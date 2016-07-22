@@ -19,12 +19,12 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Engine.ELIB.Security.Issue;
+using OpenETaxBill.Channel.Library.Security.Issue;
 using OpenETaxBill.SDK.Control.Library;
 using OpenETaxBill.SDK.Data;
 using OpenETaxBill.SDK.Data.Collection;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eTaxCreator : DevExpress.XtraEditors.XtraForm
     {

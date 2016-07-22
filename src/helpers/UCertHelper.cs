@@ -16,9 +16,9 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using OpenETaxBill.Engine.ELIB.Security.Signature;
+using OpenETaxBill.Channel.Library.Security.Signature;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     /// <summary>
     /// 

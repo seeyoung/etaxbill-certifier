@@ -17,11 +17,11 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using OpenETaxBill.Engine.ELIB.Security.Mime;
-using OpenETaxBill.Engine.ELIB.Security.Notice;
+using OpenETaxBill.Channel.Library.Security.Mime;
+using OpenETaxBill.Channel.Library.Security.Notice;
 using OpenETaxBill.SDK.Control.Library;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eTaxSmtp : DevExpress.XtraEditors.XtraForm
     {

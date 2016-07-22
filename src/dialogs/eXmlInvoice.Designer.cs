@@ -1,4 +1,4 @@
-﻿namespace OpenETaxBill.Engine.Certifier
+﻿namespace OpenETaxBill.Certifier
 {
     partial class eXmlInvoice
     {

@@ -20,7 +20,7 @@ using DevExpress.XtraBars.Helpers;
 using DevExpress.XtraEditors;
 using OpenETaxBill.SDK.Control.Library;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {

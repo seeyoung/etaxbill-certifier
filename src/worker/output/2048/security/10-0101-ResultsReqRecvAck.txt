@@ -1,18 +1,18 @@
 ﻿
-------=_Part_845_26573050.1468905228150
+------=_Part_1074_4202314.1469179595769
 Content-Type: text/xml; charset=UTF-8
 Content-ID: <SOAPPART>
 
-<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:kec="http://www.kec.or.kr/standard/Tax/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP:Header>    <wsa:MessageID>20160719021348149-ebc2d9b863ec4da8958235a8bd3d8c2e</wsa:MessageID><wsa:RelatesTo>20090921111435187-856297ec306f4036b585ae0bdaf5072e</wsa:RelatesTo>    <wsa:To>211.170.156.216</wsa:To>    <wsa:Action>http://www.kec.or.kr/standard/Tax/ResultsReqRecvAck</wsa:Action>    <kec:MessageHeader>       <kec:Version>3.0</kec:Version>       <kec:From>          <kec:PartyID>9990099999</kec:PartyID>          <kec:PartyName>National Tax Service</kec:PartyName>       </kec:From>    	  <kec:To>    	     <kec:PartyID>1200212345</kec:PartyID>    	     <kec:PartyName>Torpedo Corporation</kec:PartyName>    	  </kec:To>       <kec:OperationType>03</kec:OperationType>    	  <kec:MessageType>02</kec:MessageType>    	  <kec:TimeStamp>2016-07-19T05:13:48.149Z</kec:TimeStamp>    </kec:MessageHeader><wsse:Security SOAP:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="CertId-B4AFC6D71F5A8915E01468905228304748" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">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</wsse:BinarySecurityToken><ds:Signature Id="Signature-250" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:kec="http://www.kec.or.kr/standard/Tax/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP:Header>    <wsa:MessageID>20160722062635769-86e8c1089aeb429ebe1d6106e774d66c</wsa:MessageID><wsa:RelatesTo>20090921111435187-856297ec306f4036b585ae0bdaf5072e</wsa:RelatesTo>    <wsa:To>211.170.156.216</wsa:To>    <wsa:Action>http://www.kec.or.kr/standard/Tax/ResultsReqRecvAck</wsa:Action>    <kec:MessageHeader>       <kec:Version>3.0</kec:Version>       <kec:From>          <kec:PartyID>9990099999</kec:PartyID>          <kec:PartyName>National Tax Service</kec:PartyName>       </kec:From>    	  <kec:To>    	     <kec:PartyID>1200212345</kec:PartyID>    	     <kec:PartyName>Torpedo Corporation</kec:PartyName>    	  </kec:To>       <kec:OperationType>03</kec:OperationType>    	  <kec:MessageType>02</kec:MessageType>    	  <kec:TimeStamp>2016-07-22T09:26:35.768Z</kec:TimeStamp>    </kec:MessageHeader><wsse:Security SOAP:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="CertId-DCB7F3DF565BFE388E14691795959311000" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">MIIGBzCCBO+gAwIBAgIEAQme2zANBgkqhkiG9w0BAQsFADBPMQswCQYDVQQGEwJLUjESMBAGA1UECgwJQ3Jvc3NDZXJ0MRUwEwYDVQQLDAxBY2NyZWRpdGVkQ0ExFTATBgNVBAMMDENyb3NzQ2VydENBMjAeFw0xNjA0MTEwNzM4MDBaFw0xNzA0MTExNDU5NTlaMIGZMQswCQYDVQQGEwJLUjESMBAGA1UECgwJQ3Jvc3NDZXJ0MRUwEwYDVQQLDAxBY2NyZWRpdGVkQ0ExGzAZBgNVBAsMEu2VnOq1reyghOyekOyduOymnTEPMA0GA1UECwwG7ISc67KEMTEwLwYDVQQDDCjtlZzqta3snbjthLDrhLfsp4TtnaXsm5AodGF4Y2VydGkub3Iua3IpMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv9gNh3iXVLmtdf75ZnJmc7aYqi9vRxH4aNkp8Cb285jMKHfV+svLRcrLyxkerVDc8VVzlHroDynUenmdRz7AnVIIsVq9gGS0hR3KX91LbF9ySkY+Pel3WVNz5vjw53zpAZBJVDboJSCc5zPXHjxS/Gueww8tM0M4vL6PIRogC1F6SBIxqJ3nTRVS0wrY6oKS6kL7XcJ0kc9iJgeHEtsThg1ReXONxBAk1EgC0qtn5UzxfdkA1US2U1FCpTCNHCVQ917d3REjWxABCe7ZwFjyxKdT2xPpGf6NgjPubIzL/8DtZRitBLKSSNvrTwpGHRSPbVXhd07KsPm+9ipUp04G1wIDAQABo4ICnjCCApowgY8GA1UdIwSBhzCBhIAUtnSpm5I8x1GxIqRPvLc8/iIz13ahaKRmMGQxCzAJBgNVBAYTAktSMQ0wCwYDVQQKDARLSVNBMS4wLAYDVQQLDCVLb3JlYSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eSBDZW50cmFsMRYwFAYDVQQDDA1LSVNBIFJvb3RDQSA0ggIQBDAdBgNVHQ4EFgQUtuOl9cb/XSuetWg7PbGxYT2oxogwDgYDVR0PAQH/BAQDAgbAMIGDBgNVHSABAf8EeTB3MHUGCiqDGoyaRAUEAQMwZzAtBggrBgEFBQcCARYhaHR0cDovL2djYS5jcm9zc2NlcnQuY29tL2Nwcy5odG1sMDYGCCsGAQUFBwICMCoeKLz4ACDHeMmdwRzHWAAgxyDWqK4wrATHQAAgADGxRAAgx4WyyLLkAC4wgYgGA1UdEQSBgDB+oHwGCSqDGoyaRAoBAaBvMG0MKO2VnOq1reyduO2EsOuEt+ynhO2dpeybkCh0YXhjZXJ0aS5vci5rcikwQTA/BgoqgxqMmkQKAQEBMDEwCwYJYIZIAWUDBAIBoCIEIIVxVO89t6DIcNMmQhAOUNK0xMIQ2baSeyWD2zltJyxIMH4GA1UdHwR3MHUwc6BxoG+GbWxkYXA6Ly9kaXIuY3Jvc3NjZXJ0LmNvbTozODkvY249czFkcDlwMjExLG91PWNybGRwLG91PUFjY3JlZGl0ZWRDQSxvPUNyb3NzQ2VydCxjPUtSP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3QwRgYIKwYBBQUHAQEEOjA4MDYGCCsGAQUFBzABhipodHRwOi8vb2NzcC5jcm9zc2NlcnQuY29tOjE0MjAzL09DU1BTZXJ2ZXIwDQYJKoZIhvcNAQELBQADggEBAIUznRF2gkr0uF5mDhG+UoG67LCqKc9XEbdKQReeaxHiffDrhv28vmmZGz1fKmWX/tlkca0N50BvmD369JtCQZZNUwLOXUQGxqDzWhc6lGrx16IOHhuPvq+j75z9aJPp5AKeH9b7tnE1NeNizIyrtgZdF3g/9q2mBsKjZjWIqkSlTurHh7gYFiSpc3GdgGh5KmsbiZpp7gLQSERe+1I9bG6AeDNHSoYyUq/S+X4BKFKuYHjC6mDYKQCDRVhXEfyddeiU7coMoP4spmoM42D5pT+o0M+h04gsnUtGhpFzvUmYQU8X2nWbpWGLT/OQC2h4Wf2t2FbZhxV5gCpvO9RTegI=</wsse:BinarySecurityToken><ds:Signature Id="Signature-334" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-<ds:Reference URI="cid:78d1a690-32c5-46fe-8228-99bc0f253d4f">
+<ds:Reference URI="cid:9f70ba96-a540-4680-a37b-d4b733554407">
 <ds:Transforms>
 <ds:Transform Algorithm="http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Content-Signature-Transform"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>G6nIwnzE9Fn+JKDEtYqVe/oX7FlpmUcvPOFEv6IUh7A=</ds:DigestValue>
+<ds:DigestValue>0t7s1ziu7CYdurNjSTkvR6AIbLeib8C6mReeqak+y5c=</ds:DigestValue>
 </ds:Reference>
 <ds:Reference URI="">
 <ds:Transforms>
@@ -23,23 +23,23 @@ Content-ID: <SOAPPART>
 <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>n2KXRkd4jO41stN9yKdHG/cfhsg1oyEVRrvu7aP5W8c=</ds:DigestValue>
+<ds:DigestValue>b31/R9RrK0NzN4Pa28wzHoFk5/X9ADzgwiC/ramrvnw=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-sEBDQi2OhW0nXzwtsPcAOjIeM0XaCwhGZv5S9CUDoLunEYzpvDzyHEUZJ7eycuNlkjA0X/acOQNZ
-jiZUZxraviSBGoG6dKMEnXz3DHyuKuKGVx7tRKCRhnh+ciSKlXn2/9sN+NhFqcRbzAOiS6ozd6az
-ZdTByrD/HmR5C0ZuCSr73O/S9c2SZB2qjV+3WAm8diBxpTIIXtr3sqYIOO0K9fuy6s44jw+plmyb
-E0r8WB93FI7z1bkyF5lbUfCyoU8rOYrE9qtxCv03Sa8GeWkr9dE9BtuxfOpHYeGw3NWKkcWfr+B8
-+rRw/xTFo+MND12VOiTOEq2pjrhZRpO4CiMW3A==
+mKFE8k8dLRvR2jyLOllwQgZ+frcPpE2NUJHV5CCl5WZe1ypTKEjOq7/92C5BmnhJfeTJsabut311
+JGVLFWUkP851X5hKbU3I6X4uyqzeGecRQlx47QgR8+kdQQxADZ5rUHc3Ins2nJUnS6ln79EUWr+4
+p39FNvk+hXsYbpE/Feo9JkJL8VnX9nKy/7ylKey4sqMJKptMS21DNpqzHEd9EUgcsAlw+ulfSfxN
+HP0FsRxhkpCpwYmhvlmzBRIBnS5LmWkpeSQEsDanAJG+xT3RdZd6WPxyGBIrRiqsxEshpgXHO6Qm
+fhymFWYP/iqsiRh9TU7y8IVKUrSi0eQ+4MCyJA==
 </ds:SignatureValue>
-<ds:KeyInfo Id="KeyId-B4AFC6D71F5A8915E01468905228305749">
-<wsse:SecurityTokenReference wsu:Id="STRId-B4AFC6D71F5A8915E01468905228305750" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:Reference URI="#CertId-B4AFC6D71F5A8915E01468905228304748" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/></wsse:SecurityTokenReference>
+<ds:KeyInfo Id="KeyId-DCB7F3DF565BFE388E14691795959321001">
+<wsse:SecurityTokenReference wsu:Id="STRId-DCB7F3DF565BFE388E14691795959321002" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:Reference URI="#CertId-DCB7F3DF565BFE388E14691795959311000" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/></wsse:SecurityTokenReference>
 </ds:KeyInfo>
-</ds:Signature></wsse:Security></SOAP:Header><SOAP:Body>    <kec:ResponseMessage>	      <kec:ResultID>20160719483e80feea624e8bbcd3f63629b8e903</kec:ResultID>	      <kec:ReferenceID>78d1a690-32c5-46fe-8228-99bc0f253d4f</kec:ReferenceID>	   </kec:ResponseMessage></SOAP:Body></SOAP:Envelope>
-------=_Part_845_26573050.1468905228150
+</ds:Signature></wsse:Security></SOAP:Header><SOAP:Body>    <kec:ResponseMessage>	      <kec:ResultID>20160722b028986b1a084f4ab4e5036e8dcddb4a</kec:ResultID>	      <kec:ReferenceID>9f70ba96-a540-4680-a37b-d4b733554407</kec:ReferenceID>	   </kec:ResponseMessage></SOAP:Body></SOAP:Envelope>
+------=_Part_1074_4202314.1469179595769
 Content-Type: application/octet-stream
-Content-ID: <78d1a690-32c5-46fe-8228-99bc0f253d4f>
+Content-ID: <9f70ba96-a540-4680-a37b-d4b733554407>
 
 <?xml version="1.0" encoding="UTF-8"?><TaxInvoiceResponse xmlns="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0 http://www.kec.or.kr/standard/Tax/TaxInvoiceResponseSchemaModule_1.0.xsd">
   <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
@@ -54,15 +54,15 @@ Content-ID: <78d1a690-32c5-46fe-8228-99bc0f253d4f>
 </ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>HSFKshpI4XkqUjEmwlznm69nNBZ4FsF+O1QRNk4CQzU=</ds:DigestValue>
+<ds:DigestValue>/sPQrq/GlCDzZZkLGha8bZjEY3cSNalr78iMXs9bgQc=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-cDWXEYo+qdG10YBbD0AC621Iw5kwUfqW0lw42HAYq0uWF3mdHnAQaBYHjnrEVl+72WDFgawjcxOa
-vRRMToUw3fSO3Pp1c5TmLXFVraEDhaeRrRT0i+pbw7l5eJ1cMRLpRTkNo4fW2Z4u0qTbkoRdJ4Qe
-YYbTKbvYN/nL33VaLN1ZN22tHPvJs/6sXfmMDDV+c2XcZB6k9DgwddIcE3Mw5byIolBgUYkWbVyz
-XND4TSNDjVWj0WZwA4HJLpcUfE9Zfob6qeRG+HLA0Njaaouh7pMnsH80IAJO9pr0OAbbvJwjxyps
-Lb70mt6M9zdkaKoEJlTjT6LYgaGUWbYnJsHqXA==
+dp/8csT9LAzOBq92C/K+hEUZ0agfgKPY9B4ueFL/5l03SAorFnagK2MdrbxGDrzo4OVed9bbdMP1
+/ajxQUV9AkcZcY7ffvshNn6rKPV4xZUudX15M28Nz7zRUCoMR7OmsEPiJWDT4qhBNIafWaUVu9WR
+Dyfx8DuvGziYKp8Cr0QaHQ55rVf78VSUYP9jXxmWUqlzq3N+6JaJfwOUn8c3E4yoSNozocx7Zf5a
+4cF/amxytGpEy5H/LS/w69y3OzkSi6LqWU44f+dFyZg+rZah4R37xwD0dSamNjw/izjJRsIWQq9i
+M7Y5CCj5ehieH9lKt+dUPdEWx7/11vyfz5nGUA==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:X509Data>
@@ -111,11 +111,11 @@ BLKSSNvrTwpGHRSPbVXhd07KsPm+9ipUp04G1w==
 </ds:KeyValue>
 </ds:KeyInfo>
 </ds:Signature><ResultDocument>
-    <RefSubmitID>10294729-20160719-8c67d580a84344cf9eb6a5ed6751b3ef</RefSubmitID>
-    <ReceiptID>NTS-20160719021348-09999</ReceiptID>
+    <RefSubmitID>10294729-20160722-859aee71ea0344b7b5f847691d511be6</RefSubmitID>
+    <ReceiptID>NTS-20160722062635-09999</ReceiptID>
     <TypeCode>02</TypeCode>
-    <ResponseDateTime>20160719021348</ResponseDateTime>
+    <ResponseDateTime>20160722062635</ResponseDateTime>
     <ProcessStatusCode>02</ProcessStatusCode>
   </ResultDocument>
 </TaxInvoiceResponse>
-------=_Part_845_26573050.1468905228150--
+------=_Part_1074_4202314.1469179595769--

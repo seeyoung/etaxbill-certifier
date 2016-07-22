@@ -1,4 +1,4 @@
-﻿namespace OpenETaxBill.Engine.Certifier
+﻿namespace OpenETaxBill.Certifier
 {
     partial class MainForm
     {
@@ -57,6 +57,10 @@
             this.btInteropSubmit = new DevExpress.XtraBars.BarButtonItem();
             this.biInteropRequest = new DevExpress.XtraBars.BarButtonItem();
             this.bbCertRequest = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem17 = new DevExpress.XtraBars.BarSubItem();
+            this.bbSmtp = new DevExpress.XtraBars.BarButtonItem();
+            this.bbHttp = new DevExpress.XtraBars.BarButtonItem();
+            this.bbSharpMail = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.bm_theme = new DevExpress.XtraBars.BarSubItem();
             this.biOption = new DevExpress.XtraBars.BarButtonItem();
@@ -95,10 +99,6 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.tabbedMdiMgr = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.barSubItem17 = new DevExpress.XtraBars.BarSubItem();
-            this.bbSmtp = new DevExpress.XtraBars.BarButtonItem();
-            this.bbHttp = new DevExpress.XtraBars.BarButtonItem();
-            this.bbSharpMail = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.eTaxBarMgr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
@@ -399,6 +399,34 @@
             this.bbCertRequest.Name = "bbCertRequest";
             this.bbCertRequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbCertRequest_ItemClick);
             // 
+            // barSubItem17
+            // 
+            this.barSubItem17.Caption = "유통시스템 검증";
+            this.barSubItem17.Id = 55;
+            this.barSubItem17.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbSmtp),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbHttp),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbSharpMail)});
+            this.barSubItem17.Name = "barSubItem17";
+            // 
+            // bbSmtp
+            // 
+            this.bbSmtp.Caption = "SMTP";
+            this.bbSmtp.Id = 56;
+            this.bbSmtp.Name = "bbSmtp";
+            // 
+            // bbHttp
+            // 
+            this.bbHttp.Caption = "HTTP";
+            this.bbHttp.Id = 57;
+            this.bbHttp.Name = "bbHttp";
+            // 
+            // bbSharpMail
+            // 
+            this.bbSharpMail.Caption = "#MAIL";
+            this.bbSharpMail.Id = 58;
+            this.bbSharpMail.Name = "bbSharpMail";
+            // 
             // barSubItem4
             // 
             this.barSubItem4.Caption = "도구(&T)";
@@ -493,7 +521,7 @@
             // 
             // biBizBill
             // 
-            this.biBizBill.Caption = "OdinSoft eTax Billing on the site";
+            this.biBizBill.Caption = "Open-eTaxBill Billing on the site";
             this.biBizBill.Id = 32;
             this.biBizBill.Name = "biBizBill";
             this.biBizBill.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.biBizBill_ItemClick);
@@ -573,28 +601,28 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(784, 27);
+            this.barDockControlTop.Size = new System.Drawing.Size(1264, 27);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 531);
-            this.barDockControlBottom.Size = new System.Drawing.Size(784, 30);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 971);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1264, 30);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 27);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 504);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 944);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(784, 27);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 504);
+            this.barDockControlRight.Location = new System.Drawing.Point(1264, 27);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 944);
             // 
             // ilMenuBar
             // 
@@ -702,39 +730,11 @@
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "Lilian";
             // 
-            // barSubItem17
-            // 
-            this.barSubItem17.Caption = "유통시스템 검증";
-            this.barSubItem17.Id = 55;
-            this.barSubItem17.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.bbSmtp),
-            new DevExpress.XtraBars.LinkPersistInfo(this.bbHttp),
-            new DevExpress.XtraBars.LinkPersistInfo(this.bbSharpMail)});
-            this.barSubItem17.Name = "barSubItem17";
-            // 
-            // bbSmtp
-            // 
-            this.bbSmtp.Caption = "SMTP";
-            this.bbSmtp.Id = 56;
-            this.bbSmtp.Name = "bbSmtp";
-            // 
-            // bbHttp
-            // 
-            this.bbHttp.Caption = "HTTP";
-            this.bbHttp.Id = 57;
-            this.bbHttp.Name = "bbHttp";
-            // 
-            // bbSharpMail
-            // 
-            this.bbSharpMail.Caption = "#MAIL";
-            this.bbSharpMail.Id = 58;
-            this.bbSharpMail.Name = "bbSharpMail";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1264, 1001);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);

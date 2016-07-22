@@ -18,7 +18,7 @@ using System.Threading;
 using System.Windows.Forms;
 using OpenETaxBill.SDK.Configuration;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public static class Program
     {

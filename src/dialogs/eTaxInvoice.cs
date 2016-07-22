@@ -19,12 +19,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Engine.ELIB.Security.Issue;
-using OpenETaxBill.Engine.ELIB.Security.Mime;
-using OpenETaxBill.Engine.ELIB.Security.Notice;
+using OpenETaxBill.Channel.Library.Security.Issue;
+using OpenETaxBill.Channel.Library.Security.Mime;
+using OpenETaxBill.Channel.Library.Security.Notice;
 using OpenETaxBill.SDK.Control.Library;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eTaxInvoice : DevExpress.XtraEditors.XtraForm
     {

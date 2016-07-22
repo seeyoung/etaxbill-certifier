@@ -11,15 +11,15 @@
 </ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>2clNX0TvbB4TRg7Kpx7jXh/QuSSiTDbaHL7+cRyRuQc=</ds:DigestValue>
+<ds:DigestValue>2upcPpoOlCHNuzQ61bdUrQrjW+qv04MD8E2nHPe/3nE=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-CvWUDFZXwJ1qVVtmuOK59CSL2rsfpPXa3P5LjN8iNhHi9564UNlwRN5fg2kCqJt34T5L96aHgjsZ
-OLyAFbmqBUr4rmZ/xtypEq1huNwBCXwyxCoL0wHA5fGjbITWLHTd6K/OO7V4B2fhkt4HcNrT6ePI
-j74LmQj3kmVtEkNUbgXju6NoNxLRZSc+dw4gzAnB8VUVIzrRaoXTLV7sf0wNJbyABBn2p2v0tkPG
-Z6g1xJc0t8KcR69PuOEpBPqC1gM2UId6kqL7KlQ0b7w5lbgF3KPPhog6o54937h95IzyESqOd3an
-tHaNbsYa4eufWIfnL66fpoxVNZfAsqpbSipZIg==
+A5eCB7hs8FbM2PwsyyYVS2IVHCdqsh/eiHHZ6AWaW8tdyJMAeYNTChkQ1p0thFTBtjDld7m2X76v
+MZp6hyVrzVmQbSTGlLtjHKcrx3wo2tBWzepucbumM6LgLl1E+lWAFBl8XcFWOUjycMb8fp5seLsM
+aQxPiWyYeRYpn6RdthkkpcMYgTwAAD7kfoepgWmoct71J0TVmXp2AhAKYhusO6Rm9goAkIOOnD4V
+n7ErysPRyDz3wu+QE6D3wCrHwdZLlsu3H9bgh4ht4h3bKaoBco4+8iPYm/p0Am/rvXRDNZXVQGmP
+h6lxIbgeKC1hw5+QJkmiELa3oLFzR6tFy4xMEQ==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:X509Data>
@@ -68,10 +68,10 @@ BLKSSNvrTwpGHRSPbVXhd07KsPm+9ipUp04G1w==
 </ds:KeyValue>
 </ds:KeyInfo>
 </ds:Signature><ResultDocument>
-    <RefSubmitID>10294729-20160719-b0255f929177441d82c7e18c4bf25703</RefSubmitID>
-    <ReceiptID>NTS-20160719022050-09999</ReceiptID>
+    <RefSubmitID>10294729-20160722-91e69c55606a491188ea66616693a32e</RefSubmitID>
+    <ReceiptID>NTS-20160722062558-09999</ReceiptID>
     <TypeCode>02</TypeCode>
-    <ResponseDateTime>20160719022050</ResponseDateTime>
+    <ResponseDateTime>20160722062558</ResponseDateTime>
     <ProcessStatusCode>02</ProcessStatusCode>
   </ResultDocument>
 </TaxInvoiceResponse>

@@ -19,11 +19,11 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
-using OpenETaxBill.Engine.ELIB.Security.Encrypt;
+using OpenETaxBill.Channel.Library.Security.Encrypt;
 using OpenETaxBill.SDK.Control.Library;
 using Org.BouncyCastle.Asn1;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eTaxEncrypt : DevExpress.XtraEditors.XtraForm
     {

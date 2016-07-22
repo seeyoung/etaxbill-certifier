@@ -1,6 +1,6 @@
-# Project Title
+# 전자세금계산서 인증 프로그램
 
-One Paragraph of project description goes here
+[한국인터넷진흥원](https://www.taxcerti.or.kr/etax/)의 인증 절차를 통과 하기 위한 인증용 프로그램 입니다.
 
 ## Getting Started
 
@@ -72,9 +72,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **SeongAhn Lee** - *Initial work* - [JACK-LEE](https://github.com/lisa3907)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/open-etaxbill/etaxbill-certifier/graphs/contributors) who participated in this project.
 
 ## License
 

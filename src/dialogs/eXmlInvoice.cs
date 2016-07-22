@@ -21,16 +21,16 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Engine.ELIB.Security.Encrypt;
-using OpenETaxBill.Engine.ELIB.Security.Issue;
-using OpenETaxBill.Engine.ELIB.Security.Mime;
-using OpenETaxBill.Engine.ELIB.Security.Notice;
-using OpenETaxBill.Engine.ELIB.Security.Signature;
+using OpenETaxBill.Channel.Library.Security.Encrypt;
+using OpenETaxBill.Channel.Library.Security.Issue;
+using OpenETaxBill.Channel.Library.Security.Mime;
+using OpenETaxBill.Channel.Library.Security.Notice;
+using OpenETaxBill.Channel.Library.Security.Signature;
 using OpenETaxBill.SDK.Control.Library;
 using OpenETaxBill.SDK.Data;
 using OpenETaxBill.SDK.Data.Collection;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eXmlInvoice : DevExpress.XtraEditors.XtraForm
     {

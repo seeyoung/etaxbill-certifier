@@ -16,7 +16,7 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.IO;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     /// <summary>
     /// 
@@ -45,25 +45,25 @@ namespace OpenETaxBill.Engine.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // 
         //-------------------------------------------------------------------------------------------------------------------------
-        private OpenETaxBill.Engine.Interface.ISigner m_isigner = null;
-        private OpenETaxBill.Engine.Interface.ISigner ISigner
+        private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
+        private OpenETaxBill.Channel.Interface.ISigner ISigner
         {
             get
             {
                 if (m_isigner == null)
-                    m_isigner = new OpenETaxBill.Engine.Interface.ISigner(false);
+                    m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
 
                 return m_isigner;
             }
         }
 
-        private OpenETaxBill.Engine.Channel.CCollector m_ccollector = null;
-        private OpenETaxBill.Engine.Channel.CCollector CCollector
+        private OpenETaxBill.Channel.CCollector m_ccollector = null;
+        private OpenETaxBill.Channel.CCollector CCollector
         {
             get
             {
                 if (m_ccollector == null)
-                    m_ccollector = new OpenETaxBill.Engine.Channel.CCollector(ISigner.Manager);
+                    m_ccollector = new OpenETaxBill.Channel.CCollector(ISigner.Manager);
 
                 return m_ccollector;
             }
@@ -165,7 +165,7 @@ namespace OpenETaxBill.Engine.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_root_folder) == true)
-                    m_root_folder = GetCfgValue("RootFolder", @"D:\odinsoft-git\ubsvc3\bizapp\etaxbill\src\engine\client\etax.engine.certifier\worker");
+                    m_root_folder = GetCfgValue("RootFolder", @"D:\OpenETaxBill\certifier\worker");
 
                 return m_root_folder;
             }
@@ -223,9 +223,9 @@ namespace OpenETaxBill.Engine.Certifier
                 if (String.IsNullOrEmpty(m_connection_string) == true)
                 {
                     if (LiveServer == false)
-						m_connection_string = GetCfgValue("Test_ConnectionString", "server=odin-db-server;uid=odinsoft;pwd=p@ssw0rd;database=ODIN-TAX-V46");
+						m_connection_string = GetCfgValue("Test_ConnectionString", "server=odin-db-server;uid=openetaxbill;pwd=p@ssw0rd;database=ODIN-TAX-V46");
                     else
-						m_connection_string = GetCfgValue("Live_ConnectionString", "server=odin-db-server;uid=odinsoft;pwd=p@ssw0rd;database=ODIN-TAX-V46");
+						m_connection_string = GetCfgValue("Live_ConnectionString", "server=odin-db-server;uid=openetaxbill;pwd=p@ssw0rd;database=ODIN-TAX-V46");
                 }
 
                 return m_connection_string;
@@ -468,7 +468,7 @@ namespace OpenETaxBill.Engine.Certifier
                     if (LiveServer == false)
 						m_hostAddress = GetCfgValue("Test_HostAddress", "localhost");	
                     else
-                        m_hostAddress = GetCfgValue("Live_HostAddress", "etax.odinsoftware.co.kr");
+                        m_hostAddress = GetCfgValue("Live_HostAddress", "etax.openetaxbill.co.kr");
                 }
 
                 return m_hostAddress;

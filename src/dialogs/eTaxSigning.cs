@@ -20,11 +20,11 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Engine.ELIB.Security.Issue;
-using OpenETaxBill.Engine.ELIB.Security.Signature;
+using OpenETaxBill.Channel.Library.Security.Issue;
+using OpenETaxBill.Channel.Library.Security.Signature;
 using OpenETaxBill.SDK.Control.Library;
 
-namespace OpenETaxBill.Engine.Certifier
+namespace OpenETaxBill.Certifier
 {
     public partial class eTaxSigning : DevExpress.XtraEditors.XtraForm
     {
@@ -40,13 +40,13 @@ namespace OpenETaxBill.Engine.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        private OpenETaxBill.Engine.Interface.ISigner m_isigner = null;
-        private OpenETaxBill.Engine.Interface.ISigner ISigner
+        private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
+        private OpenETaxBill.Channel.Interface.ISigner ISigner
         {
             get
             {
                 if (m_isigner == null)
-                    m_isigner = new OpenETaxBill.Engine.Interface.ISigner(false);
+                    m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
 
                 return m_isigner;
             }
