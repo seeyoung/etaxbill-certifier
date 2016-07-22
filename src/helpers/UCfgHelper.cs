@@ -16,7 +16,7 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.IO;
 
-namespace OdinSoft.eTaxBill.Engine.Certifier
+namespace OpenETaxBill.Engine.Certifier
 {
     /// <summary>
     /// 
@@ -45,25 +45,25 @@ namespace OdinSoft.eTaxBill.Engine.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // 
         //-------------------------------------------------------------------------------------------------------------------------
-        private OdinSoft.eTaxBill.Engine.Interface.ISigner m_isigner = null;
-        private OdinSoft.eTaxBill.Engine.Interface.ISigner ISigner
+        private OpenETaxBill.Engine.Interface.ISigner m_isigner = null;
+        private OpenETaxBill.Engine.Interface.ISigner ISigner
         {
             get
             {
                 if (m_isigner == null)
-                    m_isigner = new OdinSoft.eTaxBill.Engine.Interface.ISigner(false);
+                    m_isigner = new OpenETaxBill.Engine.Interface.ISigner(false);
 
                 return m_isigner;
             }
         }
 
-        private OdinSoft.eTaxBill.Engine.Channel.CCollector m_ccollector = null;
-        private OdinSoft.eTaxBill.Engine.Channel.CCollector CCollector
+        private OpenETaxBill.Engine.Channel.CCollector m_ccollector = null;
+        private OpenETaxBill.Engine.Channel.CCollector CCollector
         {
             get
             {
                 if (m_ccollector == null)
-                    m_ccollector = new OdinSoft.eTaxBill.Engine.Channel.CCollector(ISigner.Manager);
+                    m_ccollector = new OpenETaxBill.Engine.Channel.CCollector(ISigner.Manager);
 
                 return m_ccollector;
             }

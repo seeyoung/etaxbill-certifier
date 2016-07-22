@@ -1,4 +1,4 @@
-﻿namespace OdinSoft.eTaxBill.Engine.Certifier
+﻿namespace OpenETaxBill.Engine.Certifier
 {
     partial class eXmlRequest
     {

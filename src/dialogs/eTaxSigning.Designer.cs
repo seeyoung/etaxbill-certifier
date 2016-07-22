@@ -1,4 +1,4 @@
-﻿namespace OdinSoft.eTaxBill.Engine.Certifier
+﻿namespace OpenETaxBill.Engine.Certifier
 {
     partial class eTaxSigning
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.cbKind2 = new OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit();
-            this.cbKind1 = new OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit();
+            this.cbKind2 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
+            this.cbKind1 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
             this.lbKind2 = new DevExpress.XtraEditors.LabelControl();
             this.uLabelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.btValidate = new DevExpress.XtraEditors.SimpleButton();
@@ -400,8 +400,8 @@
         private DevExpress.XtraEditors.SimpleButton sbCreate;
         private DevExpress.XtraEditors.SimpleButton sbVerify;
         private DevExpress.XtraEditors.SimpleButton btValidate;
-        private OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit cbKind2;
-        private OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit cbKind1;
+        private OpenETaxBill.SDK.Control.DVX.uComboBoxEdit cbKind2;
+        private OpenETaxBill.SDK.Control.DVX.uComboBoxEdit cbKind1;
         private DevExpress.XtraEditors.LabelControl lbKind2;
         private DevExpress.XtraEditors.LabelControl uLabelControl2;
     }

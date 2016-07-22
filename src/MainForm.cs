@@ -18,9 +18,9 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Helpers;
 using DevExpress.XtraEditors;
-using OdinSoft.eTaxBill.SDK.Control.Library;
+using OpenETaxBill.SDK.Control.Library;
 
-namespace OdinSoft.eTaxBill.Engine.Certifier
+namespace OpenETaxBill.Engine.Certifier
 {
     public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {

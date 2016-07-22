@@ -78,6 +78,9 @@
       <HintPath>..\..\..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OpenETaxBill.SDK">
+      <HintPath>..\..\etaxbill-sdk\output\v4.5.2016.02\Debug\OpenETaxBill.SDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -252,22 +255,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\sdk\etax.sdk.configuration\etax.sdk.configuration.csproj">
-      <Project>{b52062ac-a62c-4e34-9e66-14105807a475}</Project>
-      <Name>etax.sdk.configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\sdk\etax.sdk.control\etax.sdk.control.csproj">
-      <Project>{28a23b50-3882-4a1a-b656-00ee453515fc}</Project>
-      <Name>etax.sdk.control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\sdk\etax.sdk.data\etax.sdk.data.csproj">
-      <Project>{7b20bb1d-986b-4b0a-b7df-b8fb2c07ccac}</Project>
-      <Name>etax.sdk.data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\sdk\etax.sdk.queue\etax.sdk.queue.csproj">
-      <Project>{6b0ef716-8622-4db9-946d-f5aa41d69980}</Project>
-      <Name>etax.sdk.queue</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\proxy\etax.engine.channel\etax.engine.channel.csproj">
       <Project>{AB03197A-E0AC-41A9-B018-533FE6E5CA9F}</Project>
       <Name>etax.engine.channel</Name>

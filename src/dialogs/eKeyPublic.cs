@@ -21,14 +21,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
-using OdinSoft.eTaxBill.Engine.ELIB.Security.Encrypt;
-using OdinSoft.eTaxBill.Engine.ELIB.Security.Mime;
-using OdinSoft.eTaxBill.Engine.ELIB.Security.Notice;
-using OdinSoft.eTaxBill.SDK.Control.Library;
-using OdinSoft.eTaxBill.SDK.Data;
-using OdinSoft.eTaxBill.SDK.Data.Collection;
+using OpenETaxBill.Engine.ELIB.Security.Encrypt;
+using OpenETaxBill.Engine.ELIB.Security.Mime;
+using OpenETaxBill.Engine.ELIB.Security.Notice;
+using OpenETaxBill.SDK.Control.Library;
+using OpenETaxBill.SDK.Data;
+using OpenETaxBill.SDK.Data.Collection;
 
-namespace OdinSoft.eTaxBill.Engine.Certifier
+namespace OpenETaxBill.Engine.Certifier
 {
     public partial class eKeyPublic : DevExpress.XtraEditors.XtraForm
     {
@@ -43,13 +43,13 @@ namespace OdinSoft.eTaxBill.Engine.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        private OdinSoft.eTaxBill.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.eTaxBill.SDK.Data.DataHelper LDataHelper
+        private OpenETaxBill.SDK.Data.DataHelper m_dataHelper = null;
+        private OpenETaxBill.SDK.Data.DataHelper LDataHelper
         {
             get
             {
                 if (m_dataHelper == null)
-                    m_dataHelper = new OdinSoft.eTaxBill.SDK.Data.DataHelper();
+                    m_dataHelper = new OpenETaxBill.SDK.Data.DataHelper();
                 return m_dataHelper;
             }
         }

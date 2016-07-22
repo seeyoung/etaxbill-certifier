@@ -1,4 +1,4 @@
-﻿namespace OdinSoft.eTaxBill.Engine.Certifier
+﻿namespace OpenETaxBill.Engine.Certifier
 {
     partial class eTaxRequest
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.cbKind2 = new OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit();
-            this.cbKind1 = new OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit();
+            this.cbKind2 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
+            this.cbKind1 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
             this.lbKind2 = new DevExpress.XtraEditors.LabelControl();
             this.uLabelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.tbResultsReqSubmitUrl = new DevExpress.XtraEditors.TextEdit();
@@ -382,8 +382,8 @@
         private System.Windows.Forms.OpenFileDialog xmlLoadDlg;
 		private DevExpress.XtraEditors.TextEdit tbResultsReqSubmitUrl;
 		private DevExpress.XtraEditors.LabelControl uLabelControl2;
-        private OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit cbKind2;
-        private OdinSoft.eTaxBill.SDK.Control.DVX.uComboBoxEdit cbKind1;
+        private OpenETaxBill.SDK.Control.DVX.uComboBoxEdit cbKind2;
+        private OpenETaxBill.SDK.Control.DVX.uComboBoxEdit cbKind1;
         private DevExpress.XtraEditors.LabelControl lbKind2;
         private DevExpress.XtraEditors.LabelControl uLabelControl4;
         private DevExpress.XtraEditors.CheckEdit ceTestOk;
