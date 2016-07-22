@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17454071-9AE9-4080-B361-C41DDBE49939}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OdinSoft.eTaxBill.Engine.Certifier</RootNamespace>
+    <AssemblyName>OdinSoft.eTaxBill.Engine.Certifier</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>dialogs\eTaxMain.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>engine.certifier.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\..\..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Tutorials.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dialogs\eTaxSmtp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxSmtp.Designer.cs">
+      <DependentUpon>eTaxSmtp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="helpers\UCertHelper.cs" />
+    <Compile Include="helpers\UCfgHelper.cs" />
+    <Compile Include="dialogs\eTaxEncrypt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxEncrypt.Designer.cs">
+      <DependentUpon>eTaxEncrypt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eXmlInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eXmlInvoice.Designer.cs">
+      <DependentUpon>eXmlInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eKeyPublic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eKeyPublic.Designer.cs">
+      <DependentUpon>eKeyPublic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eTaxRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxRequest.Designer.cs">
+      <DependentUpon>eTaxRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eXmlRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eXmlRequest.Designer.cs">
+      <DependentUpon>eXmlRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="dialogs\eTaxSmtp.resx">
+      <DependentUpon>eTaxSmtp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eTaxEncrypt.resx">
+      <DependentUpon>eTaxEncrypt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eTaxInvoice.resx">
+      <DependentUpon>eTaxInvoice.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eXmlInvoice.resx">
+      <DependentUpon>eXmlInvoice.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eKeyPublic.resx">
+      <DependentUpon>eKeyPublic.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eTaxRequest.resx">
+      <DependentUpon>eTaxRequest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eXmlRequest.resx">
+      <DependentUpon>eXmlRequest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="dialogs\eTaxCreator.resx">
+      <DependentUpon>eTaxCreator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\eTaxSigning.resx">
+      <DependentUpon>eTaxSigning.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="engine.certifier.snk" />
+    <Compile Include="dialogs\eTaxCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxCreator.Designer.cs">
+      <DependentUpon>eTaxCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eTaxSigning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxSigning.Designer.cs">
+      <DependentUpon>eTaxSigning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\eTaxInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\eTaxInvoice.Designer.cs">
+      <DependentUpon>eTaxInvoice.cs</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dialogs\eTaxMain.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0%28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0%28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\sdk\etax.sdk.configuration\etax.sdk.configuration.csproj">
+      <Project>{b52062ac-a62c-4e34-9e66-14105807a475}</Project>
+      <Name>etax.sdk.configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\sdk\etax.sdk.control\etax.sdk.control.csproj">
+      <Project>{28a23b50-3882-4a1a-b656-00ee453515fc}</Project>
+      <Name>etax.sdk.control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\sdk\etax.sdk.data\etax.sdk.data.csproj">
+      <Project>{7b20bb1d-986b-4b0a-b7df-b8fb2c07ccac}</Project>
+      <Name>etax.sdk.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\sdk\etax.sdk.queue\etax.sdk.queue.csproj">
+      <Project>{6b0ef716-8622-4db9-946d-f5aa41d69980}</Project>
+      <Name>etax.sdk.queue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\proxy\etax.engine.channel\etax.engine.channel.csproj">
+      <Project>{AB03197A-E0AC-41A9-B018-533FE6E5CA9F}</Project>
+      <Name>etax.engine.channel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\proxy\etax.engine.interface\etax.engine.interface.csproj">
+      <Project>{A929880A-6A4E-4C63-8772-5264EA57C18A}</Project>
+      <Name>etax.engine.interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\server\library\etax.engine.elibrary\etax.engine.elib.csproj">
+      <Project>{3c4f13d6-d2a1-45ad-b93c-2092215c1aa9}</Project>
+      <Name>etax.engine.elib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="worker\input\eMail\" />
+    <Folder Include="worker\input\NTS\" />
+    <Folder Include="worker\output\1024\interop\" />
+    <Folder Include="worker\output\1024\security\" />
+    <Folder Include="worker\output\1024\unitest\" />
+    <Folder Include="worker\output\2048\interop\" />
+    <Folder Include="worker\output\2048\security\" />
+    <Folder Include="worker\output\2048\unitest\" />
+    <Folder Include="worker\output\pubkey\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' != 'Unix' ">:begin
+
+SET framebiz_path=$(SolutionDir)\output\v4.5.2016.02\$(ConfigurationName)
+if not exist %25framebiz_path%25 mkdir %25framebiz_path%25
+goto :target_copy
+
+:target_copy
+copy /Y $(TargetPath) %25framebiz_path%25
+if exist $(TargetPath).config copy /Y $(TargetPath).config %25framebiz_path%25
+if exist $(TargetName).xml copy /Y $(TargetName).xml %25framebiz_path%25
+goto :refence_copy
+
+:refence_copy
+@rem if not $(TargetExt)==.exe goto end
+if not exist *.dll goto end
+copy /Y $(TargetDir)\*.dll %25framebiz_path%25
+goto end
+
+:end</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' == 'Unix' ">
+if [ ! -d $(SolutionDir)/output ]; then
+  mkdir $(SolutionDir)/output
+fi
+if [ ! -d $(SolutionDir)/output/$(ConfigurationName) ]; then
+  mkdir $(SolutionDir)/output/$(ConfigurationName)
+fi
+cp -u $(TargetPath) $(SolutionDir)/output/$(ConfigurationName)
+if [ -f $(TargetPath).config ]; then
+  cp -u $(TargetPath).config $(SolutionDir)/output/$(ConfigurationName)
+fi
+if [ -f $(TargetName).XML ]; then
+  cp -u $(TargetName).XML $(SolutionDir)/output/$(ConfigurationName)
+fi
+filescount=`ls $(TargetDir)/*.dll | awk 'END { print NR }'`  
+if [ $filescount -gt 0 ]; then  
+  cp -u $(TargetDir)/*.dll $(SolutionDir)/output/$(ConfigurationName)
+fi
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
