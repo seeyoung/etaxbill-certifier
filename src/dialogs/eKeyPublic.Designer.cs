@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.tbBizName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.sbUnZip = new DevExpress.XtraEditors.SimpleButton();
             this.tbFileType = new DevExpress.XtraEditors.TextEdit();
             this.uLabelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -49,10 +51,9 @@
             this.uPanelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.uLabelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.tbBizName = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBizName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFileType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBizId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRegId.Properties)).BeginInit();
@@ -67,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbSourceXml.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uPanelControl1)).BeginInit();
             this.uPanelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBizName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl2
@@ -87,6 +87,22 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(934, 143);
             this.panelControl2.TabIndex = 6;
+            // 
+            // tbBizName
+            // 
+            this.tbBizName.EditValue = "(주)전자세금계산서테스트";
+            this.tbBizName.Location = new System.Drawing.Point(104, 37);
+            this.tbBizName.Name = "tbBizName";
+            this.tbBizName.Size = new System.Drawing.Size(198, 20);
+            this.tbBizName.TabIndex = 37;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(10, 41);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(40, 14);
+            this.labelControl1.TabIndex = 36;
+            this.labelControl1.Text = "사업자명";
             // 
             // sbUnZip
             // 
@@ -115,7 +131,7 @@
             // 
             // tbBizId
             // 
-            this.tbBizId.EditValue = "1388602200";
+            this.tbBizId.EditValue = "1112233333";
             this.tbBizId.Location = new System.Drawing.Point(104, 12);
             this.tbBizId.Name = "tbBizId";
             this.tbBizId.Size = new System.Drawing.Size(198, 20);
@@ -144,7 +160,7 @@
             // 
             // tbRegId
             // 
-            this.tbRegId.EditValue = "42000238";
+            this.tbRegId.EditValue = "40000000";
             this.tbRegId.Location = new System.Drawing.Point(104, 62);
             this.tbRegId.Name = "tbRegId";
             this.tbRegId.Size = new System.Drawing.Size(198, 20);
@@ -272,22 +288,6 @@
             this.labelControl6.TabIndex = 3;
             this.labelControl6.Text = "Source XML";
             // 
-            // tbBizName
-            // 
-            this.tbBizName.EditValue = "(주)오딘소프트";
-            this.tbBizName.Location = new System.Drawing.Point(104, 37);
-            this.tbBizName.Name = "tbBizName";
-            this.tbBizName.Size = new System.Drawing.Size(198, 20);
-            this.tbBizName.TabIndex = 37;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(10, 41);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(40, 14);
-            this.labelControl1.TabIndex = 36;
-            this.labelControl1.Text = "사업자명";
-            // 
             // eKeyPublic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -302,6 +302,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBizName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFileType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBizId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRegId.Properties)).EndInit();
@@ -318,7 +319,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.uPanelControl1)).EndInit();
             this.uPanelControl1.ResumeLayout(false);
             this.uPanelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBizName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

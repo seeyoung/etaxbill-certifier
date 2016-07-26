@@ -91,7 +91,7 @@ namespace OpenETaxBill.Certifier
 
             Body _soapBody = new Body();
             {
-                _soapBody.RefSubmitID = "42000238-20160719-c82073dfeff344348f07e032cc8c313c";
+                _soapBody.RefSubmitID = UCfgHelper.SNG.RegisterId + "-20160719-c82073dfeff344348f07e032cc8c313c";
             }
 
             //-------------------------------------------------------------------------------------------------------------------------

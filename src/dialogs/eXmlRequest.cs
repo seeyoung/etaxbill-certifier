@@ -55,6 +55,7 @@ namespace OpenETaxBill.Certifier
             LayoutHelper.RestoreFormLayout(this);
 
             ceTestOk_CheckedChanged(sender, e);
+            tbSubmitId.Text = UCfgHelper.SNG.RegisterId + "-20160708-451f22a828182f47921e93b1b747e5dc";
         }
 
         //-------------------------------------------------------------------------------------------------------------------------

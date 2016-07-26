@@ -89,7 +89,7 @@ namespace OpenETaxBill.Certifier
         {
             LayoutHelper.RestoreFormLayout(this);
 
-            tbInvoicerId.Text = UCfgHelper.SNG.TesterBizNo;
+            tbInvoicerId.Text = UCfgHelper.SNG.InvoicerBizNo;
         }
 
         private void XmlCreator_FormClosing(object sender, FormClosingEventArgs e)

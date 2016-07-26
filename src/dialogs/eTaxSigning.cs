@@ -40,17 +40,17 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
-        private OpenETaxBill.Channel.Interface.ISigner ISigner
-        {
-            get
-            {
-                if (m_isigner == null)
-                    m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
+        //private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
+        //private OpenETaxBill.Channel.Interface.ISigner ISigner
+        //{
+        //    get
+        //    {
+        //        if (m_isigner == null)
+        //            m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
 
-                return m_isigner;
-            }
-        }
+        //        return m_isigner;
+        //    }
+        //}
 
         //-------------------------------------------------------------------------------------------------------------------------
         //

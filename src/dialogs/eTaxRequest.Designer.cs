@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.ceTestOk = new DevExpress.XtraEditors.CheckEdit();
             this.cbKind2 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
             this.cbKind1 = new OpenETaxBill.SDK.Control.DVX.uComboBoxEdit();
             this.lbKind2 = new DevExpress.XtraEditors.LabelControl();
@@ -51,9 +52,9 @@
             this.uLabelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.xmlLoadDlg = new System.Windows.Forms.OpenFileDialog();
-            this.ceTestOk = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceTestOk.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbKind2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbKind1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResultsReqSubmitUrl.Properties)).BeginInit();
@@ -68,7 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbSourceXml.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uPanelControl1)).BeginInit();
             this.uPanelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ceTestOk.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl2
@@ -88,6 +88,15 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(934, 108);
             this.panelControl2.TabIndex = 4;
+            // 
+            // ceTestOk
+            // 
+            this.ceTestOk.Location = new System.Drawing.Point(50, 36);
+            this.ceTestOk.Name = "ceTestOk";
+            this.ceTestOk.Properties.Caption = "인증 검사 중";
+            this.ceTestOk.Size = new System.Drawing.Size(99, 19);
+            this.ceTestOk.TabIndex = 53;
+            this.ceTestOk.CheckedChanged += new System.EventHandler(this.ceTestOk_CheckedChanged);
             // 
             // cbKind2
             // 
@@ -214,16 +223,16 @@
             // 
             this.tbResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbResult.EditValue = "";
-            this.tbResult.Location = new System.Drawing.Point(2, 457);
+            this.tbResult.Location = new System.Drawing.Point(2, 454);
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(930, 94);
+            this.tbResult.Size = new System.Drawing.Size(930, 97);
             this.tbResult.TabIndex = 1;
             // 
             // uPanelControl2
             // 
             this.uPanelControl2.Controls.Add(this.labelControl7);
             this.uPanelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.uPanelControl2.Location = new System.Drawing.Point(2, 429);
+            this.uPanelControl2.Location = new System.Drawing.Point(2, 426);
             this.uPanelControl2.Name = "uPanelControl2";
             this.uPanelControl2.Size = new System.Drawing.Size(930, 28);
             this.uPanelControl2.TabIndex = 14;
@@ -242,7 +251,7 @@
             this.spBottomMiddle.Dock = System.Windows.Forms.DockStyle.Top;
             this.spBottomMiddle.Location = new System.Drawing.Point(2, 421);
             this.spBottomMiddle.Name = "spBottomMiddle";
-            this.spBottomMiddle.Size = new System.Drawing.Size(930, 8);
+            this.spBottomMiddle.Size = new System.Drawing.Size(930, 5);
             this.spBottomMiddle.TabIndex = 13;
             this.spBottomMiddle.TabStop = false;
             // 
@@ -262,16 +271,16 @@
             // 
             this.tbTargetXml.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbTargetXml.EditValue = "";
-            this.tbTargetXml.Location = new System.Drawing.Point(454, 24);
+            this.tbTargetXml.Location = new System.Drawing.Point(451, 24);
             this.tbTargetXml.Name = "tbTargetXml";
-            this.tbTargetXml.Size = new System.Drawing.Size(474, 393);
+            this.tbTargetXml.Size = new System.Drawing.Size(477, 393);
             this.tbTargetXml.TabIndex = 14;
             // 
             // spTopLeft
             // 
             this.spTopLeft.Location = new System.Drawing.Point(446, 24);
             this.spTopLeft.Name = "spTopLeft";
-            this.spTopLeft.Size = new System.Drawing.Size(8, 393);
+            this.spTopLeft.Size = new System.Drawing.Size(5, 393);
             this.spTopLeft.TabIndex = 13;
             this.spTopLeft.TabStop = false;
             // 
@@ -317,15 +326,6 @@
             this.xmlLoadDlg.FileName = "*.*";
             this.xmlLoadDlg.Filter = "All Files (*.*)|*.*";
             // 
-            // ceTestOk
-            // 
-            this.ceTestOk.Location = new System.Drawing.Point(50, 36);
-            this.ceTestOk.Name = "ceTestOk";
-            this.ceTestOk.Properties.Caption = "인증 검사 중";
-            this.ceTestOk.Size = new System.Drawing.Size(99, 19);
-            this.ceTestOk.TabIndex = 53;
-            this.ceTestOk.CheckedChanged += new System.EventHandler(this.ceTestOk_CheckedChanged);
-            // 
             // eTaxRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -340,6 +340,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceTestOk.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbKind2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbKind1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResultsReqSubmitUrl.Properties)).EndInit();
@@ -356,7 +357,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.uPanelControl1)).EndInit();
             this.uPanelControl1.ResumeLayout(false);
             this.uPanelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ceTestOk.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

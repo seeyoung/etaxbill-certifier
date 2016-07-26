@@ -78,10 +78,12 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OpenETaxBill.Channel">
+    <Reference Include="OpenETaxBill.Channel, Version=1.0.2016.7, Culture=neutral, PublicKeyToken=e3057811f9436898, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\etaxbill-channel\output\v1.0.2016.07\Debug\OpenETaxBill.Channel.dll</HintPath>
     </Reference>
-    <Reference Include="OpenETaxBill.SDK">
+    <Reference Include="OpenETaxBill.SDK, Version=1.0.2016.7, Culture=neutral, PublicKeyToken=642719c61e8023ed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\etaxbill-sdk\output\v1.0.2016.07\Debug\OpenETaxBill.SDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -221,9 +223,17 @@
       <DependentUpon>eTaxInvoice.cs</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="work-folder\certkey\NTS\1024\국세청.der" />
+    <None Include="work-folder\certkey\NTS\1024\진흥원.der" />
+    <None Include="work-folder\certkey\NTS\2048\국세청.der" />
+    <None Include="work-folder\certkey\NTS\2048\진흥원.der" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="dialogs\eTaxMain.ico" />
+    <Content Include="work-folder\output\2048\unitest\2-0101.xml" />
+    <Content Include="work-folder\output\2048\unitest\2-0201.xml" />
+    <Content Include="work-folder\output\2048\unitest\2-0301.xml" />
+    <Content Include="work-folder\output\2048\unitest\2-0401.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -258,15 +268,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="worker\input\eMail\" />
-    <Folder Include="worker\input\NTS\" />
-    <Folder Include="worker\output\1024\interop\" />
-    <Folder Include="worker\output\1024\security\" />
-    <Folder Include="worker\output\1024\unitest\" />
-    <Folder Include="worker\output\2048\interop\" />
-    <Folder Include="worker\output\2048\security\" />
-    <Folder Include="worker\output\2048\unitest\" />
-    <Folder Include="worker\output\pubkey\" />
+    <Folder Include="work-folder\certkey\ASP\1024\" />
+    <Folder Include="work-folder\certkey\ASP\2048\" />
+    <Folder Include="work-folder\certkey\USER\1024\" />
+    <Folder Include="work-folder\certkey\USER\2048\" />
+    <Folder Include="work-folder\input\eMail\" />
+    <Folder Include="work-folder\input\NTS\" />
+    <Folder Include="work-folder\output\1024\interop\" />
+    <Folder Include="work-folder\output\1024\security\" />
+    <Folder Include="work-folder\output\1024\unitest\" />
+    <Folder Include="work-folder\output\2048\interop\" />
+    <Folder Include="work-folder\output\2048\security\" />
+    <Folder Include="work-folder\output\pubkey\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

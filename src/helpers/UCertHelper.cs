@@ -48,61 +48,26 @@ namespace OpenETaxBill.Certifier
         // 
         //-------------------------------------------------------------------------------------------------------------------------
 
+        private X509CertMgr m_userSignCert = null;
+
         /// <summary>
-        /// 
+        /// 사용자의 전자서명용 인증서, 테스트시 ASP/ERP 사업자의 인증서와 동일한 것을 사용 하게 되며,
+        /// 라이브 서비스에서는 DB에 저장된 고객(customer)위 인증서를 사용 한다.
         /// </summary>
         public X509CertMgr UserSignCert
         {
             get
             {
-                if (UCfgHelper.SNG.KeySize == 2048)
-                    return UserSignCert_2048;
-                else
-                    return UserSignCert_1024;
-            }
-        }
-
-        private X509CertMgr m_userSignCert_2048 = null;
-
-        /// <summary>
-        /// 전자서명용 -> 사용자로써의 오딘소프트 서명용 2048 인증서 
-        /// </summary>
-        public X509CertMgr UserSignCert_2048
-        {
-            get
-            {
-                if (m_userSignCert_2048 == null)
+                if (m_userSignCert == null)
                 {
-                    string _publicFile = Path.Combine(UCfgHelper.SNG.RootCertFolder, @"ASP\2048\signCert.der");
-                    string _privatFile = Path.Combine(UCfgHelper.SNG.RootCertFolder, @"ASP\2048\signPri.key");
-                    string _password = UCfgHelper.SNG.UserCertPassword_2048;
+                    string _publicFile = Path.Combine(UCfgHelper.SNG.UserCertFolder, "signCert.der");
+                    string _privatFile = Path.Combine(UCfgHelper.SNG.UserCertFolder, "signPri.key");
+                    string _password = UCfgHelper.SNG.UserCertPassword;
 
-                    m_userSignCert_2048 = new X509CertMgr(_publicFile, _privatFile, _password);
+                    m_userSignCert = new X509CertMgr(_publicFile, _privatFile, _password);
                 }
 
-                return m_userSignCert_2048;
-            }
-        }
-
-        private X509CertMgr m_userSignCert_1024 = null;
-
-        /// <summary>
-        /// 전자서명용 -> 사용자로써의 오딘소프트 서명용 1024 인증서 
-        /// </summary>
-        public X509CertMgr UserSignCert_1024
-        {
-            get
-            {
-                if (m_userSignCert_1024 == null)
-                {
-                    string _publicFile = Path.Combine(UCfgHelper.SNG.RootCertFolder, @"ASP\1024\signCert.der");
-                    string _privatFile = Path.Combine(UCfgHelper.SNG.RootCertFolder, @"ASP\1024\signPri.key");
-                    string _password = UCfgHelper.SNG.UserCertPassword_1024;
-
-                    m_userSignCert_1024 = new X509CertMgr(_publicFile, _privatFile, _password);
-                }
-
-                return m_userSignCert_1024;
+                return m_userSignCert;
             }
         }
 
@@ -113,7 +78,7 @@ namespace OpenETaxBill.Certifier
         private X509CertMgr m_aspSignCert = null;
 
         /// <summary>
-        /// 전자서명용 -> ASP사업자인 오딘소프트의 서명용 인증서 (테스트 기간에는 진흥원에서 제공한 2048 인증서 사용)
+        /// ASP/ERP 사업자의 전자서명용 인증서 (테스트 기간에는 진흥원에서 제공한 인증서 사용)
         /// </summary>
         public X509CertMgr AspSignCert
         {
@@ -135,7 +100,7 @@ namespace OpenETaxBill.Certifier
         private X509Certificate2 m_ntsPublicKey = null;
 
         /// <summary>
-        /// 암호화용 -> 국세청에서 제공하는 공캐키, 검증시에는 진흥원 키 사용
+        /// 진흥원에서 제공하는 암호화용 공캐키
         /// </summary>
         public X509Certificate2 NtsPublicKey
         {
@@ -143,13 +108,7 @@ namespace OpenETaxBill.Certifier
             {
                 if (m_ntsPublicKey == null)
                 {
-                    string _public_cert_file;
-
-                    if (UCfgHelper.SNG.LiveServer == true)
-                        _public_cert_file = Path.Combine(UCfgHelper.SNG.NtsCertFolder, "국세청.der");
-                    else
-                        _public_cert_file = Path.Combine(UCfgHelper.SNG.NtsCertFolder, "진흥원.der");
-
+                    var _public_cert_file = Path.Combine(UCfgHelper.SNG.NtsCertFolder, "진흥원.der");
                     m_ntsPublicKey = new X509Certificate2(_public_cert_file);
                 }
 

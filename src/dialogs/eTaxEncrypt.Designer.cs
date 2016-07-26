@@ -197,16 +197,16 @@
             // 
             this.tbResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbResult.EditValue = "";
-            this.tbResult.Location = new System.Drawing.Point(2, 468);
+            this.tbResult.Location = new System.Drawing.Point(2, 465);
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(930, 122);
+            this.tbResult.Size = new System.Drawing.Size(930, 125);
             this.tbResult.TabIndex = 1;
             // 
             // uPanelControl2
             // 
             this.uPanelControl2.Controls.Add(this.labelControl7);
             this.uPanelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.uPanelControl2.Location = new System.Drawing.Point(2, 444);
+            this.uPanelControl2.Location = new System.Drawing.Point(2, 441);
             this.uPanelControl2.Name = "uPanelControl2";
             this.uPanelControl2.Size = new System.Drawing.Size(930, 24);
             this.uPanelControl2.TabIndex = 14;
@@ -225,7 +225,7 @@
             this.spBottomMiddle.Dock = System.Windows.Forms.DockStyle.Top;
             this.spBottomMiddle.Location = new System.Drawing.Point(2, 436);
             this.spBottomMiddle.Name = "spBottomMiddle";
-            this.spBottomMiddle.Size = new System.Drawing.Size(930, 8);
+            this.spBottomMiddle.Size = new System.Drawing.Size(930, 5);
             this.spBottomMiddle.TabIndex = 13;
             this.spBottomMiddle.TabStop = false;
             // 
@@ -245,16 +245,16 @@
             // 
             this.tbTargetXml.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbTargetXml.EditValue = "";
-            this.tbTargetXml.Location = new System.Drawing.Point(454, 21);
+            this.tbTargetXml.Location = new System.Drawing.Point(451, 21);
             this.tbTargetXml.Name = "tbTargetXml";
-            this.tbTargetXml.Size = new System.Drawing.Size(474, 411);
+            this.tbTargetXml.Size = new System.Drawing.Size(477, 411);
             this.tbTargetXml.TabIndex = 14;
             // 
             // spTopLeft
             // 
             this.spTopLeft.Location = new System.Drawing.Point(446, 21);
             this.spTopLeft.Name = "spTopLeft";
-            this.spTopLeft.Size = new System.Drawing.Size(8, 411);
+            this.spTopLeft.Size = new System.Drawing.Size(5, 411);
             this.spTopLeft.TabIndex = 13;
             this.spTopLeft.TabStop = false;
             // 

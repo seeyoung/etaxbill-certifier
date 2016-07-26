@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TaxInvoice xmlns="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0 http://www.kec.or.kr/standard/Tax/TaxInvoiceSchemaModule_1.0.xsd">
 	<ExchangedDocument>
-		<ID>201312134100007300000008</ID>
-		<IssueDateTime>20131213000000</IssueDateTime>
+		<ID>201409184100007300000001</ID>
+		<IssueDateTime>20140918000000</IssueDateTime>
 	</ExchangedDocument>
 	<TaxInvoiceDocument>
-		<IssueID>201312134100007300000008</IssueID>
-		<TypeCode>0201</TypeCode>
-		<IssueDateTime>20131213</IssueDateTime>
-		<AmendmentStatusCode>01</AmendmentStatusCode>
+		<IssueID>201409184100007300000001</IssueID>
+		<TypeCode>0101</TypeCode>
+		<IssueDateTime>20140918</IssueDateTime>
 		<PurposeCode>02</PurposeCode>
-		<OriginalIssueID>201312134100007300000004</OriginalIssueID>
 	</TaxInvoiceDocument>
 	<TaxInvoiceTradeSettlement>
 		<InvoicerParty>
@@ -24,7 +22,7 @@
 			<DefinedContact>
 				<DepartmentNameText>영업관리실 관리팀</DepartmentNameText>
 				<PersonNameText>이상익</PersonNameText>
-				<TelephoneCommunication>02-2186-3304</TelephoneCommunication>
+				<TelephoneCommunication>031-698-3790</TelephoneCommunication>
 				<URICommunication>lsi@odinsoftware.co.kr</URICommunication>
 			</DefinedContact>
 			<SpecifiedAddress>
@@ -66,22 +64,22 @@
 		</SpecifiedPaymentMeans>
 		<SpecifiedPaymentMeans>
 			<TypeCode>40</TypeCode>
-			<PaidAmount>-242000</PaidAmount>
+			<PaidAmount>1308010</PaidAmount>
 		</SpecifiedPaymentMeans>
 		<SpecifiedMonetarySummation>
-			<ChargeTotalAmount>-220000</ChargeTotalAmount>
-			<TaxTotalAmount>-22000</TaxTotalAmount>
-			<GrandTotalAmount>-242000</GrandTotalAmount>
+			<ChargeTotalAmount>1189100</ChargeTotalAmount>
+			<TaxTotalAmount>118910</TaxTotalAmount>
+			<GrandTotalAmount>1308010</GrandTotalAmount>
 		</SpecifiedMonetarySummation>
 	</TaxInvoiceTradeSettlement>
 	<TaxInvoiceTradeLineItem>
 		<SequenceNumeric>1</SequenceNumeric>
-		<InvoiceAmount>-220000</InvoiceAmount>
+		<InvoiceAmount>1189100</InvoiceAmount>
 		<ChargeableUnitQuantity>0.00</ChargeableUnitQuantity>
 		<NameText>통합전산시스템 유지보수료</NameText>
-		<PurchaseExpiryDateTime>20131213</PurchaseExpiryDateTime>
+		<PurchaseExpiryDateTime>20140918</PurchaseExpiryDateTime>
 		<TotalTax>
-			<CalculatedAmount>-22000</CalculatedAmount>
+			<CalculatedAmount>118910</CalculatedAmount>
 		</TotalTax>
 		<UnitPrice>
 			<UnitAmount>0.00</UnitAmount>

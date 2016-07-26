@@ -171,7 +171,7 @@
             // 
             this.tbInvoicerId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbInvoicerId.EditValue = "1388602200";
+            this.tbInvoicerId.EditValue = "1112233333";
             this.tbInvoicerId.Location = new System.Drawing.Point(77, 20);
             this.tbInvoicerId.Name = "tbInvoicerId";
             this.tbInvoicerId.Size = new System.Drawing.Size(198, 20);

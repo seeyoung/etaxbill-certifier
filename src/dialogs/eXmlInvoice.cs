@@ -97,7 +97,7 @@ namespace OpenETaxBill.Certifier
         {
             LayoutHelper.RestoreFormLayout(this);
 
-            tbInvoicerId.Text = UCfgHelper.SNG.TesterBizNo;
+            tbInvoicerId.Text = UCfgHelper.SNG.InvoicerBizNo;
             ceTestOk_CheckedChanged(sender, e);
         }
 
@@ -235,34 +235,34 @@ namespace OpenETaxBill.Certifier
             //-------------------------------------------------------------------------------------------------------------------//
             // 암호화
             //-------------------------------------------------------------------------------------------------------------------//
-            byte[] _rvalue_2048 = UCertHelper.SNG.UserSignCert.RandomNumber;
+            byte[] _rvalue = UCertHelper.SNG.UserSignCert.RandomNumber;
 
             ArrayList _taxinvoice = new ArrayList();
             {
                 TaxInvoiceStruct _s_0301 = new TaxInvoiceStruct
                 {
-                    SignerRValue = _rvalue_2048,
+                    SignerRValue = _rvalue,
                     TaxInvoice = _p_0301.ToArray()
                 };
                 _taxinvoice.Add(_s_0301);
 
                 TaxInvoiceStruct _s_0101 = new TaxInvoiceStruct
                 {
-                    SignerRValue = _rvalue_2048,
+                    SignerRValue = _rvalue,
                     TaxInvoice = _p_0101.ToArray()
                 };
                 _taxinvoice.Add(_s_0101);
 
                 TaxInvoiceStruct _s_0401 = new TaxInvoiceStruct
                 {
-                    SignerRValue = _rvalue_2048,
+                    SignerRValue = _rvalue,
                     TaxInvoice = _p_0401.ToArray()
                 };
                 _taxinvoice.Add(_s_0401);
 
                 TaxInvoiceStruct _s_0201 = new TaxInvoiceStruct
                 {
-                    SignerRValue = _rvalue_2048,
+                    SignerRValue = _rvalue,
                     TaxInvoice = _p_0201.ToArray()
                 };
                 _taxinvoice.Add(_s_0201);
@@ -323,7 +323,7 @@ namespace OpenETaxBill.Certifier
 
         private void ceTestOk_CheckedChanged(object sender, EventArgs e)
         {
-            tbTaxInvoiceSubmitUrl.Text = UCfgHelper.SNG.RequestResultsSubmitUrl(ceTestOk.Checked, true);
+            tbTaxInvoiceSubmitUrl.Text = UCfgHelper.SNG.TaxInvoiceSubmitUrl(ceTestOk.Checked, true);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------

@@ -210,7 +210,7 @@ namespace OpenETaxBill.Certifier
 
         private void ceTestOk_CheckedChanged(object sender, EventArgs e)
         {
-            tbTaxInvoiceSubmitUrl.Text = UCfgHelper.SNG.RequestResultsSubmitUrl(ceTestOk.Checked, false);
+            tbTaxInvoiceSubmitUrl.Text = UCfgHelper.SNG.TaxInvoiceSubmitUrl(ceTestOk.Checked, false);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------

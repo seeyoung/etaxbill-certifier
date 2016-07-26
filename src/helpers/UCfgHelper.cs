@@ -14,7 +14,10 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 */
 
 using System;
+using System.Configuration;
 using System.IO;
+using OpenETaxBill.Channel.Interface;
+using OpenETaxBill.SDK.Configuration;
 
 namespace OpenETaxBill.Certifier
 {
@@ -45,29 +48,41 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // 
         //-------------------------------------------------------------------------------------------------------------------------
-        private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
-        private OpenETaxBill.Channel.Interface.ISigner ISigner
+        //private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
+        //private OpenETaxBill.Channel.Interface.ISigner ISigner
+        //{
+        //    get
+        //    {
+        //        if (m_isigner == null)
+        //            m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
+
+        //        return m_isigner;
+        //    }
+        //}
+
+        private OpenETaxBill.Channel.Interface.ICollector m_icollector = null;
+        private OpenETaxBill.Channel.Interface.ICollector ICollector
         {
             get
             {
-                if (m_isigner == null)
-                    m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
+                if (m_icollector == null)
+                    m_icollector = new OpenETaxBill.Channel.Interface.ICollector(false);
 
-                return m_isigner;
+                return m_icollector;
             }
         }
 
-        private OpenETaxBill.Channel.CCollector m_ccollector = null;
-        private OpenETaxBill.Channel.CCollector CCollector
-        {
-            get
-            {
-                if (m_ccollector == null)
-                    m_ccollector = new OpenETaxBill.Channel.CCollector(ISigner.Manager);
+        //private OpenETaxBill.Channel.CCollector m_ccollector = null;
+        //private OpenETaxBill.Channel.CCollector CCollector
+        //{
+        //    get
+        //    {
+        //        if (m_ccollector == null)
+        //            m_ccollector = new OpenETaxBill.Channel.CCollector(ISigner.Manager);
 
-                return m_ccollector;
-            }
-        }
+        //        return m_ccollector;
+        //    }
+        //}
 
         //-------------------------------------------------------------------------------------------------------------------------
         // 
@@ -79,9 +94,12 @@ namespace OpenETaxBill.Certifier
         /// <param name="p_appkey"></param>
         /// <param name="p_default"></param>
         /// <returns></returns>
-        private string GetCfgValue(string p_appkey, string p_default)
+        public string GetAppValue(string p_appkey, string p_default = "")
         {
-            return CCollector.GetCfgValue(p_appkey, p_default);
+            if (String.IsNullOrEmpty(p_default) == true)
+                p_default = ConfigurationManager.AppSettings[p_appkey];
+
+            return RegHelper.SNG.GetClient(ICollector.Manager.CategoryId, ICollector.Manager.ProductId, p_appkey, p_default);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -93,54 +111,25 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_keySize) == true)
-                    m_keySize = GetCfgValue("KeySize", "2048");
+                    m_keySize = GetAppValue("KeySize", "2048");
 
                 return Convert.ToInt32(m_keySize);
             }
         }
 
+        private string m_userCertPassword = "";
+
+        /// <summary>
+        /// 세금계산서를 발행하는 사업자의 인증서 암호 입니다.
+        /// </summary>
         public string UserCertPassword
         {
             get
             {
-                if (KeySize == 2048)
-                    return UserCertPassword_2048;
-                else
-                    return UserCertPassword_1024;
-            }
-        }
+                if (String.IsNullOrEmpty(m_userCertPassword) == true)
+                    m_userCertPassword = GetAppValue("UserCertPassword", "p@ssw0rd");
 
-        private string m_userCertPassword_1024 = "";
-
-        /// <summary>
-        /// 세금계산서를 발행하는 사업자의 인증서 입니다.
-        /// AspCertPassword는 ASP 또는 ERP 사업자의 인증서 암호 입니다.
-        /// </summary>
-        public string UserCertPassword_1024
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(m_userCertPassword_1024) == true)
-                    m_userCertPassword_1024 = GetCfgValue("UserCertPassword_1024", "password");
-
-                return m_userCertPassword_1024;
-            }
-        }
-
-        private string m_userCertPassword_2048 = "";
-
-        /// <summary>
-        /// 세금계산서를 발행하는 사업자의 인증서 입니다.
-        /// AspCertPassword는 ASP 또는 ERP 사업자의 인증서 암호 입니다.
-        /// </summary>
-        public string UserCertPassword_2048
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(m_userCertPassword_2048) == true)
-                    m_userCertPassword_2048 = GetCfgValue("UserCertPassword_2048", "password");
-
-                return m_userCertPassword_2048;
+                return m_userCertPassword;
             }
         }
 
@@ -148,12 +137,12 @@ namespace OpenETaxBill.Certifier
         // client only usage property, probably will remove.
         //-------------------------------------------------------------------------------------------------------------------------
         private string m_testerBizNo = "";
-        public string TesterBizNo
+        public string InvoicerBizNo
         {
             get
             {
                 if (String.IsNullOrEmpty(m_testerBizNo) == true)
-                    m_testerBizNo = GetCfgValue("TesterBizNo", "1388602200");
+                    m_testerBizNo = GetAppValue("InvoicerBizNo", "4445566666");
 
                 return m_testerBizNo;
             }
@@ -165,12 +154,33 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_root_folder) == true)
-                    m_root_folder = GetCfgValue("RootFolder", @"D:\OpenETaxBill\certifier\worker");
+                {
+                    m_root_folder = GetAppValue("RootFolder", @"C:\open-etaxbill");
+
+                    if (Directory.Exists(m_root_folder) == false)
+                        Directory.CreateDirectory(m_root_folder);
+                }
 
                 return m_root_folder;
             }
         }
 
+        private static string m_work_folder = "";
+        public string WorkFolder
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(m_work_folder) == true)
+                {
+                    m_work_folder = Path.Combine(RootFolder, "work-folder");
+
+                    if (Directory.Exists(m_work_folder) == false)
+                        Directory.CreateDirectory(m_work_folder);
+                }
+
+                return m_work_folder;
+            }
+        }
 
         private string m_rootOutFolder = "";
         public string RootOutFolder
@@ -178,7 +188,12 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_rootOutFolder) == true)
-                    m_rootOutFolder = GetCfgValue("RootOutFolder", Path.Combine(RootFolder, "output"));
+                {
+                    m_rootOutFolder = Path.Combine(WorkFolder, "output");
+
+                    if (Directory.Exists(m_rootOutFolder) == false)
+                        Directory.CreateDirectory(m_rootOutFolder);
+                }
 
                 return m_rootOutFolder;
             }
@@ -190,7 +205,12 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_outputFolder) == true)
+                {
                     m_outputFolder = Path.Combine(RootOutFolder, KeySize.ToString());
+
+                    if (Directory.Exists(m_outputFolder) == false)
+                        Directory.CreateDirectory(m_outputFolder);
+                }
 
                 return m_outputFolder;
             }
@@ -209,7 +229,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_isLiveServer) == true)
-                    m_isLiveServer = GetCfgValue("LiveServer", "false");
+                    m_isLiveServer = GetAppValue("LiveServer", "false");
 
                 return m_isLiveServer.ToLower() == "true";
             }
@@ -221,14 +241,21 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_connection_string) == true)
-                {
-                    if (LiveServer == false)
-						m_connection_string = GetCfgValue("Test_ConnectionString", "server=odin-db-server;uid=openetaxbill;pwd=p@ssw0rd;database=ODIN-TAX-V46");
-                    else
-						m_connection_string = GetCfgValue("Live_ConnectionString", "server=odin-db-server;uid=openetaxbill;pwd=p@ssw0rd;database=ODIN-TAX-V46");
-                }
+                    m_connection_string = GetAppValue("ConnectionString", "server=etax-db-server;uid=openetax;pwd=p@ssw0rd;database=OPEN-eTAX-V10");
 
                 return m_connection_string;
+            }
+        }
+
+        private static string m_endpoint_guid = "";
+        public string EndpointGuid
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(m_endpoint_guid) == true)
+                    m_endpoint_guid = GetAppValue("EndpointGuid", "bfa1fab8-2fcf-4e41-b7c1-95577f106c43");
+
+                return m_endpoint_guid;
             }
         }
 
@@ -245,16 +272,16 @@ namespace OpenETaxBill.Certifier
             if (p_is_testing == false)
             {
                 if (p_is_interop == false)
-                    _result = "http://www.taxcerti.or.kr/etax/mr/SubmitEtaxInvoiceService/07855a68-d5a2-4e58-9833-ea76b7703826";            // 단위 기능별 검증
+                    _result = "http://www.taxcerti.or.kr/etax/mr/SubmitEtaxInvoiceService/" + EndpointGuid;            // 단위 기능별 검증
                 else
-                    _result = "http://www.taxcerti.or.kr/etax/er/SubmitEtaxInvoiceService/07855a68-d5a2-4e58-9833-ea76b7703826";            // 상호 운용성 검즘
+                    _result = "http://www.taxcerti.or.kr/etax/er/SubmitEtaxInvoiceService/" + EndpointGuid;            // 상호 운용성 검즘
             }
             else
             {
                 if (p_is_interop == false)
-                    _result = "http://www.taxcerti.or.kr/etax/mr/CertSubmitEtaxInvoiceService/07855a68-d5a2-4e58-9833-ea76b7703826";        // 단위 기능별 검증
+                    _result = "http://www.taxcerti.or.kr/etax/mr/CertSubmitEtaxInvoiceService/" + EndpointGuid;        // 단위 기능별 검증
                 else
-                    _result = "http://www.taxcerti.or.kr/etax/er/CertSubmitEtaxInvoiceService/07855a68-d5a2-4e58-9833-ea76b7703826";        // 상호 운용성 검즘
+                    _result = "http://www.taxcerti.or.kr/etax/er/CertSubmitEtaxInvoiceService/" + EndpointGuid;        // 상호 운용성 검즘
             }
 
             return _result;
@@ -273,16 +300,16 @@ namespace OpenETaxBill.Certifier
             if (p_is_testing == false)
             {
                 if (p_is_interop == false)
-                    _result = "http://www.taxcerti.or.kr/etax/mr/RequestResultsService/07855a68-d5a2-4e58-9833-ea76b7703826";            // 단위 기능별 검증
+                    _result = "http://www.taxcerti.or.kr/etax/mr/RequestResultsService/" + EndpointGuid;            // 단위 기능별 검증
                 else
-                    _result = "http://www.taxcerti.or.kr/etax/er/RequestResultsService/07855a68-d5a2-4e58-9833-ea76b7703826";            // 상호 운용성 검즘
+                    _result = "http://www.taxcerti.or.kr/etax/er/RequestResultsService/" + EndpointGuid;            // 상호 운용성 검즘
             }
             else
             {
                 if (p_is_interop == false)
-                    _result = "http://www.taxcerti.or.kr/etax/mr/CertRequestResultsService/07855a68-d5a2-4e58-9833-ea76b7703826";        // 단위 기능별 검증
+                    _result = "http://www.taxcerti.or.kr/etax/mr/CertRequestResultsService/" + EndpointGuid;        // 단위 기능별 검증
                 else
-                    _result = "http://www.taxcerti.or.kr/etax/er/CertRequestResultsService/07855a68-d5a2-4e58-9833-ea76b7703826";        // 상호 운용성 검즘
+                    _result = "http://www.taxcerti.or.kr/etax/er/CertRequestResultsService/" + EndpointGuid;        // 상호 운용성 검즘
             }
 
             return _result;
@@ -294,7 +321,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_requestCertUrl) == true)
-                    m_requestCertUrl = GetCfgValue("RequestCertUrl", "http://webservice.esero.go.kr/services/RequestCert");
+                    m_requestCertUrl = GetAppValue("RequestCertUrl", "http://webservice.esero.go.kr/services/RequestCert");
 
                 return m_requestCertUrl;
             }
@@ -306,22 +333,14 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_rootCertFolder) == true)
-					m_rootCertFolder = GetCfgValue("RootCertFolder", Path.Combine(RootFolder, "certkey"));
+                {
+                    m_rootCertFolder = Path.Combine(WorkFolder, "certkey");
 
+                    if (Directory.Exists(m_rootCertFolder) == false)
+                        Directory.CreateDirectory(m_rootCertFolder);
+                }
 
                 return m_rootCertFolder;
-            }
-        }
-
-        private static string m_soapKeySize = "";
-        public int SoapKeySize
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(m_soapKeySize) == true)
-                    m_soapKeySize = GetCfgValue("SoapKeySize", "2048");
-
-                return Convert.ToInt32(m_soapKeySize);
             }
         }
 
@@ -331,9 +350,31 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_aspCertFolder) == true)
-                    m_aspCertFolder = Path.Combine(RootCertFolder, "ASP", SoapKeySize.ToString());
+                {
+                    m_aspCertFolder = Path.Combine(RootCertFolder, "ASP", KeySize.ToString());
+
+                    if (Directory.Exists(m_aspCertFolder) == false)
+                        Directory.CreateDirectory(m_aspCertFolder);
+                }
 
                 return m_aspCertFolder;
+            }
+        }
+
+        private static string m_userCertFolder = "";
+        public string UserCertFolder
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(m_userCertFolder) == true)
+                {
+                    m_userCertFolder = Path.Combine(RootCertFolder, "USER", KeySize.ToString());
+
+                    if (Directory.Exists(m_userCertFolder) == false)
+                        Directory.CreateDirectory(m_userCertFolder);
+                }
+
+                return m_userCertFolder;
             }
         }
 
@@ -343,7 +384,12 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_ntsCertFolder) == true)
-                    m_ntsCertFolder = Path.Combine(RootCertFolder,"NTS", SoapKeySize.ToString());
+                {
+                    m_ntsCertFolder = Path.Combine(RootCertFolder, "NTS", KeySize.ToString());
+
+                    if (Directory.Exists(m_ntsCertFolder) == false)
+                        Directory.CreateDirectory(m_ntsCertFolder);
+                }
 
                 return m_ntsCertFolder;
             }
@@ -353,14 +399,13 @@ namespace OpenETaxBill.Certifier
 
         /// <summary>
         /// ASP 또는 ERP 사업자의 인증서 암호 입니다.
-        /// UserCertPassword는 세금계산서를 발행하는 사업자의 인증서 입니다.
         /// </summary>
         public string AspCertPassword
         {
             get
             {
                 if (String.IsNullOrEmpty(m_aspCertPassword) == true)
-                    m_aspCertPassword = GetCfgValue("AspCertPassword", "password");
+                    m_aspCertPassword = GetAppValue("AspCertPassword", "p@ssw0rd");
 
                 return m_aspCertPassword;
             }
@@ -372,7 +417,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_senderBizNo) == true)
-                    m_senderBizNo = GetCfgValue("SenderBizNo", "1388602200");
+                    m_senderBizNo = GetAppValue("SenderBizNo", "1112233333");
 
                 return m_senderBizNo;
             }
@@ -384,7 +429,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_senderBizName) == true)
-                    m_senderBizName = GetCfgValue("SenderBizName", "(주)오딘소프트");
+                    m_senderBizName = GetAppValue("SenderBizName", "(주)전자세금테스트");
 
                 return m_senderBizName;
             }
@@ -396,7 +441,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_receiverBizNo) == true)
-                    m_receiverBizNo = GetCfgValue("ReceiverBizNo", "9999999999");
+                    m_receiverBizNo = GetAppValue("ReceiverBizNo", "9999999999");
 
                 return m_receiverBizNo;
             }
@@ -408,7 +453,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_receiverBizName) == true)
-                    m_receiverBizName = GetCfgValue("ReceiverBizName", "국세청");
+                    m_receiverBizName = GetAppValue("ReceiverBizName", "국세청");
 
                 return m_receiverBizName;
             }
@@ -420,7 +465,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_eTaxVersion) == true)
-                    m_eTaxVersion = GetCfgValue("eTaxVersion", "3.0");
+                    m_eTaxVersion = GetAppValue("eTaxVersion", "3.0");
 
                 return m_eTaxVersion;
             }
@@ -432,7 +477,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_registerId) == true)
-                    m_registerId = GetCfgValue("RegisterId", "42000238");
+                    m_registerId = GetAppValue("RegisterId", "40000000");
 
                 return m_registerId;
             }
@@ -444,9 +489,9 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_acceptedRequestUrl) == true)
-                    m_acceptedRequestUrl = GetCfgValue("AcceptedRequestUrl", "/ResultSubmit");
+                    m_acceptedRequestUrl = GetAppValue("AcceptedRequestUrl", "/ResultSubmit");
 
-                return m_acceptedRequestUrl.ToLower();
+                return m_acceptedRequestUrl;
             }
         }
 
@@ -464,12 +509,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_hostAddress) == true)
-                {
-                    if (LiveServer == false)
-						m_hostAddress = GetCfgValue("Test_HostAddress", "localhost");	
-                    else
-                        m_hostAddress = GetCfgValue("Live_HostAddress", "etax.openetaxbill.co.kr");
-                }
+                    m_hostAddress = GetAppValue("HostAddress", "etax.domain.name");
 
                 return m_hostAddress;
             }
@@ -481,7 +521,7 @@ namespace OpenETaxBill.Certifier
             get
             {
                 if (String.IsNullOrEmpty(m_portNumber) == true)
-                    m_portNumber = GetCfgValue("PortNumber", "8080");
+                    m_portNumber = GetAppValue("PortNumber", "8080");
 
                 return Convert.ToInt32(m_portNumber);
             }
@@ -508,16 +548,16 @@ namespace OpenETaxBill.Certifier
         {
             if (disposing)
             {
-                if (m_isigner != null)
-                {
-                    m_isigner.Dispose();
-                    m_isigner = null;
-                }
-                if (m_ccollector != null)
-                {
-                    m_ccollector.Dispose();
-                    m_ccollector = null;
-                }
+                //if (m_isigner != null)
+                //{
+                //    m_isigner.Dispose();
+                //    m_isigner = null;
+                //}
+                //if (m_ccollector != null)
+                //{
+                //    m_ccollector.Dispose();
+                //    m_ccollector = null;
+                //}
             }
         }
 
