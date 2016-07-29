@@ -22,7 +22,7 @@ using System.Windows.Forms;
 using System.Xml;
 using OpenETaxBill.Channel.Library.Security.Issue;
 using OpenETaxBill.Channel.Library.Security.Signature;
-using OpenETaxBill.SDK.Control.Library;
+using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
 {

@@ -26,9 +26,9 @@ using OpenETaxBill.Channel.Library.Security.Issue;
 using OpenETaxBill.Channel.Library.Security.Mime;
 using OpenETaxBill.Channel.Library.Security.Notice;
 using OpenETaxBill.Channel.Library.Security.Signature;
-using OpenETaxBill.SDK.Control.Library;
-using OpenETaxBill.SDK.Data;
-using OpenETaxBill.SDK.Data.Collection;
+using OdinSoft.SDK.Control.Library;
+using OdinSoft.SDK.Data;
+using OdinSoft.SDK.Data.Collection;
 
 namespace OpenETaxBill.Certifier
 {
@@ -46,13 +46,13 @@ namespace OpenETaxBill.Certifier
         //
         //-------------------------------------------------------------------------------------------------------------------------
 
-        private OpenETaxBill.SDK.Data.DataHelper m_dataHelper = null;
-        private OpenETaxBill.SDK.Data.DataHelper LDataHelper
+        private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
+        private OdinSoft.SDK.Data.DataHelper LDataHelper
         {
             get
             {
                 if (m_dataHelper == null)
-                    m_dataHelper = new OpenETaxBill.SDK.Data.DataHelper();
+                    m_dataHelper = new OdinSoft.SDK.Data.DataHelper();
                 return m_dataHelper;
             }
         }

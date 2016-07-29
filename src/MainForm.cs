@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Helpers;
 using DevExpress.XtraEditors;
-using OpenETaxBill.SDK.Control.Library;
+using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
 {

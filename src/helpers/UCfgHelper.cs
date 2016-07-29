@@ -17,7 +17,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using OpenETaxBill.Channel.Interface;
-using OpenETaxBill.SDK.Configuration;
+using OdinSoft.SDK.Configuration;
 
 namespace OpenETaxBill.Certifier
 {

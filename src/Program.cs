@@ -16,7 +16,7 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using OpenETaxBill.SDK.Configuration;
+using OdinSoft.SDK.Configuration;
 
 namespace OpenETaxBill.Certifier
 {
