@@ -20,8 +20,8 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Channel.Library.Security.Issue;
-using OpenETaxBill.Channel.Library.Security.Signature;
+using OdinSoft.SDK.eTaxBill.Security.Issue;
+using OdinSoft.SDK.eTaxBill.Security.Signature;
 using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier

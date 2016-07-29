@@ -16,7 +16,7 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using OpenETaxBill.Channel.Library.Security.Signature;
+using OdinSoft.SDK.eTaxBill.Security.Signature;
 
 namespace OpenETaxBill.Certifier
 {

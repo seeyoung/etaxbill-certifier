@@ -19,7 +19,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Channel.Library.Security.Issue;
+using OdinSoft.SDK.eTaxBill.Security.Issue;
 using OdinSoft.SDK.Control.Library;
 using OdinSoft.SDK.Data;
 using OdinSoft.SDK.Data.Collection;

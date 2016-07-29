@@ -19,7 +19,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
-using OpenETaxBill.Channel.Library.Security.Encrypt;
+using OdinSoft.SDK.eTaxBill.Security.Encrypt;
 using OdinSoft.SDK.Control.Library;
 using Org.BouncyCastle.Asn1;
 

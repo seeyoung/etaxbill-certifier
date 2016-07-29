@@ -18,8 +18,8 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OpenETaxBill.Channel.Library.Security.Mime;
-using OpenETaxBill.Channel.Library.Security.Notice;
+using OdinSoft.SDK.eTaxBill.Security.Mime;
+using OdinSoft.SDK.eTaxBill.Security.Notice;
 using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
