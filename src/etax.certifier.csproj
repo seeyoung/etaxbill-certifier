@@ -69,18 +69,12 @@
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.BonusSkins.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Tutorials.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OdinSoft.SDK.Control, Version=1.0.2016.27139, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OdinSoft.SDK.Control.1.0.0.2\lib\net45\OdinSoft.SDK.Control.dll</HintPath>
+    <Reference Include="OdinSoft.SDK.Base, Version=1.0.2016.27138, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OdinSoft.SDK.Base.1.0.0.2\lib\net45\OdinSoft.SDK.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OdinSoft.SDK.Crypto, Version=1.0.2016.27138, Culture=neutral, processorArchitecture=MSIL">
@@ -174,6 +168,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="dialogs\eTaxSmtp.resx">
       <DependentUpon>eTaxSmtp.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -214,6 +213,10 @@
     <EmbeddedResource Include="dialogs\eTaxSigning.resx">
       <DependentUpon>eTaxSigning.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
     <Compile Include="dialogs\eTaxCreator.cs">

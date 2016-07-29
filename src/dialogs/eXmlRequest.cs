@@ -20,18 +20,21 @@ using System.Windows.Forms;
 using System.Xml;
 using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
-using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
 {
-    public partial class eXmlRequest : DevExpress.XtraEditors.XtraForm
+    public partial class eXmlRequest : Form
     {
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        public eXmlRequest()
+        private MainForm __parent_form = null;
+
+        public eXmlRequest(Form p_parent_form)
         {
             InitializeComponent();
+
+            __parent_form = (MainForm)p_parent_form;
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -39,20 +42,24 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void WriteLine(string p_message)
         {
-            tbResult.Text = p_message + Environment.NewLine + tbResult.Text;
+            if (__parent_form != null)
+            {
+                var _main = __parent_form;
+                _main.WriteOutput(p_message, this.Name);
+            }
         }
-  
+
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
         private void eXmlInterop_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LayoutHelper.SaveFormLayout(this);
+            __parent_form.SaveFormLayout(this);
         }
 
         private void eXmlInterop_Load(object sender, EventArgs e)
         {
-            LayoutHelper.RestoreFormLayout(this);
+            __parent_form.RestoreFormLayout(this);
 
             ceTestOk_CheckedChanged(sender, e);
             tbSubmitId.Text = UCfgHelper.SNG.RegisterId + "-20160708-451f22a828182f47921e93b1b747e5dc";

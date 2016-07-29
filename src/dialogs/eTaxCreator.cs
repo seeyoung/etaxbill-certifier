@@ -19,21 +19,24 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OdinSoft.SDK.eTaxBill.Security.Issue;
-using OdinSoft.SDK.Control.Library;
-using OdinSoft.SDK.Data;
+using OdinSoft.SDK.Base;
 using OdinSoft.SDK.Data.Collection;
+using OdinSoft.SDK.eTaxBill.Security.Issue;
 
 namespace OpenETaxBill.Certifier
 {
-    public partial class eTaxCreator : DevExpress.XtraEditors.XtraForm
+    public partial class eTaxCreator : Form
     {
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        public eTaxCreator()
+        private MainForm __parent_form = null;
+
+        public eTaxCreator(Form p_parent_form)
         {
             InitializeComponent();
+
+            __parent_form = (MainForm)p_parent_form;
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -53,6 +56,15 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // inner functions
         //-------------------------------------------------------------------------------------------------------------------------
+        private void WriteLine(string p_message)
+        {
+            if (__parent_form != null)
+            {
+                var _main = __parent_form;
+                _main.WriteOutput(p_message, this.Name);
+            }
+        }
+
         private DataSet getMasterDataSet(string p_type_code = "0101")
         {
             string _sqlstr = "SELECT TOP 1 * FROM TB_eTAX_INVOICE WHERE typeCode=@typeCode ORDER BY issueId DESC";
@@ -77,24 +89,19 @@ namespace OpenETaxBill.Certifier
             return LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
 
-        private void WriteLine(string p_message)
-        {
-            tbResult.Text += p_message + Environment.NewLine;
-        }
-
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
         private void XmlCreator_Load(object sender, EventArgs e)
         {
-            LayoutHelper.RestoreFormLayout(this);
+            __parent_form.RestoreFormLayout(this);
 
             tbInvoicerId.Text = UCfgHelper.SNG.InvoicerBizNo;
         }
 
         private void XmlCreator_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LayoutHelper.SaveFormLayout(this);
+            __parent_form.SaveFormLayout(this);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +179,6 @@ namespace OpenETaxBill.Certifier
         private void btClear_Click(object sender, EventArgs e)
         {
             tbSourceXml.Text = "";
-            tbResult.Text = "";
         }
 
         private void tbCanonical_Click(object sender, EventArgs e)

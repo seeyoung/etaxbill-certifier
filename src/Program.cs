@@ -43,9 +43,6 @@ namespace OpenETaxBill.Certifier
             // Add the event handler for handling non-UI thread exceptions to the event. 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            DevExpress.UserSkins.BonusSkins.Register();
-            DevExpress.Utils.AppearanceObject.DefaultFont = new System.Drawing.Font("맑은 고딕", 9F);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

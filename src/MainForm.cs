@@ -15,14 +15,11 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
 using System.Windows.Forms;
-using DevExpress.XtraBars;
-using DevExpress.XtraBars.Helpers;
-using DevExpress.XtraEditors;
-using OdinSoft.SDK.Control.Library;
+using OdinSoft.SDK.Base;
 
 namespace OpenETaxBill.Certifier
 {
-    public partial class MainForm : DevExpress.XtraEditors.XtraForm
+    public partial class MainForm : Form
     {
         //-------------------------------------------------------------------------------------------------------------------------
         // attributes
@@ -36,22 +33,56 @@ namespace OpenETaxBill.Certifier
             }
         }
 
-        bool IsTabbedMdi
+        //bool IsTabbedMdi
+        //{
+        //    get
+        //    {
+        //        return biTabbedMDI.Down;
+        //    }
+        //}
+
+        private static CLayout __ilayout = null;
+        public static CLayout __clayout
         {
             get
             {
-                return biTabbedMDI.Down;
+                if (__ilayout == null)
+                    __ilayout = new CLayout();
+                return __ilayout;
             }
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
         // methodes
         //-------------------------------------------------------------------------------------------------------------------------
-        private bool ActivateChildForm(XtraForm p_newForm)
+        public void RestoreFormLayout(Form p_child_form)
+        {
+            __clayout.RestoreFormLayout(p_child_form, this.GetType().GUID.ToString());
+        }
+
+        public void SaveFormLayout(Form p_child_form)
+        {
+            __clayout.SaveFormLayout(p_child_form, this.GetType().GUID.ToString());
+        }
+
+        public void WriteOutput(string p_message, string p_category = "")
+        {
+            if (String.IsNullOrEmpty(p_category) == true)
+                p_category = this.Name;
+
+            this.InvokeEx(f =>
+            {
+                f.rtOutput.AppendText(String.Format("'{0}' => {1}{2}", p_category, p_message, Environment.NewLine));
+                f.rtOutput.Select(f.rtOutput.Text.Length, 0);
+                f.rtOutput.ScrollToCaret();
+            });
+        }
+
+        private bool ActivateChildForm(Form p_newForm)
         {
             var _found = false;
 
-            foreach (XtraForm _form in MdiChildren)
+            foreach (Form _form in MdiChildren)
             {
                 if (_form.Name == p_newForm.Name)
                 {
@@ -73,8 +104,8 @@ namespace OpenETaxBill.Certifier
 
         private void ToggleTabbedMDI()
         {
-            tabbedMdiMgr.MdiParent = IsTabbedMdi ? this : null;
-            biCascade.Visibility = biHorizontal.Visibility = biVertical.Visibility = IsTabbedMdi ? BarItemVisibility.Never : BarItemVisibility.Always;
+            //tabbedMdiMgr.MdiParent = IsTabbedMdi ? this : null;
+            //biCascade.Visibility = biHorizontal.Visibility = biVertical.Visibility = IsTabbedMdi ? BarItemVisibility.Never : BarItemVisibility.Always;
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +114,6 @@ namespace OpenETaxBill.Certifier
         public MainForm()
         {
             InitializeComponent();
-            SkinHelper.InitSkinPopupMenu(bm_theme);
 
             ToggleTabbedMDI();
         }
@@ -91,159 +121,32 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // events
         //-------------------------------------------------------------------------------------------------------------------------
-        private void mBarExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Close();
-        }
-
-        private void biTabbedMDI_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            ToggleTabbedMDI();
-        }
-
-        private void biCascade_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            LayoutMdi(MdiLayout.Cascade);
-        }
-
-        private void biHorizontal_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        private void biVertical_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void biClose_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (ActiveMDIForm != null)
-                ActiveMDIForm.Close();
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LayoutHelper.RestoreFormLayout(this);
+            __clayout.RestoreFormLayout(this);
             this.Text = String.Format("표준 전자세금계산서 인증시스템 - {0}", UCfgHelper.SNG.KeySize);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LayoutHelper.SaveFormLayout(this);
+            __clayout.SaveFormLayout(this);
         }
 
-        private void biCreator_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //-------------------------------------------------------------------------------------------------------------------------
+        //
+        //-------------------------------------------------------------------------------------------------------------------------
+        private void miClose_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraEditors.XtraForm _creator = new eTaxCreator();
-
-            if (ActivateChildForm(_creator) == false)
-            {
-                _creator.MdiParent = this;
-                _creator.Show();
-            }
+            if (ActiveMDIForm != null)
+                ActiveMDIForm.Close();
         }
 
-        private void biSignature_ItemClick(object sender, ItemClickEventArgs e)
+        private void miExit_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraEditors.XtraForm _signatureForm = new eTaxSigning();
-
-            if (ActivateChildForm(_signatureForm) == false)
-            {
-                _signatureForm.MdiParent = this;
-                _signatureForm.Show();
-            }
+            Close();
         }
 
-        private void biEncrypt_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _envelope = new eTaxEncrypt();
-
-            if (ActivateChildForm(_envelope) == false)
-            {
-                _envelope.MdiParent = this;
-                _envelope.Show();
-            }
-        }
-
-        private void biExchange_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _creator = new eTaxInvoice();
-
-            if (ActivateChildForm(_creator) == false)
-            {
-                _creator.MdiParent = this;
-                _creator.Show();
-            }
-        }
-
-        private void biRequest_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _creator = new eTaxRequest();
-
-            if (ActivateChildForm(_creator) == false)
-            {
-                _creator.MdiParent = this;
-                _creator.Show();
-            }
-        }
-
-        private void btInteropSubmit_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _interop = new eXmlInvoice();
-
-            if (ActivateChildForm(_interop) == false)
-            {
-                _interop.MdiParent = this;
-                _interop.Show();
-            }
-        }
-
-        private void biInteropRequest_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _interop = new eXmlRequest();
-
-            if (ActivateChildForm(_interop) == false)
-            {
-                _interop.MdiParent = this;
-                _interop.Show();
-            }
-        }
-
-        private void bbCertRequest_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DevExpress.XtraEditors.XtraForm _certkey = new eKeyPublic();
-
-            if (ActivateChildForm(_certkey) == false)
-            {
-                _certkey.MdiParent = this;
-                _certkey.Show();
-            }
-        }
-
-        private void biBizBill_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            using (System.Diagnostics.Process _process = new System.Diagnostics.Process())
-            {
-                _process.StartInfo.FileName = "http://www.odinsoftware.co.kr";
-                _process.StartInfo.Verb = "Open";
-                _process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                _process.Start();
-            }
-        }
-
-        private void biESeroTest_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            using (System.Diagnostics.Process _process = new System.Diagnostics.Process())
-            {
-                _process.StartInfo.FileName = "http://testbed.esero.go.kr";
-                _process.StartInfo.Verb = "Open";
-                _process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                _process.Start();
-            }
-        }
-
-        private void biTaxCertiTest_ItemClick(object sender, ItemClickEventArgs e)
+        private void miTaxCerti_Click(object sender, EventArgs e)
         {
             using (System.Diagnostics.Process _process = new System.Diagnostics.Process())
             {
@@ -254,29 +157,82 @@ namespace OpenETaxBill.Certifier
             }
         }
 
-        private void biOutputFolder_ItemClick(object sender, ItemClickEventArgs e)
+        private void miAbout_Click(object sender, EventArgs e)
         {
             using (System.Diagnostics.Process _process = new System.Diagnostics.Process())
             {
-                _process.StartInfo.FileName = UCfgHelper.SNG.OutputFolder;
+                _process.StartInfo.FileName = "http://www.odinsoftware.co.kr";
                 _process.StartInfo.Verb = "Open";
                 _process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
                 _process.Start();
             }
         }
 
-        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        private void miTabbedMdi_Click(object sender, EventArgs e)
         {
-            using (System.Diagnostics.Process _process = new System.Diagnostics.Process())
+            ToggleTabbedMDI();
+        }
+
+        private void miCascade_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void miHorizontal_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+
+        private void miVertical_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        private void miTaxCreator_Click(object sender, EventArgs e)
+        {
+            var _creator = new eTaxCreator(this);
+
+            if (ActivateChildForm(_creator) == false)
             {
-                _process.StartInfo.FileName = @"AcroEdit.exe";
-                _process.StartInfo.Verb = "Open";
-                _process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                _process.Start();
+                _creator.MdiParent = this;
+                _creator.Show();
             }
         }
 
-        private void biResponse_ItemClick(object sender, ItemClickEventArgs e)
+        private void miTaxSigning_Click(object sender, EventArgs e)
+        {
+            var _signatureForm = new eTaxSigning(this);
+
+            if (ActivateChildForm(_signatureForm) == false)
+            {
+                _signatureForm.MdiParent = this;
+                _signatureForm.Show();
+            }
+        }
+
+        private void miTaxEncrypt_Click(object sender, EventArgs e)
+        {
+            var _envelope = new eTaxEncrypt(this);
+
+            if (ActivateChildForm(_envelope) == false)
+            {
+                _envelope.MdiParent = this;
+                _envelope.Show();
+            }
+        }
+
+        private void miTaxInvoice_Click(object sender, EventArgs e)
+        {
+            var _creator = new eTaxInvoice(this);
+
+            if (ActivateChildForm(_creator) == false)
+            {
+                _creator.MdiParent = this;
+                _creator.Show();
+            }
+        }
+
+        private void miTaxReport_Click(object sender, EventArgs e)
         {
             string _endPoint = UCfgHelper.SNG.ReplyAddress;
 
@@ -290,9 +246,48 @@ namespace OpenETaxBill.Certifier
             MessageBox.Show(String.Format(_message, _endPoint));
         }
 
-        private void biOption_ItemClick(object sender, ItemClickEventArgs e)
+        private void miTaxRequest_Click(object sender, EventArgs e)
         {
+            var _creator = new eTaxRequest(this);
 
+            if (ActivateChildForm(_creator) == false)
+            {
+                _creator.MdiParent = this;
+                _creator.Show();
+            }
+        }
+
+        private void miXmlInvoice_Click(object sender, EventArgs e)
+        {
+            var _interop = new eXmlInvoice(this);
+
+            if (ActivateChildForm(_interop) == false)
+            {
+                _interop.MdiParent = this;
+                _interop.Show();
+            }
+        }
+
+        private void miXmlRequest_Click(object sender, EventArgs e)
+        {
+            var _interop = new eXmlRequest(this);
+
+            if (ActivateChildForm(_interop) == false)
+            {
+                _interop.MdiParent = this;
+                _interop.Show();
+            }
+        }
+
+        private void miKeyPublic_Click(object sender, EventArgs e)
+        {
+            var _certkey = new eKeyPublic(this);
+
+            if (ActivateChildForm(_certkey) == false)
+            {
+                _certkey.MdiParent = this;
+                _certkey.Show();
+            }
         }
 
         //-------------------------------------------------------------------------------------------------------------------------

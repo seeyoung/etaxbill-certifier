@@ -22,52 +22,51 @@ using System.Windows.Forms;
 using System.Xml;
 using OdinSoft.SDK.eTaxBill.Security.Issue;
 using OdinSoft.SDK.eTaxBill.Security.Signature;
-using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
 {
-    public partial class eTaxSigning : DevExpress.XtraEditors.XtraForm
+    public partial class eTaxSigning : Form
     {
 
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        public eTaxSigning()
+        private MainForm __parent_form = null;
+
+        public eTaxSigning(Form p_parent_form)
         {
             InitializeComponent();
+
+            __parent_form = (MainForm)p_parent_form;
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        //private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
-        //private OpenETaxBill.Channel.Interface.ISigner ISigner
-        //{
-        //    get
-        //    {
-        //        if (m_isigner == null)
-        //            m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
-
-        //        return m_isigner;
-        //    }
-        //}
+        private void WriteLine(string p_message)
+        {
+            if (__parent_form != null)
+            {
+                var _main = __parent_form;
+                _main.WriteOutput(p_message, this.Name);
+            }
+        }
 
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
         private void XmlSignature_Load(object sender, EventArgs e)
         {
-            LayoutHelper.RestoreFormLayout(this);
+            __parent_form.RestoreFormLayout(this);
         }
 
         private void XmlSignature_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LayoutHelper.SaveFormLayout(this);
+            __parent_form.SaveFormLayout(this);
         }
 
         private void btClear_Click(object sender, EventArgs e)
         {
-            tbResult.Text = "";
             tbSourceXml.Text = "";
         }
 
@@ -98,11 +97,6 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        private void WriteLine(string p_message)
-        {
-            tbResult.Text += p_message + Environment.NewLine;
-        }
-
         private void FixupNamespaceNodes(XmlElement p_srcNode, XmlElement p_dstNode)
         {
             // remove namespace nodes
@@ -160,9 +154,6 @@ namespace OpenETaxBill.Certifier
         {
             var _type_code = String.Format("{0:00}{1:00}", (cbKind1.SelectedIndex + 1), (cbKind2.SelectedIndex + 1));
 
-            tbResult.Text = "";
-            tbResult.Refresh();
-
             string _readfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\2-{_type_code}.xml");
             WriteLine("read source file: " + _readfile);
 
@@ -219,13 +210,12 @@ namespace OpenETaxBill.Certifier
 
             MemoryStream _ms = new MemoryStream(File.ReadAllBytes(_signedFile));
 
-            tbResult.Text = "Validating..." + Environment.NewLine;
-            tbResult.Refresh();
+            WriteLine("Validating..." + Environment.NewLine);
 
             Validator.SNG.DoValidation(_ms);
 
-            tbResult.Text += Validator.SNG.Result + Environment.NewLine;
-            tbResult.Text += "Done..." + Environment.NewLine;
+            WriteLine(Validator.SNG.Result + Environment.NewLine);
+            WriteLine("Done..." + Environment.NewLine);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
