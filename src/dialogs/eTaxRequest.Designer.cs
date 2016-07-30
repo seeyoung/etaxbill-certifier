@@ -268,7 +268,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eTaxRequest";
-            this.Text = "SoapCreator";
+            this.Text = "단위 기능별 검증 -> 웹서비스메시징 -> 처리결과 요청";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.eXmlCreator_FormClosing);
             this.Load += new System.EventHandler(this.eXmlCreator_Load);
             this.panelControl2.ResumeLayout(false);

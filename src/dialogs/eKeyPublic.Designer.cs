@@ -40,12 +40,12 @@
             this.tbRegId = new System.Windows.Forms.TextBox();
             this.labelControl4 = new System.Windows.Forms.Label();
             this.pnTop = new System.Windows.Forms.Panel();
-            this.uPanelControl1 = new System.Windows.Forms.Panel();
-            this.labelControl6 = new System.Windows.Forms.Label();
-            this.uLabelControl1 = new System.Windows.Forms.Label();
-            this.tbSourceXml = new System.Windows.Forms.RichTextBox();
-            this.spTopLeft = new System.Windows.Forms.Splitter();
             this.tbTargetXml = new System.Windows.Forms.RichTextBox();
+            this.spTopLeft = new System.Windows.Forms.Splitter();
+            this.tbSourceXml = new System.Windows.Forms.RichTextBox();
+            this.uPanelControl1 = new System.Windows.Forms.Panel();
+            this.uLabelControl1 = new System.Windows.Forms.Label();
+            this.labelControl6 = new System.Windows.Forms.Label();
             this.pnBackGround = new System.Windows.Forms.Panel();
             this.panelControl2.SuspendLayout();
             this.pnTop.SuspendLayout();
@@ -165,33 +165,22 @@
             this.pnTop.Size = new System.Drawing.Size(1062, 439);
             this.pnTop.TabIndex = 12;
             // 
-            // uPanelControl1
+            // tbTargetXml
             // 
-            this.uPanelControl1.Controls.Add(this.uLabelControl1);
-            this.uPanelControl1.Controls.Add(this.labelControl6);
-            this.uPanelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.uPanelControl1.Location = new System.Drawing.Point(0, 0);
-            this.uPanelControl1.Name = "uPanelControl1";
-            this.uPanelControl1.Size = new System.Drawing.Size(1062, 23);
-            this.uPanelControl1.TabIndex = 11;
+            this.tbTargetXml.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbTargetXml.Location = new System.Drawing.Point(513, 23);
+            this.tbTargetXml.Name = "tbTargetXml";
+            this.tbTargetXml.Size = new System.Drawing.Size(549, 416);
+            this.tbTargetXml.TabIndex = 14;
+            this.tbTargetXml.Text = "";
             // 
-            // labelControl6
+            // spTopLeft
             // 
-            this.labelControl6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelControl6.Location = new System.Drawing.Point(0, 0);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(73, 23);
-            this.labelControl6.TabIndex = 3;
-            this.labelControl6.Text = "Source XML";
-            // 
-            // uLabelControl1
-            // 
-            this.uLabelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.uLabelControl1.Location = new System.Drawing.Point(988, 0);
-            this.uLabelControl1.Name = "uLabelControl1";
-            this.uLabelControl1.Size = new System.Drawing.Size(74, 23);
-            this.uLabelControl1.TabIndex = 4;
-            this.uLabelControl1.Text = "Sample XML";
+            this.spTopLeft.Location = new System.Drawing.Point(507, 23);
+            this.spTopLeft.Name = "spTopLeft";
+            this.spTopLeft.Size = new System.Drawing.Size(6, 416);
+            this.spTopLeft.TabIndex = 13;
+            this.spTopLeft.TabStop = false;
             // 
             // tbSourceXml
             // 
@@ -202,22 +191,33 @@
             this.tbSourceXml.TabIndex = 12;
             this.tbSourceXml.Text = "";
             // 
-            // spTopLeft
+            // uPanelControl1
             // 
-            this.spTopLeft.Location = new System.Drawing.Point(507, 23);
-            this.spTopLeft.Name = "spTopLeft";
-            this.spTopLeft.Size = new System.Drawing.Size(6, 416);
-            this.spTopLeft.TabIndex = 13;
-            this.spTopLeft.TabStop = false;
+            this.uPanelControl1.Controls.Add(this.uLabelControl1);
+            this.uPanelControl1.Controls.Add(this.labelControl6);
+            this.uPanelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.uPanelControl1.Location = new System.Drawing.Point(0, 0);
+            this.uPanelControl1.Name = "uPanelControl1";
+            this.uPanelControl1.Size = new System.Drawing.Size(1062, 23);
+            this.uPanelControl1.TabIndex = 11;
             // 
-            // tbTargetXml
+            // uLabelControl1
             // 
-            this.tbTargetXml.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTargetXml.Location = new System.Drawing.Point(513, 23);
-            this.tbTargetXml.Name = "tbTargetXml";
-            this.tbTargetXml.Size = new System.Drawing.Size(549, 416);
-            this.tbTargetXml.TabIndex = 14;
-            this.tbTargetXml.Text = "";
+            this.uLabelControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.uLabelControl1.Location = new System.Drawing.Point(988, 0);
+            this.uLabelControl1.Name = "uLabelControl1";
+            this.uLabelControl1.Size = new System.Drawing.Size(74, 23);
+            this.uLabelControl1.TabIndex = 4;
+            this.uLabelControl1.Text = "Sample XML";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelControl6.Location = new System.Drawing.Point(0, 0);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(73, 23);
+            this.labelControl6.TabIndex = 3;
+            this.labelControl6.Text = "Source XML";
             // 
             // pnBackGround
             // 
@@ -236,7 +236,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eKeyPublic";
-            this.Text = "eXmlPublicKey";
+            this.Text = "사업자 공개키 획득";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.eXmlPublicKey_FormClosing);
             this.Load += new System.EventHandler(this.eXmlPublicKey_Load);
             this.panelControl2.ResumeLayout(false);

@@ -56,7 +56,7 @@
             // sbCreateMsg
             // 
             this.sbCreateMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sbCreateMsg.Location = new System.Drawing.Point(960, 3);
+            this.sbCreateMsg.Location = new System.Drawing.Point(960, 12);
             this.sbCreateMsg.Name = "sbCreateMsg";
             this.sbCreateMsg.Size = new System.Drawing.Size(90, 58);
             this.sbCreateMsg.TabIndex = 29;
@@ -146,7 +146,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eTaxSmtp";
-            this.Text = "eTaxSmtp";
+            this.Text = "유통시스템 검증 -> SMTP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.eTaxSmtp_FormClosing);
             this.Load += new System.EventHandler(this.eTaxSmtp_Load);
             this.panelControl2.ResumeLayout(false);

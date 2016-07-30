@@ -48,18 +48,6 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // 
         //-------------------------------------------------------------------------------------------------------------------------
-        //private OpenETaxBill.Channel.Interface.ISigner m_isigner = null;
-        //private OpenETaxBill.Channel.Interface.ISigner ISigner
-        //{
-        //    get
-        //    {
-        //        if (m_isigner == null)
-        //            m_isigner = new OpenETaxBill.Channel.Interface.ISigner(false);
-
-        //        return m_isigner;
-        //    }
-        //}
-
         private OpenETaxBill.Channel.Interface.ICollector m_icollector = null;
         private OpenETaxBill.Channel.Interface.ICollector ICollector
         {
@@ -71,18 +59,6 @@ namespace OpenETaxBill.Certifier
                 return m_icollector;
             }
         }
-
-        //private OpenETaxBill.Channel.CCollector m_ccollector = null;
-        //private OpenETaxBill.Channel.CCollector CCollector
-        //{
-        //    get
-        //    {
-        //        if (m_ccollector == null)
-        //            m_ccollector = new OpenETaxBill.Channel.CCollector(ISigner.Manager);
-
-        //        return m_ccollector;
-        //    }
-        //}
 
         //-------------------------------------------------------------------------------------------------------------------------
         // 

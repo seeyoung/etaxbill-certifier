@@ -230,7 +230,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eXmlRequest";
-            this.Text = "eXmlInterop";
+            this.Text = "상호운용성 검증 -> 처리결과 요청";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.eXmlInterop_FormClosing);
             this.Load += new System.EventHandler(this.eXmlInterop_Load);
             this.panelControl2.ResumeLayout(false);

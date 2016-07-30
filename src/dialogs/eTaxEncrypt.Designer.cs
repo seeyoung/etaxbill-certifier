@@ -250,7 +250,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eTaxEncrypt";
-            this.Text = "Envelope";
+            this.Text = "단위 기능별 검증 -> 보안 검증";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Envelope_FormClosing);
             this.Load += new System.EventHandler(this.Envelope_Load);
             this.panelControl2.ResumeLayout(false);

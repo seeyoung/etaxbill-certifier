@@ -275,7 +275,7 @@
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
             this.Name = "eTaxCreator";
-            this.Text = "XmlCreator";
+            this.Text = "단위 기능별 검증 -> 전자세금계산서 검증 -> 전자(세금)계산서 작성";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XmlCreator_FormClosing);
             this.Load += new System.EventHandler(this.XmlCreator_Load);
             this.panelControl2.ResumeLayout(false);

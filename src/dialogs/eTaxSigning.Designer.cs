@@ -289,7 +289,7 @@
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
             this.Name = "eTaxSigning";
-            this.Text = "XmlSignature";
+            this.Text = "단위 기능별 검증 -> 전자세금계산서 검증 -> 전자서명";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XmlSignature_FormClosing);
             this.Load += new System.EventHandler(this.XmlSignature_Load);
             this.panelControl2.ResumeLayout(false);
