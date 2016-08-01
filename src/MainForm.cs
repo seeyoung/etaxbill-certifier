@@ -38,12 +38,12 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         public void RestoreFormLayout(Form p_child_form)
         {
-            LayoutHelper.RemoveFormLayout(p_child_form, this.GetType().GUID.ToString());
+            LayoutHelper.SNG.RestoreFormLayout(p_child_form, this.GetType().GUID.ToString());
         }
 
         public void SaveFormLayout(Form p_child_form)
         {
-            LayoutHelper.SaveFormLayout(p_child_form, this.GetType().GUID.ToString());
+            LayoutHelper.SNG.SaveFormLayout(p_child_form, this.GetType().GUID.ToString());
         }
 
         public void WriteOutput(string p_message, string p_category = "")
@@ -104,13 +104,13 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LayoutHelper.RestoreFormLayout(this);
+            LayoutHelper.SNG.RestoreFormLayout(this);
             this.Text = String.Format("표준 전자세금계산서 인증시스템 - {0}", UCfgHelper.SNG.KeySize);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LayoutHelper.SaveFormLayout(this);
+            LayoutHelper.SNG.SaveFormLayout(this);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------

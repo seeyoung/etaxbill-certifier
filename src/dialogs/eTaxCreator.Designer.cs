@@ -71,8 +71,9 @@
             this.panelControl2.Controls.Add(this.btCreate);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1062, 106);
+            this.panelControl2.Size = new System.Drawing.Size(844, 85);
             this.panelControl2.TabIndex = 1;
             // 
             // cbKind2
@@ -86,9 +87,10 @@
             "수입",
             "영세율위수탁",
             "수입납부유예"});
-            this.cbKind2.Location = new System.Drawing.Point(816, 22);
+            this.cbKind2.Location = new System.Drawing.Point(629, 18);
+            this.cbKind2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbKind2.Name = "cbKind2";
-            this.cbKind2.Size = new System.Drawing.Size(138, 23);
+            this.cbKind2.Size = new System.Drawing.Size(121, 20);
             this.cbKind2.TabIndex = 36;
             this.cbKind2.Text = "일반";
             this.cbKind2.ValueMember = "code";
@@ -102,9 +104,10 @@
             "수정세금계산서",
             "계산서",
             "수정계산서"});
-            this.cbKind1.Location = new System.Drawing.Point(626, 22);
+            this.cbKind1.Location = new System.Drawing.Point(463, 18);
+            this.cbKind1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbKind1.Name = "cbKind1";
-            this.cbKind1.Size = new System.Drawing.Size(133, 23);
+            this.cbKind1.Size = new System.Drawing.Size(117, 20);
             this.cbKind1.TabIndex = 35;
             this.cbKind1.Text = "세금계산서";
             this.cbKind1.ValueMember = "code";
@@ -112,27 +115,28 @@
             // lbKind2
             // 
             this.lbKind2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbKind2.Location = new System.Drawing.Point(765, 23);
+            this.lbKind2.Location = new System.Drawing.Point(584, 18);
             this.lbKind2.Name = "lbKind2";
-            this.lbKind2.Size = new System.Drawing.Size(45, 18);
+            this.lbKind2.Size = new System.Drawing.Size(39, 14);
             this.lbKind2.TabIndex = 34;
             this.lbKind2.Text = "구분";
             // 
             // uLabelControl1
             // 
             this.uLabelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.uLabelControl1.Location = new System.Drawing.Point(576, 23);
+            this.uLabelControl1.Location = new System.Drawing.Point(419, 18);
             this.uLabelControl1.Name = "uLabelControl1";
-            this.uLabelControl1.Size = new System.Drawing.Size(44, 18);
+            this.uLabelControl1.Size = new System.Drawing.Size(38, 14);
             this.uLabelControl1.TabIndex = 33;
             this.uLabelControl1.Text = "종류";
             // 
             // sbTransform
             // 
             this.sbTransform.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sbTransform.Location = new System.Drawing.Point(941, 67);
+            this.sbTransform.Location = new System.Drawing.Point(738, 54);
+            this.sbTransform.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sbTransform.Name = "sbTransform";
-            this.sbTransform.Size = new System.Drawing.Size(109, 32);
+            this.sbTransform.Size = new System.Drawing.Size(95, 26);
             this.sbTransform.TabIndex = 32;
             this.sbTransform.Text = "TRANSFORM";
             this.sbTransform.Click += new System.EventHandler(this.sbTransform_Click);
@@ -140,9 +144,10 @@
             // tbCanonical
             // 
             this.tbCanonical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCanonical.Location = new System.Drawing.Point(830, 67);
+            this.tbCanonical.Location = new System.Drawing.Point(641, 54);
+            this.tbCanonical.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbCanonical.Name = "tbCanonical";
-            this.tbCanonical.Size = new System.Drawing.Size(104, 32);
+            this.tbCanonical.Size = new System.Drawing.Size(91, 26);
             this.tbCanonical.TabIndex = 30;
             this.tbCanonical.Text = "CANONICAL";
             this.tbCanonical.Click += new System.EventHandler(this.tbCanonical_Click);
@@ -151,26 +156,28 @@
             // 
             this.tbInvoicerId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbInvoicerId.Location = new System.Drawing.Point(105, 22);
+            this.tbInvoicerId.Location = new System.Drawing.Point(92, 18);
+            this.tbInvoicerId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbInvoicerId.Name = "tbInvoicerId";
-            this.tbInvoicerId.Size = new System.Drawing.Size(221, 25);
+            this.tbInvoicerId.Size = new System.Drawing.Size(109, 21);
             this.tbInvoicerId.TabIndex = 26;
             this.tbInvoicerId.Text = "1112233333";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(13, 23);
+            this.labelControl2.Location = new System.Drawing.Point(11, 18);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(86, 18);
+            this.labelControl2.Size = new System.Drawing.Size(75, 14);
             this.labelControl2.TabIndex = 25;
             this.labelControl2.Text = "사업자번호";
             // 
             // btClear
             // 
             this.btClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClear.Location = new System.Drawing.Point(567, 67);
+            this.btClear.Location = new System.Drawing.Point(411, 54);
+            this.btClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btClear.Name = "btClear";
-            this.btClear.Size = new System.Drawing.Size(80, 32);
+            this.btClear.Size = new System.Drawing.Size(70, 26);
             this.btClear.TabIndex = 24;
             this.btClear.Text = "CLEAR";
             this.btClear.Click += new System.EventHandler(this.btClear_Click);
@@ -178,9 +185,10 @@
             // btSave
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSave.Location = new System.Drawing.Point(743, 67);
+            this.btSave.Location = new System.Drawing.Point(565, 54);
+            this.btSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(80, 32);
+            this.btSave.Size = new System.Drawing.Size(70, 26);
             this.btSave.TabIndex = 23;
             this.btSave.Text = "SAVE";
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
@@ -188,9 +196,10 @@
             // btLoad
             // 
             this.btLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLoad.Location = new System.Drawing.Point(655, 67);
+            this.btLoad.Location = new System.Drawing.Point(488, 54);
+            this.btLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(80, 32);
+            this.btLoad.Size = new System.Drawing.Size(70, 26);
             this.btLoad.TabIndex = 22;
             this.btLoad.Text = "LOAD";
             this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
@@ -198,9 +207,10 @@
             // btCreate
             // 
             this.btCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCreate.Location = new System.Drawing.Point(960, 3);
+            this.btCreate.Location = new System.Drawing.Point(755, 2);
+            this.btCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btCreate.Name = "btCreate";
-            this.btCreate.Size = new System.Drawing.Size(90, 58);
+            this.btCreate.Size = new System.Drawing.Size(79, 46);
             this.btCreate.TabIndex = 20;
             this.btCreate.Text = "CreateXml";
             this.btCreate.Click += new System.EventHandler(this.btCreate_Click);
@@ -210,17 +220,19 @@
             this.panelControl3.Controls.Add(this.tbSourceXml);
             this.panelControl3.Controls.Add(this.uPanelControl1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 106);
+            this.panelControl3.Location = new System.Drawing.Point(0, 85);
+            this.panelControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1062, 455);
+            this.panelControl3.Size = new System.Drawing.Size(844, 476);
             this.panelControl3.TabIndex = 2;
             // 
             // tbSourceXml
             // 
             this.tbSourceXml.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbSourceXml.Location = new System.Drawing.Point(0, 20);
+            this.tbSourceXml.Location = new System.Drawing.Point(0, 16);
+            this.tbSourceXml.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbSourceXml.Name = "tbSourceXml";
-            this.tbSourceXml.Size = new System.Drawing.Size(1062, 435);
+            this.tbSourceXml.Size = new System.Drawing.Size(844, 460);
             this.tbSourceXml.TabIndex = 8;
             this.tbSourceXml.Text = "";
             // 
@@ -229,8 +241,9 @@
             this.uPanelControl1.Controls.Add(this.labelControl6);
             this.uPanelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.uPanelControl1.Location = new System.Drawing.Point(0, 0);
+            this.uPanelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uPanelControl1.Name = "uPanelControl1";
-            this.uPanelControl1.Size = new System.Drawing.Size(1062, 20);
+            this.uPanelControl1.Size = new System.Drawing.Size(844, 16);
             this.uPanelControl1.TabIndex = 7;
             // 
             // labelControl6
@@ -238,7 +251,7 @@
             this.labelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl6.Location = new System.Drawing.Point(0, 0);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(1062, 20);
+            this.labelControl6.Size = new System.Drawing.Size(844, 16);
             this.labelControl6.TabIndex = 3;
             this.labelControl6.Text = "Display XML Code";
             // 
@@ -269,11 +282,12 @@
             // 
             // eTaxCreator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 561);
+            this.ClientSize = new System.Drawing.Size(844, 561);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "eTaxCreator";
             this.Text = "단위 기능별 검증 -> 전자세금계산서 검증 -> 전자(세금)계산서 작성";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XmlCreator_FormClosing);

@@ -49,16 +49,18 @@
             this.panelControl2.Controls.Add(this.sbCreateMsg);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1062, 102);
+            this.panelControl2.Size = new System.Drawing.Size(844, 82);
             this.panelControl2.TabIndex = 6;
             // 
             // sbCreateMsg
             // 
             this.sbCreateMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sbCreateMsg.Location = new System.Drawing.Point(960, 12);
+            this.sbCreateMsg.Location = new System.Drawing.Point(755, 10);
+            this.sbCreateMsg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sbCreateMsg.Name = "sbCreateMsg";
-            this.sbCreateMsg.Size = new System.Drawing.Size(90, 58);
+            this.sbCreateMsg.Size = new System.Drawing.Size(79, 46);
             this.sbCreateMsg.TabIndex = 29;
             this.sbCreateMsg.Text = "CREATE MSG";
             this.sbCreateMsg.Click += new System.EventHandler(this.sbCreateMsg_Click);
@@ -67,9 +69,10 @@
             // 
             this.pnBackGround.Controls.Add(this.pnTop);
             this.pnBackGround.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnBackGround.Location = new System.Drawing.Point(0, 102);
+            this.pnBackGround.Location = new System.Drawing.Point(0, 82);
+            this.pnBackGround.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnBackGround.Name = "pnBackGround";
-            this.pnBackGround.Size = new System.Drawing.Size(1062, 459);
+            this.pnBackGround.Size = new System.Drawing.Size(844, 479);
             this.pnBackGround.TabIndex = 7;
             // 
             // pnTop
@@ -80,33 +83,37 @@
             this.pnTop.Controls.Add(this.uPanelControl1);
             this.pnTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnTop.Location = new System.Drawing.Point(0, 0);
+            this.pnTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnTop.Name = "pnTop";
-            this.pnTop.Size = new System.Drawing.Size(1062, 459);
+            this.pnTop.Size = new System.Drawing.Size(844, 479);
             this.pnTop.TabIndex = 12;
             // 
             // tbTargetXml
             // 
             this.tbTargetXml.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTargetXml.Location = new System.Drawing.Point(513, 23);
+            this.tbTargetXml.Location = new System.Drawing.Point(398, 18);
+            this.tbTargetXml.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbTargetXml.Name = "tbTargetXml";
-            this.tbTargetXml.Size = new System.Drawing.Size(549, 436);
+            this.tbTargetXml.Size = new System.Drawing.Size(446, 461);
             this.tbTargetXml.TabIndex = 14;
             this.tbTargetXml.Text = "";
             // 
             // spTopLeft
             // 
-            this.spTopLeft.Location = new System.Drawing.Point(507, 23);
+            this.spTopLeft.Location = new System.Drawing.Point(393, 18);
+            this.spTopLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.spTopLeft.Name = "spTopLeft";
-            this.spTopLeft.Size = new System.Drawing.Size(6, 436);
+            this.spTopLeft.Size = new System.Drawing.Size(5, 461);
             this.spTopLeft.TabIndex = 13;
             this.spTopLeft.TabStop = false;
             // 
             // tbSourceXml
             // 
             this.tbSourceXml.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tbSourceXml.Location = new System.Drawing.Point(0, 23);
+            this.tbSourceXml.Location = new System.Drawing.Point(0, 18);
+            this.tbSourceXml.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbSourceXml.Name = "tbSourceXml";
-            this.tbSourceXml.Size = new System.Drawing.Size(507, 436);
+            this.tbSourceXml.Size = new System.Drawing.Size(393, 461);
             this.tbSourceXml.TabIndex = 12;
             this.tbSourceXml.Text = "";
             // 
@@ -116,16 +123,17 @@
             this.uPanelControl1.Controls.Add(this.labelControl6);
             this.uPanelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.uPanelControl1.Location = new System.Drawing.Point(0, 0);
+            this.uPanelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uPanelControl1.Name = "uPanelControl1";
-            this.uPanelControl1.Size = new System.Drawing.Size(1062, 23);
+            this.uPanelControl1.Size = new System.Drawing.Size(844, 18);
             this.uPanelControl1.TabIndex = 11;
             // 
             // uLabelControl1
             // 
             this.uLabelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.uLabelControl1.Location = new System.Drawing.Point(988, 0);
+            this.uLabelControl1.Location = new System.Drawing.Point(779, 0);
             this.uLabelControl1.Name = "uLabelControl1";
-            this.uLabelControl1.Size = new System.Drawing.Size(74, 23);
+            this.uLabelControl1.Size = new System.Drawing.Size(65, 18);
             this.uLabelControl1.TabIndex = 4;
             this.uLabelControl1.Text = "Sample XML";
             // 
@@ -134,17 +142,18 @@
             this.labelControl6.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelControl6.Location = new System.Drawing.Point(0, 0);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(73, 23);
+            this.labelControl6.Size = new System.Drawing.Size(64, 18);
             this.labelControl6.TabIndex = 3;
             this.labelControl6.Text = "Source XML";
             // 
             // eTaxSmtp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 561);
+            this.ClientSize = new System.Drawing.Size(844, 561);
             this.Controls.Add(this.pnBackGround);
             this.Controls.Add(this.panelControl2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "eTaxSmtp";
             this.Text = "유통시스템 검증 -> SMTP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.eTaxSmtp_FormClosing);
