@@ -17,7 +17,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using OdinSoft.SDK.Base;
 using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 

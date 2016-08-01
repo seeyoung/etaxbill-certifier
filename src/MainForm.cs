@@ -15,7 +15,7 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
 using System.Windows.Forms;
-using OdinSoft.SDK.Base;
+using OdinSoft.SDK.Control.Library;
 
 namespace OpenETaxBill.Certifier
 {
@@ -33,36 +33,17 @@ namespace OpenETaxBill.Certifier
             }
         }
 
-        //bool IsTabbedMdi
-        //{
-        //    get
-        //    {
-        //        return biTabbedMDI.Down;
-        //    }
-        //}
-
-        private static CLayout __ilayout = null;
-        public static CLayout __clayout
-        {
-            get
-            {
-                if (__ilayout == null)
-                    __ilayout = new CLayout();
-                return __ilayout;
-            }
-        }
-
         //-------------------------------------------------------------------------------------------------------------------------
         // methodes
         //-------------------------------------------------------------------------------------------------------------------------
         public void RestoreFormLayout(Form p_child_form)
         {
-            __clayout.RestoreFormLayout(p_child_form, this.GetType().GUID.ToString());
+            LayoutHelper.RemoveFormLayout(p_child_form, this.GetType().GUID.ToString());
         }
 
         public void SaveFormLayout(Form p_child_form)
         {
-            __clayout.SaveFormLayout(p_child_form, this.GetType().GUID.ToString());
+            LayoutHelper.SaveFormLayout(p_child_form, this.GetType().GUID.ToString());
         }
 
         public void WriteOutput(string p_message, string p_category = "")
@@ -123,13 +104,13 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void MainForm_Load(object sender, EventArgs e)
         {
-            __clayout.RestoreFormLayout(this);
+            LayoutHelper.RestoreFormLayout(this);
             this.Text = String.Format("표준 전자세금계산서 인증시스템 - {0}", UCfgHelper.SNG.KeySize);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            __clayout.SaveFormLayout(this);
+            LayoutHelper.SaveFormLayout(this);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
