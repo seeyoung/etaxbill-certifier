@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TaxInvoice xmlns="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0 http://www.kec.or.kr/standard/Tax/TaxInvoiceSchemaModule_1.0.xsd">
 	<ExchangedDocument>
-		<ID>201409184100007300000001</ID>
-		<IssueDateTime>20140918000000</IssueDateTime>
+		<ID>201606304100007300000001</ID>
+		<IssueDateTime>20160630000000</IssueDateTime>
 	</ExchangedDocument>
 	<TaxInvoiceDocument>
-		<IssueID>201409184100007300000001</IssueID>
-		<TypeCode>0101</TypeCode>
-		<IssueDateTime>20140918</IssueDateTime>
+		<IssueID>201606304100007300000001</IssueID>
+		<TypeCode>0301</TypeCode>
+		<IssueDateTime>20160630</IssueDateTime>
 		<PurposeCode>02</PurposeCode>
 	</TaxInvoiceDocument>
 	<TaxInvoiceTradeSettlement>
@@ -64,22 +64,22 @@
 		</SpecifiedPaymentMeans>
 		<SpecifiedPaymentMeans>
 			<TypeCode>40</TypeCode>
-			<PaidAmount>1308010</PaidAmount>
+			<PaidAmount>220000</PaidAmount>
 		</SpecifiedPaymentMeans>
 		<SpecifiedMonetarySummation>
-			<ChargeTotalAmount>1189100</ChargeTotalAmount>
-			<TaxTotalAmount>118910</TaxTotalAmount>
-			<GrandTotalAmount>1308010</GrandTotalAmount>
+			<ChargeTotalAmount>220000</ChargeTotalAmount>
+			<TaxTotalAmount>0</TaxTotalAmount>
+			<GrandTotalAmount>220000</GrandTotalAmount>
 		</SpecifiedMonetarySummation>
 	</TaxInvoiceTradeSettlement>
 	<TaxInvoiceTradeLineItem>
 		<SequenceNumeric>1</SequenceNumeric>
-		<InvoiceAmount>1189100</InvoiceAmount>
+		<InvoiceAmount>220000</InvoiceAmount>
 		<ChargeableUnitQuantity>0.00</ChargeableUnitQuantity>
 		<NameText>통합전산시스템 유지보수료</NameText>
-		<PurchaseExpiryDateTime>20140918</PurchaseExpiryDateTime>
+		<PurchaseExpiryDateTime>20160630</PurchaseExpiryDateTime>
 		<TotalTax>
-			<CalculatedAmount>118910</CalculatedAmount>
+			<CalculatedAmount>0</CalculatedAmount>
 		</TotalTax>
 		<UnitPrice>
 			<UnitAmount>0.00</UnitAmount>

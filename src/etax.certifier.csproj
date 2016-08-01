@@ -241,10 +241,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dialogs\eTaxMain.ico" />
-    <Content Include="work-folder\output\2048\unitest\2-0101.xml" />
-    <Content Include="work-folder\output\2048\unitest\2-0201.xml" />
-    <Content Include="work-folder\output\2048\unitest\2-0301.xml" />
-    <Content Include="work-folder\output\2048\unitest\2-0401.xml" />
+    <Content Include="work-folder\output\2048\unitest\1-0101.xml" />
+    <Content Include="work-folder\output\2048\unitest\1-0201.xml" />
+    <Content Include="work-folder\output\2048\unitest\1-0301.xml" />
+    <Content Include="work-folder\output\2048\unitest\1-0401.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
