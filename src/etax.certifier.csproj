@@ -218,7 +218,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="dialogs\eTaxCreator.resx">
       <DependentUpon>eTaxCreator.cs</DependentUpon>
       <SubType>Designer</SubType>
