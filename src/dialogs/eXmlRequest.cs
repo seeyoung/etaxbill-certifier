@@ -17,8 +17,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
 namespace OpenETaxBill.Certifier
@@ -70,38 +68,40 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void CreateRequest()
         {
-            Header _soapHeader = new Header();
+            var _time_stamp = DateTime.Now;
+
+            var _soap_header = new Header()
             {
-				_soapHeader.ToAddress = tbResultsReqSubmitUrl.Text.Trim();
-                _soapHeader.Action = Request.eTaxRequestSubmit;
-                _soapHeader.Version = UCfgHelper.SNG.eTaxVersion;
+                ToAddress = tbResultsReqSubmitUrl.Text.Trim(),
+                Action = Request.eTaxRequestSubmit,
+                Version = UCfgHelper.SNG.eTaxVersion,
 
-                _soapHeader.FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName);
-                _soapHeader.ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName);
+                FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName),
+                ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName),
 
-                _soapHeader.OperationType = Request.OperationType_RequestSubmit;
-                _soapHeader.MessageType = Request.MessageType_Request;
-                
-                _soapHeader.TimeStamp = DateTime.Now;
-                _soapHeader.MessageId = Packing.SNG.GetMessageId(_soapHeader.TimeStamp);
-            }
+                OperationType = Request.OperationType_RequestSubmit,
+                MessageType = Request.MessageType_Request,
 
-            Body _soapBody = new Body();
+                TimeStamp = _time_stamp,
+                MessageId = Packing.SNG.GetMessageId(_time_stamp),
+            };
+
+            var _soap_body = new Body()
             {
-                _soapBody.RefSubmitID = tbSubmitId.Text;
-            }
+                RefSubmitID = tbSubmitId.Text
+            };
 
             //-------------------------------------------------------------------------------------------------------------------------
             // Signature
             //-------------------------------------------------------------------------------------------------------------------------
-            XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\19-ResultsReqsubmit.txt");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\19-ResultsReqsubmit.txt");
             {
-                File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+                File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("transforms write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("transforms write on the " + _save_file);
             }
         }
 
@@ -114,36 +114,36 @@ namespace OpenETaxBill.Certifier
 				return;
 			}
 
-			string _endpoint = tbResultsReqSubmitUrl.Text.Trim();
+			var _end_point = tbResultsReqSubmitUrl.Text.Trim();
 
-            MessageBox.Show(String.Format("상호운영성 테스트 검증을 위한 처리 결과 요청 메시지를,\n\rENDPOINT: {0}를\n\r 통해 인증 시스템으로 전송 합니다. ", _endpoint));
+            MessageBox.Show(String.Format("상호운영성 테스트 검증을 위한 처리 결과 요청 메시지를,\n\rENDPOINT: {0}를\n\r 통해 인증 시스템으로 전송 합니다. ", _end_point));
             CreateRequest();
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\19-ResultsReqSubmit.txt");
+            var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\19-ResultsReqSubmit.txt");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("after transform read from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("after transform read from " + _load_file);
             }
 
-            byte[] _soappart = File.ReadAllBytes(_loadfile);
+            var _soap_part = File.ReadAllBytes(_load_file);
 
-            MimeContent _mimeContent = Request.SNG.TaxRequestSubmit(_soappart, _endpoint);
-            if (_mimeContent.StatusCode == 0)
+            var _mime_content = Request.SNG.TaxRequestSubmit(_soap_part, _end_point);
+            if (_mime_content.StatusCode == 0)
             {
-                var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\10-ResultsReqRecvAck.txt");
+                var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"interop\\10-ResultsReqRecvAck.txt");
                 {
-                    string _response = _mimeContent.GetContentAsString();
-                    File.WriteAllText(_savefile, _response, Encoding.UTF8);
+                    string _response = _mime_content.GetContentAsString();
+                    File.WriteAllText(_save_file, _response, Encoding.UTF8);
 
-                    tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                    WriteLine("response write on the " + _savefile);
+                    tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                    WriteLine("response write on the " + _save_file);
                 }
 
                 MessageBox.Show("전송 되었습니다.");
             }
             else
             {
-                MessageBox.Show(_mimeContent.ErrorMessage);
+                MessageBox.Show(_mime_content.ErrorMessage);
             }
         }
 

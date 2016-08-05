@@ -17,7 +17,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
 namespace OpenETaxBill.Certifier
@@ -74,20 +73,20 @@ namespace OpenETaxBill.Certifier
             //    BodyHtml = GetProviderBody(_issuedRow)
             //};
 
-            //byte[] _obuffer = CmsManager.SNG.GetEncryptedContent(GetProviderKey(_invoiceeId), Encoding.UTF8.GetBytes(_document));
+            //var _obuffer = CmsManager.SNG.GetEncryptedContent(GetProviderKey(_invoiceeId), Encoding.UTF8.GetBytes(_document));
             //_mime.Attachments.Add(new Attachment(String.Format("{0}.msg", _issueId), _obuffer));
 
             ////-------------------------------------------------------------------------------------------------------------------------
             //// Signature
             ////-------------------------------------------------------------------------------------------------------------------------
-            //XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            //var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            //var _savefile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
+            //var _save_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
             //{
-            //    File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+            //    File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-            //    tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-            //    WriteLine("transforms write on the " + _savefile);
+            //    tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+            //    WriteLine("transforms write on the " + _save_file);
             //}
         }
 
@@ -96,41 +95,41 @@ namespace OpenETaxBill.Certifier
             MessageBox.Show(String.Format("공인인증서 요청을 위한 웹서비스 메시지를,\n\r{0} ENDPOINT를\n\r 통해 인증 시스템으로 전송 합니다.", UCfgHelper.SNG.RequestCertUrl));
             CreateRequest();
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
+            var _load_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("read requesting certification soap-message from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("read requesting certification soap-message from " + _load_file);
             }
 
-            byte[] _soappart = Encoding.UTF8.GetBytes(File.ReadAllText(_loadfile, Encoding.UTF8));
+            var _soap_part = Encoding.UTF8.GetBytes(File.ReadAllText(_load_file, Encoding.UTF8));
 
-            MimeContent _mimeContent = Request.SNG.TaxRequestCertSubmit(_soappart, UCfgHelper.SNG.RequestCertUrl);
-            if (_mimeContent.StatusCode == 0)
+            var _mime_content = Request.SNG.TaxRequestCertSubmit(_soap_part, UCfgHelper.SNG.RequestCertUrl);
+            if (_mime_content.StatusCode == 0)
             {
-                var _savefile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.txt");
+                var _save_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.txt");
                 {
-                    File.WriteAllText(_savefile, _mimeContent.Parts[0].GetContentAsString(), Encoding.UTF8);
+                    File.WriteAllText(_save_file, _mime_content.Parts[0].GetContentAsString(), Encoding.UTF8);
 
-                    if (_mimeContent.StatusCode == 0)
-                        tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
+                    if (_mime_content.StatusCode == 0)
+                        tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
                     else
-                        tbTargetXml.Text = _mimeContent.ErrorMessage;
+                        tbTargetXml.Text = _mime_content.ErrorMessage;
 
-                    WriteLine("response write on the " + _savefile);
+                    WriteLine("response write on the " + _save_file);
                 }
 
-                string _zipfile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
+                var _zip_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
                 {
-                    File.WriteAllBytes(_zipfile, _mimeContent.Parts[1].GetContentAsStream().ToArray());
+                    File.WriteAllBytes(_zip_file, _mime_content.Parts[1].GetContentAsStream().ToArray());
 
-                    WriteLine("zip file write on the " + _zipfile);
+                    WriteLine("zip file write on the " + _zip_file);
                 }
 
-                MessageBox.Show(String.Format("수신된 Zip 파일이 {0}에 저장 되었습니다.", _zipfile));
+                MessageBox.Show(String.Format("수신된 Zip 파일이 {0}에 저장 되었습니다.", _zip_file));
             }
             else
             {
-                MessageBox.Show(_mimeContent.ErrorMessage);
+                MessageBox.Show(_mime_content.ErrorMessage);
             }
         }
 

@@ -19,11 +19,9 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using OdinSoft.SDK.Data.Collection;
 using OdinSoft.SDK.eTaxBill.Security.Encrypt;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
 namespace OpenETaxBill.Certifier
@@ -46,7 +44,7 @@ namespace OpenETaxBill.Certifier
         //
         //-------------------------------------------------------------------------------------------------------------------------
         private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.SDK.Data.DataHelper LDataHelper
+        private OdinSoft.SDK.Data.DataHelper LSQLHelper
         {
             get
             {
@@ -90,38 +88,40 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void CreateRequest()
         {
-            Header _soapHeader = new Header();
+            var _time_stamp = DateTime.Now;
+
+            var _soap_header = new Header()
             {
-                _soapHeader.ToAddress = UCfgHelper.SNG.RequestCertUrl;
-                _soapHeader.Action = Request.eTaxRequestCertSubmit;
-                _soapHeader.Version = UCfgHelper.SNG.eTaxVersion;
+                ToAddress = UCfgHelper.SNG.RequestCertUrl,
+                Action = Request.eTaxRequestCertSubmit,
+                Version = UCfgHelper.SNG.eTaxVersion,
 
-                _soapHeader.FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName);
-                _soapHeader.ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName);
+                FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName),
+                ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName),
 
-                _soapHeader.OperationType = Request.OperationType_RequestSubmit;
-                _soapHeader.MessageType = Request.MessageType_Request;
+                OperationType = Request.OperationType_RequestSubmit,
+                MessageType = Request.MessageType_Request,
 
-                _soapHeader.TimeStamp = DateTime.Now;
-            }
+                TimeStamp = _time_stamp
+            };
 
-            Body _soapBody = new Body();
+            var _soap_body = new Body()
             {
-                _soapBody.RequestParty = new Party(tbBizId.Text, tbBizName.Text, tbRegId.Text);
-                _soapBody.FileType = tbFileType.Text;
-            }
+                RequestParty = new Party(tbBizId.Text, tbBizName.Text, tbRegId.Text),
+                FileType = tbFileType.Text
+            };
 
             //-------------------------------------------------------------------------------------------------------------------------
             // Signature
             //-------------------------------------------------------------------------------------------------------------------------
-            XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
+            var _save_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
             {
-                File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+                File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("transforms write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("transforms write on the " + _save_file);
             }
         }
 
@@ -130,51 +130,51 @@ namespace OpenETaxBill.Certifier
             MessageBox.Show(String.Format("공인인증서 요청을 위한 웹서비스 메시지를,\n\r{0} ENDPOINT를\n\r 통해 인증 시스템으로 전송 합니다.", UCfgHelper.SNG.RequestCertUrl));
             CreateRequest();
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
+            var _load_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\31.CertReqSubmit.txt");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("read requesting certification soap-message from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("read requesting certification soap-message from " + _load_file);
             }
 
-            byte[] _soappart = Encoding.UTF8.GetBytes(File.ReadAllText(_loadfile, Encoding.UTF8));
+            var _soap_part = Encoding.UTF8.GetBytes(File.ReadAllText(_load_file, Encoding.UTF8));
 
-            MimeContent _mimeContent = Request.SNG.TaxRequestCertSubmit(_soappart, UCfgHelper.SNG.RequestCertUrl);
-            if (_mimeContent.StatusCode == 0)
+            var _mime_content = Request.SNG.TaxRequestCertSubmit(_soap_part, UCfgHelper.SNG.RequestCertUrl);
+            if (_mime_content.StatusCode == 0)
             {
-                var _savefile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.txt");
+                var _save_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.txt");
                 {
-                    File.WriteAllText(_savefile, _mimeContent.Parts[0].GetContentAsString(), Encoding.UTF8);
+                    File.WriteAllText(_save_file, _mime_content.Parts[0].GetContentAsString(), Encoding.UTF8);
 
-                    if (_mimeContent.StatusCode == 0)
-                        tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
+                    if (_mime_content.StatusCode == 0)
+                        tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
                     else
-                        tbTargetXml.Text = _mimeContent.ErrorMessage;
+                        tbTargetXml.Text = _mime_content.ErrorMessage;
 
-                    WriteLine("response write on the " + _savefile);
+                    WriteLine("response write on the " + _save_file);
                 }
 
-                string _zipfile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
+                var _zip_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
                 {
-                    File.WriteAllBytes(_zipfile, _mimeContent.Parts[1].GetContentAsStream().ToArray());
+                    File.WriteAllBytes(_zip_file, _mime_content.Parts[1].GetContentAsStream().ToArray());
 
-                    WriteLine("zip file write on the " + _zipfile);
+                    WriteLine("zip file write on the " + _zip_file);
                 }
 
-                MessageBox.Show(String.Format("수신된 Zip 파일이 {0}에 저장 되었습니다.", _zipfile));
+                MessageBox.Show(String.Format("수신된 Zip 파일이 {0}에 저장 되었습니다.", _zip_file));
             }
             else
             {
-                MessageBox.Show(_mimeContent.ErrorMessage);
+                MessageBox.Show(_mime_content.ErrorMessage);
             }
         }
 
         private void sbUnZip_Click(object sender, EventArgs e)
         {
-            string _zipFile = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
+            var _zip_file = Path.Combine(UCfgHelper.SNG.RootOutFolder, @"pubkey\32.CertReqRecvAck.zip");
             {
-                WriteLine("read zip file from " + _zipFile);
+                WriteLine("read zip file from " + _zip_file);
 
-                ZipInputStream _izipStream = new ZipInputStream(File.OpenRead(_zipFile));
+                var _izipStream = new ZipInputStream(File.OpenRead(_zip_file));
 
                 WriteLine("unzipping...");
 
@@ -184,10 +184,10 @@ namespace OpenETaxBill.Certifier
                     if (_izipEntry.Name.IndexOf(".ini") >= 0)
                         continue;
 
-                    MemoryStream _ostream = new MemoryStream();
+                    var _ostream = new MemoryStream();
                     {
-                        int _size = 2048;
-                        byte[] _obuffer = new byte[_size];
+                        var _size = 2048;
+                        var _obuffer = new byte[_size];
 
                         while (true)
                         {
@@ -201,32 +201,32 @@ namespace OpenETaxBill.Certifier
                         _ostream.Seek(0, SeekOrigin.Begin);
                     }
 
-                    string _fileName = Path.GetFileNameWithoutExtension(_izipEntry.Name);
+                    var _file_name = Path.GetFileNameWithoutExtension(_izipEntry.Name);
 
-                    string _registerid = _fileName.Substring(0, 8);
-                    string _newEMail = _fileName.Substring(9);
+                    var _register_id = _file_name.Substring(0, 8);
+                    var _new_email = _file_name.Substring(9);
 
-                    byte[] _publicBytes = _ostream.ToArray();
-                    string _publicStr = Encryptor.SNG.PlainBytesToChiperBase64(_publicBytes);
+                    var _public_bytes = _ostream.ToArray();
+                    string _public_key = Encryptor.SNG.PlainBytesToChiperBase64(_public_bytes);
 
-                    X509Certificate2 _publicCert2 = new X509Certificate2(_publicBytes);
-                    DateTime _expiration = Convert.ToDateTime(_publicCert2.GetExpirationDateString());
+                    var _publicCert2 = new X509Certificate2(_public_bytes);
+                    var _expiration = Convert.ToDateTime(_publicCert2.GetExpirationDateString());
 
-                    string _userName = _publicCert2.GetNameInfo(X509NameType.SimpleName, false);
+                    var _user_name = _publicCert2.GetNameInfo(X509NameType.SimpleName, false);
 
-                    string _sqlstr
+                    var _sqlstr
                         = "SELECT publicKey, aspEMail "
                         + "  FROM TB_eTAX_PROVIDER "
                         + " WHERE registerId=@registerId AND aspEMail=@aspEMail";
 
                     var _dbps = new DatParameters();
                     {
-                        _dbps.Add("@registerId", SqlDbType.NVarChar, _registerid);
-                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _newEMail);
+                        _dbps.Add("@registerId", SqlDbType.NVarChar, _register_id);
+                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _new_email);
                     }
 
-                    var _ds = LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
-                    if (LDataHelper.IsNullOrEmpty(_ds) == true)
+                    var _ds = LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
+                    if (LSQLHelper.IsNullOrEmpty(_ds) == true)
                     {
                         _sqlstr
                             = "INSERT TB_eTAX_PROVIDER "
@@ -238,51 +238,51 @@ namespace OpenETaxBill.Certifier
                             + " @registerId, @aspEMail, @name, @person, @publicKey, @userName, @expiration, @lastUpdate, @providerId "
                             + ")";
 
-                        _dbps.Add("@registerId", SqlDbType.NVarChar, _registerid);
-                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _newEMail);
-                        _dbps.Add("@name", SqlDbType.NVarChar, _userName);
+                        _dbps.Add("@registerId", SqlDbType.NVarChar, _register_id);
+                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _new_email);
+                        _dbps.Add("@name", SqlDbType.NVarChar, _user_name);
                         _dbps.Add("@person", SqlDbType.NVarChar, "");
-                        _dbps.Add("@publicKey", SqlDbType.NVarChar, _publicStr);
-                        _dbps.Add("@userName", SqlDbType.NVarChar, _userName);
+                        _dbps.Add("@publicKey", SqlDbType.NVarChar, _public_key);
+                        _dbps.Add("@userName", SqlDbType.NVarChar, _user_name);
                         _dbps.Add("@expiration", SqlDbType.DateTime, _expiration);
                         _dbps.Add("@lastUpdate", SqlDbType.DateTime, DateTime.Now);
                         _dbps.Add("@providerId", SqlDbType.NVarChar, "");
 
-                        if (LDataHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) < 1)
+                        if (LSQLHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) < 1)
                         {
-                            WriteLine(String.Format("INSERT FAILURE: {0}, {1}, {2}, {3}", _userName, _registerid, _newEMail, _expiration));
+                            WriteLine(String.Format("INSERT FAILURE: {0}, {1}, {2}, {3}", _user_name, _register_id, _new_email, _expiration));
                         }
                         else
                         {
-                            WriteLine(String.Format("INSERT SUCCESS: {0}, {1}, {2}, {3}", _userName, _registerid, _newEMail, _expiration));
+                            WriteLine(String.Format("INSERT SUCCESS: {0}, {1}, {2}, {3}", _user_name, _register_id, _new_email, _expiration));
                         }
                     }
                     else
                     {
-                        DataRow _dr = _ds.Tables[0].Rows[0];
+                        var _dr = _ds.Tables[0].Rows[0];
 
-                        string _publicKey = Convert.ToString(_dr["publicKey"]);
-                        byte[] _puboldBytes = Encryptor.SNG.ChiperBase64ToPlainBytes(_publicKey);
+                        var _public_old_key = Convert.ToString(_dr["publicKey"]);
+                        var _public_old_bytes = Encryptor.SNG.ChiperBase64ToPlainBytes(_public_old_key);
 
-                        X509Certificate2 _puboldCert2 = new X509Certificate2(_puboldBytes);
-                        if (_puboldCert2.Equals(_publicCert2) == false)
+                        var _public_oldcert2 = new X509Certificate2(_public_old_bytes);
+                        if (_public_oldcert2.Equals(_publicCert2) == false)
                         {
                             _sqlstr
                                 = "UPDATE TB_eTAX_PROVIDER "
                                 + "   SET publicKey=@publicKey, userName=@userName, expiration=@expiration, lastUpdate=@lastUpdate "
                                 + " WHERE registerId=@registerId AND aspEMail=@aspEMail";
 
-                            _dbps.Add("@publicKey", SqlDbType.NVarChar, _publicStr);
-                            _dbps.Add("@userName", SqlDbType.NVarChar, _userName);
+                            _dbps.Add("@publicKey", SqlDbType.NVarChar, _public_key);
+                            _dbps.Add("@userName", SqlDbType.NVarChar, _user_name);
                             _dbps.Add("@expiration", SqlDbType.DateTime, _expiration);
                             _dbps.Add("@lastUpdate", SqlDbType.DateTime, DateTime.Now);
 
-                            if (LDataHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) > 0)
-                                WriteLine(String.Format("UPDATE SUCCESS: {0}, {1}, {2}, {3}", _userName, _registerid, _newEMail, _expiration));
+                            if (LSQLHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) > 0)
+                                WriteLine(String.Format("UPDATE SUCCESS: {0}, {1}, {2}, {3}", _user_name, _register_id, _new_email, _expiration));
                         }
                         else
                         {
-                            //WriteLine(String.Format("SAME-KEY: {0}, {1}, {2}, {3}", _userName, _registerid, _newEMail, _expiration));
+                            //WriteLine(String.Format("SAME-KEY: {0}, {1}, {2}, {3}", _user_name, _register_id, _new_email, _expiration));
                         }
                     }
 

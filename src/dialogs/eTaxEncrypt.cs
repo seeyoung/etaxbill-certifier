@@ -67,58 +67,58 @@ namespace OpenETaxBill.Certifier
         {
             var _type_code = String.Format("{0:00}{1:00}", (cbKind1.SelectedIndex + 1), (cbKind2.SelectedIndex + 1));
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\6-{_type_code}.xml");
+            var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\6-{_type_code}.xml");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("plain data read from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("plain data read from " + _load_file);
             }
 
-            byte[] _plainXml = File.ReadAllBytes(_loadfile);
-            byte[] _rvalue = UCertHelper.SNG.UserSignCert.RandomNumber;
+            var _plain_xml = File.ReadAllBytes(_load_file);
+            var _rvalue = UCertHelper.SNG.UserSignCert.RandomNumber;
 
             ArrayList _taxinvoice = new ArrayList();
             {
                 TaxInvoiceStruct _s = new TaxInvoiceStruct
                 {
                     SignerRValue = _rvalue,
-                    TaxInvoice = _plainXml
+                    TaxInvoice = _plain_xml
                 };
 
                 _taxinvoice.Add(_s);
             }
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.ber");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.ber");
             {
-                File.WriteAllBytes(_savefile, GetTaxInvoicePackage(_taxinvoice));
-                WriteLine("tax invoice package write on the " + _savefile);
+                File.WriteAllBytes(_save_file, GetTaxInvoicePackage(_taxinvoice));
+                WriteLine("tax invoice package write on the " + _save_file);
             }
 
-            X509Certificate2 _nipaCert2 = UCertHelper.SNG.NtsPublicKey;
-            byte[] _encoded = CmsManager.SNG.GetContentInfo(_nipaCert2, _taxinvoice);
+            var _nipaCert2 = UCertHelper.SNG.NtsPublicKey;
+            var _encoded = CmsManager.SNG.GetContentInfo(_nipaCert2, _taxinvoice);
 
-            _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.asn");
+            _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.asn");
             {
-                File.WriteAllBytes(_savefile, _encoded);
+                File.WriteAllBytes(_save_file, _encoded);
 
                 tbSourceXml.Text = Convert.ToBase64String(_encoded);
-                WriteLine("encrypted result write on the " + _savefile);
+                WriteLine("encrypted result write on the " + _save_file);
             }
 
-            MessageBox.Show(String.Format("암호화된 형식의 전자세금계산서\n\r{0} 파일을\n\r업로드 하여 검증을 실시 하세요.", _savefile));
+            MessageBox.Show(String.Format("암호화된 형식의 전자세금계산서\n\r{0} 파일을\n\r업로드 하여 검증을 실시 하세요.", _save_file));
         }
 
         private byte[] GetTaxInvoicePackage(ArrayList p_taxInvoices)
         {
-            Asn1EncodableVector _asn1Vector = new Asn1EncodableVector();
+            var _asn1Vector = new Asn1EncodableVector();
 
             for (int i = 0; i < p_taxInvoices.Count; i++)
             {
-                TaxInvoiceStruct _taxInvoiceStruct = (TaxInvoiceStruct)p_taxInvoices[i];
+                var _taxInvoiceStruct = (TaxInvoiceStruct)p_taxInvoices[i];
 
-                DerOctetString _taxInvoce = new DerOctetString(_taxInvoiceStruct.TaxInvoice);
-                DerOctetString _signerRvalue = new DerOctetString(_taxInvoiceStruct.SignerRValue);
+                var _taxInvoce = new DerOctetString(_taxInvoiceStruct.TaxInvoice);
+                var _signerRvalue = new DerOctetString(_taxInvoiceStruct.SignerRValue);
 
-                DerSequence _taxInvoiceData = new DerSequence(_signerRvalue, _taxInvoce);
+                var _taxInvoiceData = new DerSequence(_signerRvalue, _taxInvoce);
                 _asn1Vector.Add(_taxInvoiceData);
             }
 

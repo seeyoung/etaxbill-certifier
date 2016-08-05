@@ -17,8 +17,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
 namespace OpenETaxBill.Certifier
@@ -69,7 +67,7 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void btLoad_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlLoadDlg.ShowDialog();
+            var _result = xmlLoadDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlLoadDlg.FileName) == false)
@@ -80,38 +78,40 @@ namespace OpenETaxBill.Certifier
 
         private void CreateRequest(string p_type_code)
         {
-            Header _soapHeader = new Header();
+            var _time_stamp = DateTime.Now;
+
+            var _soap_header = new Header()
             {
-				_soapHeader.ToAddress = tbResultsReqSubmitUrl.Text.Trim();
-                _soapHeader.Action = Request.eTaxRequestSubmit;
-                _soapHeader.Version = UCfgHelper.SNG.eTaxVersion;
+                ToAddress = tbResultsReqSubmitUrl.Text.Trim(),
+                Action = Request.eTaxRequestSubmit,
+                Version = UCfgHelper.SNG.eTaxVersion,
 
-                _soapHeader.FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName);
-                _soapHeader.ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName);
+                FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName),
+                ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName),
 
-                _soapHeader.OperationType = Request.OperationType_RequestSubmit;
-                _soapHeader.MessageType = Request.MessageType_Request;
+                OperationType = Request.OperationType_RequestSubmit,
+                MessageType = Request.MessageType_Request,
 
-                _soapHeader.TimeStamp = DateTime.Now;
-                _soapHeader.MessageId = Packing.SNG.GetMessageId(_soapHeader.TimeStamp);
-            }
+                TimeStamp = _time_stamp,
+                MessageId = Packing.SNG.GetMessageId(_time_stamp)
+            };
 
-            Body _soapBody = new Body();
+            var _soap_body = new Body()
             {
-                _soapBody.RefSubmitID = UCfgHelper.SNG.RegisterId + "-20160719-c82073dfeff344348f07e032cc8c313c";
-            }
+                RefSubmitID = UCfgHelper.SNG.RegisterId + "-20160719-c82073dfeff344348f07e032cc8c313c"
+            };
 
             //-------------------------------------------------------------------------------------------------------------------------
             // Signature
             //-------------------------------------------------------------------------------------------------------------------------
-            XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(null, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\9-{p_type_code}-ResultsReqsubmit.txt");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\9-{p_type_code}-ResultsReqsubmit.txt");
             {
-                File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+                File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("transforms write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("transforms write on the " + _save_file);
             }
         }
 
@@ -126,36 +126,36 @@ namespace OpenETaxBill.Certifier
 				return;
 			}
 
-			string _endpoint = tbResultsReqSubmitUrl.Text.Trim();
+            var _end_point = tbResultsReqSubmitUrl.Text.Trim();
 
-            MessageBox.Show(String.Format("전자세금계산서 처리 결과 요청 메시지를,\n\rENDPOINT: {0}를\n\r 통해 인증 시스템으로 전송 합니다. ", _endpoint));
+            MessageBox.Show(String.Format("전자세금계산서 처리 결과 요청 메시지를,\n\rENDPOINT: {0}를\n\r 통해 인증 시스템으로 전송 합니다. ", _end_point));
             CreateRequest(_type_code);
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\9-{_type_code}-ResultsReqSubmit.txt");
+            var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\9-{_type_code}-ResultsReqSubmit.txt");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("after transform read from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("after transform read from " + _load_file);
             }
 
-            byte[] _soappart = File.ReadAllBytes(_loadfile);
+            var _soap_part = File.ReadAllBytes(_load_file);
 
-            MimeContent _mimeContent = Request.SNG.TaxRequestSubmit(_soappart, _endpoint);
-            if (_mimeContent.StatusCode == 0)
+            var _mime_content = Request.SNG.TaxRequestSubmit(_soap_part, _end_point);
+            if (_mime_content.StatusCode == 0)
             {
-                var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\10-{_type_code}-ResultsReqRecvAck.txt");
+                var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\10-{_type_code}-ResultsReqRecvAck.txt");
                 {
-                    string _response = _mimeContent.GetContentAsString();
-                    File.WriteAllText(_savefile, _response, Encoding.UTF8);
+                    string _response = _mime_content.GetContentAsString();
+                    File.WriteAllText(_save_file, _response, Encoding.UTF8);
 
-                    tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                    WriteLine("response write on the " + _savefile);
+                    tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                    WriteLine("response write on the " + _save_file);
                 }
 
                 MessageBox.Show("전송 되었습니다.");
             }
             else
             {
-                MessageBox.Show(_mimeContent.ErrorMessage);
+                MessageBox.Show(_mime_content.ErrorMessage);
             }
         }
 

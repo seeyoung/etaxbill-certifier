@@ -215,7 +215,7 @@ namespace OpenETaxBill.Certifier
 
         private void miTaxReport_Click(object sender, EventArgs e)
         {
-            string _endPoint = UCfgHelper.SNG.ReplyAddress;
+            string _end_point = UCfgHelper.SNG.ReplyAddress;
 
             string _message
                 = "처리결과 전송 검증은 테스트베드가 임의의 전자(세금)계산서 처리결과를 사업자 시스템에 전송하고, 이에 대한 응답메시지를 검증합니다.\n"
@@ -224,7 +224,7 @@ namespace OpenETaxBill.Certifier
                 + "국세청 인증 사이트에서 전송 버튼을 클릭 후 log를 확인 하세요.\n\n"
                 + "** Windows 서버인 경우 방화벽 인바운드규칙에서 8080포트를 열어 줘야 합니다. **";
 
-            MessageBox.Show(String.Format(_message, _endPoint));
+            MessageBox.Show(String.Format(_message, _end_point));
         }
 
         private void miTaxRequest_Click(object sender, EventArgs e)

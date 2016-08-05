@@ -42,7 +42,7 @@ namespace OpenETaxBill.Certifier
         //
         //-------------------------------------------------------------------------------------------------------------------------
         private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.SDK.Data.DataHelper LDataHelper
+        private OdinSoft.SDK.Data.DataHelper LSQLHelper
         {
             get
             {
@@ -66,26 +66,26 @@ namespace OpenETaxBill.Certifier
 
         private DataSet getMasterDataSet(string p_type_code = "0101")
         {
-            string _sqlstr = "SELECT TOP 1 * FROM TB_eTAX_INVOICE WHERE typeCode=@typeCode ORDER BY issueId DESC";
+            var _sqlstr = "SELECT * FROM TB_eTAX_INVOICE WHERE typeCode=@typeCode ORDER BY issueId DESC LIMIT 1";
 
             var _dbps = new DatParameters();
             {
                 _dbps.Add("@typeCode", SqlDbType.NVarChar, p_type_code);
             }
 
-            return LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
+            return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
 
         private DataSet getDetailDataSet(string p_issue_id)
         {
-            string _sqlstr = "SELECT * FROM TB_eTAX_LINEITEM WHERE issueId=@issueId";
+            var _sqlstr = "SELECT * FROM TB_eTAX_LINEITEM WHERE issueId=@issueId";
 
             var _dbps = new DatParameters();
             {
                 _dbps.Add("@issueId", SqlDbType.NVarChar, p_issue_id);
             }
 
-            return LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
+            return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ namespace OpenETaxBill.Certifier
             var _type_code = String.Format("{0:00}{1:00}", (cbKind1.SelectedIndex + 1), (cbKind2.SelectedIndex + 1));
 
             var _masterSet = getMasterDataSet(_type_code);  // 전자(세금)계산서
-            if (LDataHelper.IsNullOrEmpty(_masterSet) == false)
+            if (LSQLHelper.IsNullOrEmpty(_masterSet) == false)
             {
                 DataRow _masterRow = _masterSet.Tables[0].Rows[0];
                 string _issue_id = (string)_masterRow["issueId"];
@@ -135,12 +135,12 @@ namespace OpenETaxBill.Certifier
                 XmlDocument _targetDoc = Convertor.SNG.TransformToDocument(_creator.TaxDocument);
                 _targetDoc = Convertor.SNG.CanonicalizationToDocument(_targetDoc, "\t");
 
-                var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\2-{_type_code}.xml");
+                var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\2-{_type_code}.xml");
                 {
-                    File.WriteAllText(_savefile, _targetDoc.OuterXml, Encoding.UTF8);
+                    File.WriteAllText(_save_file, _targetDoc.OuterXml, Encoding.UTF8);
 
-                    tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                    WriteLine("result docuement write on the " + _savefile);
+                    tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                    WriteLine("result docuement write on the " + _save_file);
                 }
 
                 MessageBox.Show("가상의 전자(세금)계산서를 작성 하였습니다. 다음 단계인 전자서명을 하세요.");
@@ -153,7 +153,7 @@ namespace OpenETaxBill.Certifier
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlSaveDlg.ShowDialog();
+            var _result = xmlSaveDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlSaveDlg.FileName) == false)
@@ -165,7 +165,7 @@ namespace OpenETaxBill.Certifier
 
         private void btLoad_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlLoadDlg.ShowDialog();
+            var _result = xmlLoadDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlLoadDlg.FileName) == false)

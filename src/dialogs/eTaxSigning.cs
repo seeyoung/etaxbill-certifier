@@ -72,7 +72,7 @@ namespace OpenETaxBill.Certifier
 
         private void btLoad_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlLoadDlg.ShowDialog();
+            var _result = xmlLoadDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlLoadDlg.FileName) == false)
@@ -84,7 +84,7 @@ namespace OpenETaxBill.Certifier
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlSaveDlg.ShowDialog();
+            var _result = xmlSaveDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlSaveDlg.FileName) == false)
@@ -125,11 +125,11 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void sbXPath_Click(object sender, EventArgs e)
         {
-            byte[] _source = Encoding.UTF8.GetBytes(tbSourceXml.Text);
-            byte[] _target = Encoding.UTF8.GetBytes(tbTargetXml.Text);
+            var _source = Encoding.UTF8.GetBytes(tbSourceXml.Text);
+            var _target = Encoding.UTF8.GetBytes(tbTargetXml.Text);
 
-            int _maxLength = _source.Length > _target.Length ? _source.Length : _target.Length;
-            int _pos = 0;
+            var _maxLength = _source.Length > _target.Length ? _source.Length : _target.Length;
+            var _pos = 0;
 
             for (; _pos < _maxLength; _pos++)
             {
@@ -154,49 +154,49 @@ namespace OpenETaxBill.Certifier
         {
             var _type_code = String.Format("{0:00}{1:00}", (cbKind1.SelectedIndex + 1), (cbKind2.SelectedIndex + 1));
 
-            string _readfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\2-{_type_code}.xml");
-            WriteLine("read source file: " + _readfile);
+            var _read_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\2-{_type_code}.xml");
+            WriteLine("read source file: " + _read_file);
 
-            MemoryStream _targetXml = XSignature.SNG.GetSignedXmlStream(_readfile, UCertHelper.SNG.UserSignCert.X509Cert2);
+            var _target_xml = XSignature.SNG.GetSignedXmlStream(_read_file, UCertHelper.SNG.UserSignCert.X509Cert2);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\6-{_type_code}.xml");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\6-{_type_code}.xml");
             {
-                File.WriteAllBytes(_savefile, _targetXml.ToArray());
+                File.WriteAllBytes(_save_file, _target_xml.ToArray());
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("result docuement write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("result docuement write on the " + _save_file);
             }
 
-            MessageBox.Show(String.Format("암호화 되지 않은 XML형식의(전자서명 포함) 전자세금계산서\n\r{0} 파일을\n\r국세청 인증사이트에 업로드 하세요.", _savefile));
+            MessageBox.Show(String.Format("암호화 되지 않은 XML형식의(전자서명 포함) 전자세금계산서\n\r{0} 파일을\n\r국세청 인증사이트에 업로드 하세요.", _save_file));
         }
 
         private void sbVerify_Click(object sender, EventArgs e)
         {
-            string _signedFile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"unitest\6.xml");
+            var _signed_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"unitest\6.xml");
 
-            XmlNamespaceManager _xmlmgr = new XmlNamespaceManager(new NameTable());
+            var _xmlmgr = new XmlNamespaceManager(new NameTable());
             _xmlmgr.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
 
-            XmlDocument _xmldoc = new XmlDocument(_xmlmgr.NameTable);
+            var _xmldoc = new XmlDocument(_xmlmgr.NameTable);
             _xmldoc.PreserveWhitespace = true;
-            _xmldoc.Load(_signedFile);
+            _xmldoc.Load(_signed_file);
 
-            XmlElement _binarySecurityToken = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:X509Certificate", _xmlmgr);
-            byte[] _token = Convert.FromBase64String(_binarySecurityToken.InnerText);
+            var _binarySecurityToken = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:X509Certificate", _xmlmgr);
+            var _token = Convert.FromBase64String(_binarySecurityToken.InnerText);
 
-            X509Certificate2 _x509cert2 = new X509Certificate2(_token);
+            var _x509cert2 = new X509Certificate2(_token);
 
-            XmlElement _signedInfo = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignedInfo", _xmlmgr);
-            byte[] _content = Encoding.UTF8.GetBytes(
-                        _signedInfo.OuterXml.Replace(
+            var _signed_info = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignedInfo", _xmlmgr);
+            var _content = Encoding.UTF8.GetBytes(
+                        _signed_info.OuterXml.Replace(
                             "<ds:SignedInfo xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">", 
                             "<ds:SignedInfo xmlns=\"urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                             )
                         );
-            //byte[] _content = Encoding.UTF8.GetBytes(_signedInfo.OuterXml);
+            //var _content = Encoding.UTF8.GetBytes(_signed_info.OuterXml);
 
-            XmlElement _signatureValue = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignatureValue", _xmlmgr);
-            byte[] _signature = Convert.FromBase64String(_signatureValue.InnerText);
+            var _signature_value = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignatureValue", _xmlmgr);
+            var _signature = Convert.FromBase64String(_signature_value.InnerText);
 
             if (Validator.SNG.VerifySignature(_content, _signature, _x509cert2.PublicKey.Key) == true)
                 WriteLine("verify success");
@@ -206,9 +206,9 @@ namespace OpenETaxBill.Certifier
 
         private void btValidate_Click(object sender, EventArgs e)
         {
-            string _signedFile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"unitest\6.xml");
+            var _signed_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"unitest\6.xml");
 
-            MemoryStream _ms = new MemoryStream(File.ReadAllBytes(_signedFile));
+            var _ms = new MemoryStream(File.ReadAllBytes(_signed_file));
 
             WriteLine("Validating..." + Environment.NewLine);
 

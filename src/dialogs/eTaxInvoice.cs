@@ -20,7 +20,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using OdinSoft.SDK.eTaxBill.Security.Issue;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
 namespace OpenETaxBill.Certifier
@@ -71,9 +70,9 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private void CreateInvoce(string p_type_code)
         {
-            var _timeStamp = DateTime.Now;
+            var _time_stamp = DateTime.Now;
 
-            Header _soapHeader = new Header
+            var _soap_header = new Header
             {
 				ToAddress = tbTaxInvoiceSubmitUrl.Text.Trim(),
                 Action = Request.eTaxInvoiceSubmit,
@@ -86,36 +85,36 @@ namespace OpenETaxBill.Certifier
                 OperationType = Request.OperationType_InvoiceSubmit,
                 MessageType = Request.MessageType_Request,
 
-                TimeStamp = _timeStamp,
-                MessageId = Packing.SNG.GetMessageId(_timeStamp)
+                TimeStamp = _time_stamp,
+                MessageId = Packing.SNG.GetMessageId(_time_stamp)
             };
 
-            Body _soapBody = new Body
+            var _soap_body = new Body
             {
-                SubmitID = Packing.SNG.GetSubmitID(_soapHeader.TimeStamp, UCfgHelper.SNG.RegisterId),
+                SubmitID = Packing.SNG.GetSubmitID(_soap_header.TimeStamp, UCfgHelper.SNG.RegisterId),
                 ReferenceID = Guid.NewGuid().ToString(),
                 TotalCount = 1 /* 전자세금계산서의 총 개수*/
             };
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{p_type_code}.asn");
+            var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{p_type_code}.asn");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("encrypted file load from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("encrypted file load from " + _load_file);
             }
 
-            byte[] _encrypted = File.ReadAllBytes(_loadfile);
+            var _encrypted = File.ReadAllBytes(_load_file);
 
             //-------------------------------------------------------------------------------------------------------------------------
             // Signature
             //-------------------------------------------------------------------------------------------------------------------------
-            XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(_encrypted, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(_encrypted, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\7-{p_type_code}-전자서명후.txt");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\7-{p_type_code}-전자서명후.txt");
             {
-                File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+                File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("transforms write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("transforms write on the " + _save_file);
             }
         }
 
@@ -133,48 +132,48 @@ namespace OpenETaxBill.Certifier
 			MessageBox.Show(String.Format("전자세금계산서 제출을 위한 웹서비스 메시지를,\n\r{0} ENDPOINT를\n\r 통해 인증 시스템으로 전송 합니다.", tbTaxInvoiceSubmitUrl.Text.Trim()));
             CreateInvoce(_type_code);
 
-            string _referenceId = "";
+            var _reference_id = "";
 
-            string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\7-{_type_code}-전자서명후.txt");
+            var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\7-{_type_code}-전자서명후.txt");
             {
-                tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                WriteLine("after transform read from " + _loadfile);
+                tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                WriteLine("after transform read from " + _load_file);
 
                 XmlDocument _xd = new XmlDocument();
-                _xd.Load(_loadfile);
+                _xd.Load(_load_file);
 
-                _referenceId = _xd.SelectSingleNode("descendant::kec:ReferenceID", Packing.SNG.SoapNamespaces).InnerText;
-                WriteLine(String.Format("retrieve reference-id :<{0}>", _referenceId));
+                _reference_id = _xd.SelectSingleNode("descendant::kec:ReferenceID", Packing.SNG.SoapNamespaces).InnerText;
+                WriteLine(String.Format("retrieve reference-id :<{0}>", _reference_id));
             }
 
-            byte[] _soappart = File.ReadAllBytes(_loadfile);
-            byte[] _attachment = File.ReadAllBytes(Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.asn"));
+            var _soap_part = File.ReadAllBytes(_load_file);
+            var _attachment = File.ReadAllBytes(Path.Combine(UCfgHelper.SNG.OutputFolder, $"unitest\\7-{_type_code}.asn"));
             {
                 WriteLine("read encrypt data " + _attachment.Length);
             }
 
-			MimeContent _mimeContent = Request.SNG.TaxInvoiceSubmit(_soappart, _attachment, _referenceId, tbTaxInvoiceSubmitUrl.Text.Trim());
-            if (_mimeContent.StatusCode == 0)
+            var _mime_content = Request.SNG.TaxInvoiceSubmit(_soap_part, _attachment, _reference_id, tbTaxInvoiceSubmitUrl.Text.Trim());
+            if (_mime_content.StatusCode == 0)
             {
-                var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\8-{_type_code}-TaxInvoiceRecvAck.txt");
+                var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, $"security\\8-{_type_code}-TaxInvoiceRecvAck.txt");
                 {
-                    File.WriteAllText(_savefile, _mimeContent.Parts[1].GetContentAsString(), Encoding.ASCII);
+                    File.WriteAllText(_save_file, _mime_content.Parts[1].GetContentAsString(), Encoding.ASCII);
 
-                    tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                    WriteLine("response write on the " + _savefile);
+                    tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                    WriteLine("response write on the " + _save_file);
                 }
 
                 MessageBox.Show("전송 되었습니다.");
             }
             else
             {
-                MessageBox.Show(_mimeContent.ErrorMessage);
+                MessageBox.Show(_mime_content.ErrorMessage);
             }
         }
 
         private void btLoad_Click(object sender, EventArgs e)
         {
-            DialogResult _result = xmlLoadDlg.ShowDialog();
+            var _result = xmlLoadDlg.ShowDialog();
             if (_result == DialogResult.OK)
             {
                 if (String.IsNullOrEmpty(xmlLoadDlg.FileName) == false)
@@ -185,29 +184,29 @@ namespace OpenETaxBill.Certifier
 
         private void sbCheckSign_Click(object sender, EventArgs e)
         {
-            string _signedFile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"security\7. 전자서명후.txt");
+            var _signed_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"security\7. 전자서명후.txt");
 
-            XmlDocument _xmldoc = new XmlDocument(Packing.SNG.SoapNamespaces.NameTable)
+            var _xmldoc = new XmlDocument(Packing.SNG.SoapNamespaces.NameTable)
             {
                 PreserveWhitespace = true
             };
-            _xmldoc.Load(_signedFile);
+            _xmldoc.Load(_signed_file);
 
-            XmlElement _binarySecurityToken = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::wsse:BinarySecurityToken", Packing.SNG.SoapNamespaces);
-            byte[] _token = Convert.FromBase64String(_binarySecurityToken.InnerText);
+            var _binarySecurityToken = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::wsse:BinarySecurityToken", Packing.SNG.SoapNamespaces);
+            var _token = Convert.FromBase64String(_binarySecurityToken.InnerText);
 
-            X509Certificate2 _x509cert2 = new X509Certificate2(_token);
+            var _x509cert2 = new X509Certificate2(_token);
 
-            XmlElement _signedInfo = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignedInfo", Packing.SNG.SoapNamespaces);
-            byte[] _content = Encoding.UTF8.GetBytes(
-                            _signedInfo.OuterXml.Replace(
+            var _signed_info = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignedInfo", Packing.SNG.SoapNamespaces);
+            var _content = Encoding.UTF8.GetBytes(
+                            _signed_info.OuterXml.Replace(
                                     "<ds:SignedInfo xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">",
                                     "<ds:SignedInfo xmlns:SOAP=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:kec=\"http://www.kec.or.kr/standard/Tax/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                                 )
                              );
 
-            XmlElement _signatureValue = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignatureValue", Packing.SNG.SoapNamespaces);
-            byte[] _signature = Convert.FromBase64String(_signatureValue.InnerText);
+            var _signature_value = (XmlElement)_xmldoc.DocumentElement.SelectSingleNode("descendant::ds:SignatureValue", Packing.SNG.SoapNamespaces);
+            var _signature = Convert.FromBase64String(_signature_value.InnerText);
 
             if (Validator.SNG.VerifySignature(_content, _signature, _x509cert2.PublicKey.Key) == true)
                 WriteLine("verify success");

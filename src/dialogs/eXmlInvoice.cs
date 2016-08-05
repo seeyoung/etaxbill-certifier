@@ -24,7 +24,6 @@ using System.Xml;
 using OdinSoft.SDK.Data.Collection;
 using OdinSoft.SDK.eTaxBill.Security.Encrypt;
 using OdinSoft.SDK.eTaxBill.Security.Issue;
-using OdinSoft.SDK.eTaxBill.Security.Mime;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 using OdinSoft.SDK.eTaxBill.Security.Signature;
 
@@ -49,7 +48,7 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
 
         private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.SDK.Data.DataHelper LDataHelper
+        private OdinSoft.SDK.Data.DataHelper LSQLHelper
         {
             get
             {
@@ -76,22 +75,22 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         private DataSet getMasterDataSet(string p_issue_id)
         {
-            string _sqlstr = "SELECT * FROM TB_eTAX_INVOICE WHERE issueId=@issueId";
+            var _sqlstr = "SELECT * FROM TB_eTAX_INVOICE WHERE issueId=@issueId";
 
             var _dbps = new DatParameters();
             _dbps.Add("@issueId", SqlDbType.NVarChar, p_issue_id);
 
-            return LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
+            return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
 
         private DataSet getDetailDataSet(string p_issue_id)
         {
-            string _sqlstr = "SELECT * FROM TB_eTAX_LINEITEM WHERE issueId=@issueId";
+            var _sqlstr = "SELECT * FROM TB_eTAX_LINEITEM WHERE issueId=@issueId";
 
             var _dbps = new DatParameters();
             _dbps.Add("@issueId", SqlDbType.NVarChar, p_issue_id);
 
-            return LDataHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
+            return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
@@ -122,47 +121,47 @@ namespace OpenETaxBill.Certifier
                 return;
             }
 
-            string _endpoint = tbTaxInvoiceSubmitUrl.Text.Trim();
+            var _end_point = tbTaxInvoiceSubmitUrl.Text.Trim();
 
-            MessageBox.Show(String.Format("상호운영성 테스트 검증을 위한 웹서비스 메시지를,\n\r{0} ENDPOINT를\n\r 통해 인증 시스템으로 전송 합니다.", _endpoint));
+            MessageBox.Show(String.Format("상호운영성 테스트 검증을 위한 웹서비스 메시지를,\n\r{0} ENDPOINT를\n\r 통해 인증 시스템으로 전송 합니다.", _end_point));
             if (CreateInvoce() == true)
             {
-                string _referenceId = "";
+                var _reference_id = "";
 
-                string _loadfile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\17.전자서명후.txt");
+                var _load_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\17.전자서명후.txt");
                 {
-                    tbSourceXml.Text = File.ReadAllText(_loadfile, Encoding.UTF8);
-                    WriteLine("after transform read from " + _loadfile);
+                    tbSourceXml.Text = File.ReadAllText(_load_file, Encoding.UTF8);
+                    WriteLine("after transform read from " + _load_file);
 
-                    XmlDocument _xd = new XmlDocument();
-                    _xd.Load(_loadfile);
+                    var _xd = new XmlDocument();
+                    _xd.Load(_load_file);
 
-                    _referenceId = _xd.SelectSingleNode("descendant::kec:ReferenceID", Packing.SNG.SoapNamespaces).InnerText;
-                    WriteLine(String.Format("retrieve reference-id :<{0}>", _referenceId));
+                    _reference_id = _xd.SelectSingleNode("descendant::kec:ReferenceID", Packing.SNG.SoapNamespaces).InnerText;
+                    WriteLine(String.Format("retrieve reference-id :<{0}>", _reference_id));
                 }
 
-                byte[] _soappart = File.ReadAllBytes(_loadfile);
-                byte[] _attachment = File.ReadAllBytes(Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\14.두번째ReferenceTarget.asn"));
+                var _soap_part = File.ReadAllBytes(_load_file);
+                var _attachment = File.ReadAllBytes(Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\14.두번째ReferenceTarget.asn"));
                 {
                     WriteLine("read encrypt data " + _attachment.Length);
                 }
 
-                MimeContent _mimeContent = Request.SNG.TaxInvoiceSubmit(_soappart, _attachment, _referenceId, _endpoint);
-                if (_mimeContent.StatusCode == 0)
+                var _mime_content = Request.SNG.TaxInvoiceSubmit(_soap_part, _attachment, _reference_id, _end_point);
+                if (_mime_content.StatusCode == 0)
                 {
-                    var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\21.TaxInvoiceRecvAck.txt");
+                    var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\21.TaxInvoiceRecvAck.txt");
                     {
-                        File.WriteAllText(_savefile, _mimeContent.Parts[1].GetContentAsString(), Encoding.UTF8);
+                        File.WriteAllText(_save_file, _mime_content.Parts[1].GetContentAsString(), Encoding.UTF8);
 
-                        tbTargetXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                        WriteLine("response write on the " + _savefile);
+                        tbTargetXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                        WriteLine("response write on the " + _save_file);
                     }
 
                     MessageBox.Show("전송 되었습니다.");
                 }
                 else
                 {
-                    MessageBox.Show(_mimeContent.ErrorMessage);
+                    MessageBox.Show(_mime_content.ErrorMessage);
                 }
             }
         }
@@ -174,7 +173,7 @@ namespace OpenETaxBill.Certifier
         /// <returns></returns>
         private bool CreateInvoce()
         {
-            X509Certificate2 _ntsCert2 = UCertHelper.SNG.NtsPublicKey;
+            var _ntsCert2 = UCertHelper.SNG.NtsPublicKey;
 
             //-------------------------------------------------------------------------------------------------------------------//
             // 세금계산서 작성
@@ -211,19 +210,19 @@ namespace OpenETaxBill.Certifier
             //-------------------------------------------------------------------------------------------------------------------//
             // 전자서명
             //-------------------------------------------------------------------------------------------------------------------//
-            MemoryStream _readfile = new MemoryStream(Encoding.UTF8.GetBytes(_t_0101.OuterXml));
-            MemoryStream _p_0101 = XSignature.SNG.GetSignedXmlStream(_readfile, UCertHelper.SNG.UserSignCert.X509Cert2);
+            var _read_stream = new MemoryStream(Encoding.UTF8.GetBytes(_t_0101.OuterXml));
+            var _p_0101 = XSignature.SNG.GetSignedXmlStream(_read_stream, UCertHelper.SNG.UserSignCert.X509Cert2);
 
-            _readfile = new MemoryStream(Encoding.UTF8.GetBytes(_t_0301.OuterXml));
-            MemoryStream _p_0301 = XSignature.SNG.GetSignedXmlStream(_readfile, UCertHelper.SNG.UserSignCert.X509Cert2);
+            _read_stream = new MemoryStream(Encoding.UTF8.GetBytes(_t_0301.OuterXml));
+            var _p_0301 = XSignature.SNG.GetSignedXmlStream(_read_stream, UCertHelper.SNG.UserSignCert.X509Cert2);
 
-            _readfile = new MemoryStream(Encoding.UTF8.GetBytes(_t_0201.OuterXml));
-            MemoryStream _p_0201 = XSignature.SNG.GetSignedXmlStream(_readfile, UCertHelper.SNG.UserSignCert.X509Cert2);
+            _read_stream = new MemoryStream(Encoding.UTF8.GetBytes(_t_0201.OuterXml));
+            var _p_0201 = XSignature.SNG.GetSignedXmlStream(_read_stream, UCertHelper.SNG.UserSignCert.X509Cert2);
 
-            _readfile = new MemoryStream(Encoding.UTF8.GetBytes(_t_0401.OuterXml));
-            MemoryStream _p_0401 = XSignature.SNG.GetSignedXmlStream(_readfile, UCertHelper.SNG.UserSignCert.X509Cert2);
+            _read_stream = new MemoryStream(Encoding.UTF8.GetBytes(_t_0401.OuterXml));
+            var _p_0401 = XSignature.SNG.GetSignedXmlStream(_read_stream, UCertHelper.SNG.UserSignCert.X509Cert2);
 
-            var _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\12.전자세금계산서.xml");
+            var _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\12.전자세금계산서.xml");
             {
                 string _xmltxt = (new StreamReader(_p_0101)).ReadToEnd() + "\n";
                 _p_0101.Seek(0, SeekOrigin.Begin);
@@ -237,39 +236,39 @@ namespace OpenETaxBill.Certifier
                 _xmltxt += (new StreamReader(_p_0401)).ReadToEnd() + "\n";
                 _p_0401.Seek(0, SeekOrigin.Begin);
 
-                File.WriteAllText(_savefile, _xmltxt);
-                WriteLine("write invoice document on the " + _savefile);
+                File.WriteAllText(_save_file, _xmltxt);
+                WriteLine("write invoice document on the " + _save_file);
             }
 
             //-------------------------------------------------------------------------------------------------------------------//
             // 암호화
             //-------------------------------------------------------------------------------------------------------------------//
-            byte[] _rvalue = UCertHelper.SNG.UserSignCert.RandomNumber;
+            var _rvalue = UCertHelper.SNG.UserSignCert.RandomNumber;
 
-            ArrayList _taxinvoice = new ArrayList();
+            var _taxinvoice = new ArrayList();
             {
-                TaxInvoiceStruct _s_0301 = new TaxInvoiceStruct
+                var _s_0301 = new TaxInvoiceStruct
                 {
                     SignerRValue = _rvalue,
                     TaxInvoice = _p_0301.ToArray()
                 };
                 _taxinvoice.Add(_s_0301);
 
-                TaxInvoiceStruct _s_0101 = new TaxInvoiceStruct
+                var _s_0101 = new TaxInvoiceStruct
                 {
                     SignerRValue = _rvalue,
                     TaxInvoice = _p_0101.ToArray()
                 };
                 _taxinvoice.Add(_s_0101);
 
-                TaxInvoiceStruct _s_0401 = new TaxInvoiceStruct
+                var _s_0401 = new TaxInvoiceStruct
                 {
                     SignerRValue = _rvalue,
                     TaxInvoice = _p_0401.ToArray()
                 };
                 _taxinvoice.Add(_s_0401);
 
-                TaxInvoiceStruct _s_0201 = new TaxInvoiceStruct
+                var _s_0201 = new TaxInvoiceStruct
                 {
                     SignerRValue = _rvalue,
                     TaxInvoice = _p_0201.ToArray()
@@ -277,54 +276,56 @@ namespace OpenETaxBill.Certifier
                 _taxinvoice.Add(_s_0201);
             }
 
-            byte[] _encrypted = CmsManager.SNG.GetContentInfo(_ntsCert2, _taxinvoice);
+            var _encrypted = CmsManager.SNG.GetContentInfo(_ntsCert2, _taxinvoice);
 
-            _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\14.두번째ReferenceTarget.asn");
+            _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\14.두번째ReferenceTarget.asn");
             {
-                File.WriteAllBytes(_savefile, _encrypted);
-                WriteLine("write encrypted on the " + _savefile);
+                File.WriteAllBytes(_save_file, _encrypted);
+                WriteLine("write encrypted on the " + _save_file);
             }
 
             //-------------------------------------------------------------------------------------------------------------------//
             // SOAP Envelope
             //-------------------------------------------------------------------------------------------------------------------//
-            Header _soapHeader = new Header();
+            var _time_stamp = DateTime.Now;
+
+            var _soap_header = new Header()
             {
-                _soapHeader.ToAddress = tbTaxInvoiceSubmitUrl.Text.Trim();
+                ToAddress = tbTaxInvoiceSubmitUrl.Text.Trim(),
 
-                _soapHeader.Action = Request.eTaxInvoiceSubmit;
-                _soapHeader.Version = UCfgHelper.SNG.eTaxVersion;
+                Action = Request.eTaxInvoiceSubmit,
+                Version = UCfgHelper.SNG.eTaxVersion,
 
-                _soapHeader.FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName);
-                _soapHeader.ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName);
+                FromParty = new Party(UCfgHelper.SNG.SenderBizNo, UCfgHelper.SNG.SenderBizName),
+                ToParty = new Party(UCfgHelper.SNG.ReceiverBizNo, UCfgHelper.SNG.ReceiverBizName),
 
-                _soapHeader.ReplyTo = UCfgHelper.SNG.ReplyAddress;
-                _soapHeader.OperationType = Request.OperationType_InvoiceSubmit;
-                _soapHeader.MessageType = Request.MessageType_Request;
+                ReplyTo = UCfgHelper.SNG.ReplyAddress,
+                OperationType = Request.OperationType_InvoiceSubmit,
+                MessageType = Request.MessageType_Request,
 
-                _soapHeader.TimeStamp = DateTime.Now;
-                _soapHeader.MessageId = Packing.SNG.GetMessageId(_soapHeader.TimeStamp);
-            }
+                TimeStamp = _time_stamp,
+                MessageId = Packing.SNG.GetMessageId(_time_stamp)
+            };
 
-            Body _soapBody = new Body();
+            var _soap_body = new Body()
             {
-                _soapBody.SubmitID = Packing.SNG.GetSubmitID(_soapHeader.TimeStamp, UCfgHelper.SNG.RegisterId);
-                _soapBody.ReferenceID = Guid.NewGuid().ToString();
+                SubmitID = Packing.SNG.GetSubmitID(_soap_header.TimeStamp, UCfgHelper.SNG.RegisterId),
+                ReferenceID = Guid.NewGuid().ToString(),
 
-                _soapBody.TotalCount = 4;   // 전자세금계산서의 총 개수
-            }
+                TotalCount = 4   // 전자세금계산서의 총 개수
+            };
 
             //-------------------------------------------------------------------------------------------------------------------//
             // SOAP Signature
             //-------------------------------------------------------------------------------------------------------------------//
-            XmlDocument _signedXml = Packing.SNG.GetSignedSoapEnvelope(_encrypted, UCertHelper.SNG.AspSignCert.X509Cert2, _soapHeader, _soapBody);
+            var _signed_xml = Packing.SNG.GetSignedSoapEnvelope(_encrypted, UCertHelper.SNG.AspSignCert.X509Cert2, _soap_header, _soap_body);
 
-            _savefile = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\17.전자서명후.txt");
+            _save_file = Path.Combine(UCfgHelper.SNG.OutputFolder, @"interop\17.전자서명후.txt");
             {
-                File.WriteAllText(_savefile, _signedXml.OuterXml, Encoding.UTF8);
+                File.WriteAllText(_save_file, _signed_xml.OuterXml, Encoding.UTF8);
 
-                tbSourceXml.Text = File.ReadAllText(_savefile, Encoding.UTF8);
-                WriteLine("transforms write on the " + _savefile);
+                tbSourceXml.Text = File.ReadAllText(_save_file, Encoding.UTF8);
+                WriteLine("transforms write on the " + _save_file);
             }
 
             return true;
