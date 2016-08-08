@@ -16,7 +16,6 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 using System;
 using System.Configuration;
 using System.IO;
-using OpenETaxBill.Channel.Interface;
 using OdinSoft.SDK.Configuration;
 
 namespace OpenETaxBill.Certifier
@@ -48,17 +47,17 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         // 
         //-------------------------------------------------------------------------------------------------------------------------
-        private OpenETaxBill.Channel.Interface.ICollector m_icollector = null;
-        private OpenETaxBill.Channel.Interface.ICollector ICollector
-        {
-            get
-            {
-                if (m_icollector == null)
-                    m_icollector = new OpenETaxBill.Channel.Interface.ICollector(false);
+        //private OpenETaxBill.Channel.Interface.ICollector m_icollector = null;
+        //private OpenETaxBill.Channel.Interface.ICollector ICollector
+        //{
+        //    get
+        //    {
+        //        if (m_icollector == null)
+        //            m_icollector = new OpenETaxBill.Channel.Interface.ICollector(false);
 
-                return m_icollector;
-            }
-        }
+        //        return m_icollector;
+        //    }
+        //}
 
         //-------------------------------------------------------------------------------------------------------------------------
         // 
@@ -75,7 +74,7 @@ namespace OpenETaxBill.Certifier
             if (String.IsNullOrEmpty(p_default) == true)
                 p_default = ConfigurationManager.AppSettings[p_appkey];
 
-            return RegHelper.SNG.GetClient(ICollector.Manager.CategoryId, ICollector.Manager.ProductId, p_appkey, p_default);
+            return RegHelper.SNG.GetClient("bizapp", "OpenTAX_Certifier", p_appkey, p_default);
         }
 
         //-------------------------------------------------------------------------------------------------------------------------
