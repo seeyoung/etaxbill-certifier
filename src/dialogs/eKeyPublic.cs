@@ -14,13 +14,15 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Zip;
-using OdinSoft.SDK.Data.Collection;
+using Npgsql;
+using NpgsqlTypes;
+using OdinSoft.SDK.Data.POSTGRESQL;
 using OdinSoft.SDK.eTaxBill.Security.Encrypt;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
 
@@ -43,13 +45,13 @@ namespace OpenETaxBill.Certifier
         //-------------------------------------------------------------------------------------------------------------------------
         //
         //-------------------------------------------------------------------------------------------------------------------------
-        private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.SDK.Data.DataHelper LSQLHelper
+        private OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper m_dataHelper = null;
+        private OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper LSQLHelper
         {
             get
             {
                 if (m_dataHelper == null)
-                    m_dataHelper = new OdinSoft.SDK.Data.DataHelper();
+                    m_dataHelper = new OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper();
                 return m_dataHelper;
             }
         }
@@ -219,10 +221,10 @@ namespace OpenETaxBill.Certifier
                         + "  FROM TB_eTAX_PROVIDER "
                         + " WHERE registerId=@registerId AND aspEMail=@aspEMail";
 
-                    var _dbps = new DatParameters();
+                    var _dbps = new PgDatParameters();
                     {
-                        _dbps.Add("@registerId", SqlDbType.NVarChar, _register_id);
-                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _new_email);
+                        _dbps.Add("@registerId", NpgsqlDbType.Varchar, _register_id);
+                        _dbps.Add("@aspEMail", NpgsqlDbType.Varchar, _new_email);
                     }
 
                     var _ds = LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
@@ -238,15 +240,15 @@ namespace OpenETaxBill.Certifier
                             + " @registerId, @aspEMail, @name, @person, @publicKey, @userName, @expiration, @lastUpdate, @providerId "
                             + ")";
 
-                        _dbps.Add("@registerId", SqlDbType.NVarChar, _register_id);
-                        _dbps.Add("@aspEMail", SqlDbType.NVarChar, _new_email);
-                        _dbps.Add("@name", SqlDbType.NVarChar, _user_name);
-                        _dbps.Add("@person", SqlDbType.NVarChar, "");
-                        _dbps.Add("@publicKey", SqlDbType.NVarChar, _public_key);
-                        _dbps.Add("@userName", SqlDbType.NVarChar, _user_name);
-                        _dbps.Add("@expiration", SqlDbType.DateTime, _expiration);
-                        _dbps.Add("@lastUpdate", SqlDbType.DateTime, DateTime.Now);
-                        _dbps.Add("@providerId", SqlDbType.NVarChar, "");
+                        _dbps.Add("@registerId", NpgsqlDbType.Varchar, _register_id);
+                        _dbps.Add("@aspEMail", NpgsqlDbType.Varchar, _new_email);
+                        _dbps.Add("@name", NpgsqlDbType.Varchar, _user_name);
+                        _dbps.Add("@person", NpgsqlDbType.Varchar, "");
+                        _dbps.Add("@publicKey", NpgsqlDbType.Varchar, _public_key);
+                        _dbps.Add("@userName", NpgsqlDbType.Varchar, _user_name);
+                        _dbps.Add("@expiration", NpgsqlDbType.TimestampTZ, _expiration);
+                        _dbps.Add("@lastUpdate", NpgsqlDbType.TimestampTZ, DateTime.Now);
+                        _dbps.Add("@providerId", NpgsqlDbType.Varchar, "");
 
                         if (LSQLHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) < 1)
                         {
@@ -272,10 +274,10 @@ namespace OpenETaxBill.Certifier
                                 + "   SET publicKey=@publicKey, userName=@userName, expiration=@expiration, lastUpdate=@lastUpdate "
                                 + " WHERE registerId=@registerId AND aspEMail=@aspEMail";
 
-                            _dbps.Add("@publicKey", SqlDbType.NVarChar, _public_key);
-                            _dbps.Add("@userName", SqlDbType.NVarChar, _user_name);
-                            _dbps.Add("@expiration", SqlDbType.DateTime, _expiration);
-                            _dbps.Add("@lastUpdate", SqlDbType.DateTime, DateTime.Now);
+                            _dbps.Add("@publicKey", NpgsqlDbType.Varchar, _public_key);
+                            _dbps.Add("@userName", NpgsqlDbType.Varchar, _user_name);
+                            _dbps.Add("@expiration", NpgsqlDbType.TimestampTZ, _expiration);
+                            _dbps.Add("@lastUpdate", NpgsqlDbType.TimestampTZ, DateTime.Now);
 
                             if (LSQLHelper.ExecuteText(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps) > 0)
                                 WriteLine(String.Format("UPDATE SUCCESS: {0}, {1}, {2}, {3}", _user_name, _register_id, _new_email, _expiration));

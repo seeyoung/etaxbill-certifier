@@ -15,13 +15,15 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using OdinSoft.SDK.Data.Collection;
+using Npgsql;
+using NpgsqlTypes;
+using OdinSoft.SDK.Data.POSTGRESQL;
 using OdinSoft.SDK.eTaxBill.Security.Encrypt;
 using OdinSoft.SDK.eTaxBill.Security.Issue;
 using OdinSoft.SDK.eTaxBill.Security.Notice;
@@ -47,13 +49,13 @@ namespace OpenETaxBill.Certifier
         //
         //-------------------------------------------------------------------------------------------------------------------------
 
-        private OdinSoft.SDK.Data.DataHelper m_dataHelper = null;
-        private OdinSoft.SDK.Data.DataHelper LSQLHelper
+        private OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper m_dataHelper = null;
+        private OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper LSQLHelper
         {
             get
             {
                 if (m_dataHelper == null)
-                    m_dataHelper = new OdinSoft.SDK.Data.DataHelper();
+                    m_dataHelper = new OdinSoft.SDK.Data.POSTGRESQL.PgDataHelper();
                 return m_dataHelper;
             }
         }
@@ -77,8 +79,8 @@ namespace OpenETaxBill.Certifier
         {
             var _sqlstr = "SELECT * FROM TB_eTAX_INVOICE WHERE issueId=@issueId";
 
-            var _dbps = new DatParameters();
-            _dbps.Add("@issueId", SqlDbType.NVarChar, p_issue_id);
+            var _dbps = new PgDatParameters();
+            _dbps.Add("@issueId", NpgsqlDbType.Varchar, p_issue_id);
 
             return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
@@ -87,8 +89,8 @@ namespace OpenETaxBill.Certifier
         {
             var _sqlstr = "SELECT * FROM TB_eTAX_LINEITEM WHERE issueId=@issueId";
 
-            var _dbps = new DatParameters();
-            _dbps.Add("@issueId", SqlDbType.NVarChar, p_issue_id);
+            var _dbps = new PgDatParameters();
+            _dbps.Add("@issueId", NpgsqlDbType.Varchar, p_issue_id);
 
             return LSQLHelper.SelectDataSet(UCfgHelper.SNG.ConnectionString, _sqlstr, _dbps);
         }
