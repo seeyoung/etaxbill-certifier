@@ -14,13 +14,11 @@ along with this program.If not, see<http://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Npgsql;
 using NpgsqlTypes;
 using OdinSoft.SDK.Data.POSTGRESQL;
 using OdinSoft.SDK.eTaxBill.Security.Issue;

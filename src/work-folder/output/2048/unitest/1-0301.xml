@@ -1,39 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TaxInvoice xmlns="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:kr:or:kec:standard:Tax:ReusableAggregateBusinessInformationEntitySchemaModule:1:0 http://www.kec.or.kr/standard/Tax/TaxInvoiceSchemaModule_1.0.xsd">
 	<ExchangedDocument>
-		<ID>201606304100007300000001</ID>
-		<IssueDateTime>20160630000000</IssueDateTime>
+		<ID>201607254200023800000001</ID>
+		<IssueDateTime>20160725090000</IssueDateTime>
 	</ExchangedDocument>
 	<TaxInvoiceDocument>
-		<IssueID>201606304100007300000001</IssueID>
+		<IssueID>201607254200023800000001</IssueID>
 		<TypeCode>0301</TypeCode>
-		<IssueDateTime>20160630</IssueDateTime>
+		<IssueDateTime>20160725</IssueDateTime>
 		<PurposeCode>02</PurposeCode>
 	</TaxInvoiceDocument>
 	<TaxInvoiceTradeSettlement>
 		<InvoicerParty>
 			<ID>1388602200</ID>
-			<TypeCode>서비스,제조외</TypeCode>
+			<TypeCode>서비스</TypeCode>
 			<NameText>(주)오딘소프트</NameText>
-			<ClassificationCode>S/W개발공급외</ClassificationCode>
+			<ClassificationCode>S/W개발공급</ClassificationCode>
 			<SpecifiedPerson>
 				<NameText>이성안</NameText>
 			</SpecifiedPerson>
 			<DefinedContact>
-				<DepartmentNameText>영업관리실 관리팀</DepartmentNameText>
+				<DepartmentNameText>경영지원실 관리팀</DepartmentNameText>
 				<PersonNameText>이상익</PersonNameText>
 				<TelephoneCommunication>031-698-3790</TelephoneCommunication>
 				<URICommunication>lsi@odinsoftware.co.kr</URICommunication>
 			</DefinedContact>
 			<SpecifiedAddress>
-				<LineOneText>경기도 성남시 분당구 삼평동, 삼환하이펙스B101호</LineOneText>
+				<LineOneText>경기 성남시 분당구 삼평동 삼환하이펙스 B동 B101-3호</LineOneText>
 			</SpecifiedAddress>
 		</InvoicerParty>
 		<InvoiceeParty>
-			<ID>1111111119</ID>
+			<ID>1388504400</ID>
 			<TypeCode>서비스</TypeCode>
-			<NameText>(주)오딘소프트서비스</NameText>
-			<ClassificationCode>콜센터및텔레마케팅</ClassificationCode>
+			<NameText>(주)오딘서비스</NameText>
+			<ClassificationCode>S/W개발공급자문</ClassificationCode>
 			<SpecifiedOrganization>
 				<BusinessTypeCode>01</BusinessTypeCode>
 			</SpecifiedOrganization>
@@ -41,13 +41,11 @@
 				<NameText>홍길동</NameText>
 			</SpecifiedPerson>
 			<PrimaryDefinedContact>
-				<DepartmentNameText>오딘소프트서비스</DepartmentNameText>
-				<PersonNameText>홍길미</PersonNameText>
-				<TelephoneCommunication>031-1234-5678</TelephoneCommunication>
+				<PersonNameText>홍길미 과장</PersonNameText>
 				<URICommunication>honggilme@odinservice.com</URICommunication>
 			</PrimaryDefinedContact>
 			<SpecifiedAddress>
-				<LineOneText>경기도 성남시 분당구 삼평동 삼환하이펙스 B102호</LineOneText>
+				<LineOneText>경기도 성남시 분당구 삼평동 삼환하이펙스 B102</LineOneText>
 			</SpecifiedAddress>
 		</InvoiceeParty>
 		<SpecifiedPaymentMeans>
@@ -75,14 +73,14 @@
 	<TaxInvoiceTradeLineItem>
 		<SequenceNumeric>1</SequenceNumeric>
 		<InvoiceAmount>220000</InvoiceAmount>
-		<ChargeableUnitQuantity>0.00</ChargeableUnitQuantity>
+		<ChargeableUnitQuantity>1</ChargeableUnitQuantity>
 		<NameText>통합전산시스템 유지보수료</NameText>
-		<PurchaseExpiryDateTime>20160630</PurchaseExpiryDateTime>
+		<PurchaseExpiryDateTime>20160725</PurchaseExpiryDateTime>
 		<TotalTax>
 			<CalculatedAmount>0</CalculatedAmount>
 		</TotalTax>
 		<UnitPrice>
-			<UnitAmount>0.00</UnitAmount>
+			<UnitAmount>220000</UnitAmount>
 		</UnitPrice>
 	</TaxInvoiceTradeLineItem>
 </TaxInvoice>

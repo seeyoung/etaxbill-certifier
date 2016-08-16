@@ -20,10 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{50273DD7
 	ProjectSection(SolutionItems) = preProject
 		setup\db-setup.bat = setup\db-setup.bat
 		setup\init.sql = setup\init.sql
-		setup\open-etaxbill-empty.backup = setup\open-etaxbill-empty.backup
+		setup\open-etaxbill-start.backup = setup\open-etaxbill-start.backup
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "odinlib", "..\..\..\odinsoft-git\public\open-sdk\src\odinlib\odinlib.csproj", "{22054587-58BB-4553-A0D8-F852CC1FA8C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,24 +45,11 @@ Global
 		{17454071-9AE9-4080-B361-C41DDBE49939}.Release|x64.Build.0 = Release|Any CPU
 		{17454071-9AE9-4080-B361-C41DDBE49939}.Release|x86.ActiveCfg = Release|Any CPU
 		{17454071-9AE9-4080-B361-C41DDBE49939}.Release|x86.Build.0 = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|x64.Build.0 = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Debug|x86.Build.0 = Debug|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|x64.ActiveCfg = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|x64.Build.0 = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|x86.ActiveCfg = Release|Any CPU
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{17454071-9AE9-4080-B361-C41DDBE49939} = {1F42EA4D-0FA1-44CB-A565-A8CEA0B47478}
-		{22054587-58BB-4553-A0D8-F852CC1FA8C8} = {1F42EA4D-0FA1-44CB-A565-A8CEA0B47478}
 	EndGlobalSection
 EndGlobal
